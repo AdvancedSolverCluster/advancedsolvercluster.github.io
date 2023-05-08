@@ -1,4 +1,6 @@
-# Using Element
+---
+title: Using Element
+---
 
 *September 5, 2022, [Xiang Li](mailto:646873166@qq.com)*
 
@@ -19,7 +21,7 @@ It's powered by an open network framework [Matrix](https://matrix.org). You won'
 1. Go to [element.io](https://element.io/get-started) and download your apps. You might occasionally use [Element Web](https://element.advancedsolver.com) on infrequently used machines. It's OK. For a better experience, we suggest you download the apps.
 2. **If you are on Windows and just downloaded the app, before your first login on this device, you'll need to set up a configuration file.** Copy the file content attached at the end of this page, to your Element installation directory. Usually, the installation is at `C:\Users\YOUR_USER_NAME\AppData\Roaming\Element\` for Windows. Create or edit `config.json` there.
 3. Either for the [Element Web](https://element.advancedsolver.com) or the app, click `Sign in`. You shall be asked to provide a `Homeserver`, a username and a password. **Change the `Homeserver` to `matrix.advancedsolver.com`, our self-hosted server.** Then you may sign in or sign up with your credentials.
-    - If you are about to sign up, 
+    - If you are about to sign up,
       - you might need to contact the administrator in case you haven't been authorized to create an account.
       - A security key will be generated. Ensure it **is safely stored** as it's **the last resort** to restore your chat history if your password is lost. It serves as the master key to retrieve your encrypted data.
     - If you are about to sign in from a new device, you will be asked to do a cross-device verification.

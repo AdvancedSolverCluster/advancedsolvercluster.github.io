@@ -1,4 +1,6 @@
-# Python Tensorflow / PyTorch 安装教程
+---
+title: Python Tensorflow / PyTorch 安装教程
+---
 
 *March 21, 2022, [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn)*
 
@@ -9,7 +11,7 @@ Step 2: 创建一个新的虚拟环境并激活。
 python3 -m venv --system-site-packages ./venv
 source ./venv/bin/activate
 ```
-当虚拟环境处于有效状态时，shell 提示符带有 (venv) 前缀。用`python3 --version` 确认 Python 版本正确。 
+当虚拟环境处于有效状态时，shell 提示符带有 (venv) 前缀。用`python3 --version` 确认 Python 版本正确。
 
 Step 3: 在虚拟环境中升级 pip.
 ```bash

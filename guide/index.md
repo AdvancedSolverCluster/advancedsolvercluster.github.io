@@ -1,4 +1,9 @@
-# Advanced Solver 集群使用指南
+---
+title: Advanced Solver 集群使用指南
+redirect_from:
+  - /
+  - /index.html
+---
 
 ## 公告板
 

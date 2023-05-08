@@ -1,4 +1,6 @@
-# Welcome to the Advanced Solver HPC Guide Page!
+---
+title: Welcome to the Advanced Solver HPC Guide Page!
+---
 
 ## Tutorial
 

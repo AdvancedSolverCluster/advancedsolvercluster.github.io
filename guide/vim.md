@@ -1,4 +1,6 @@
-# vi/vim 教程
+---
+title: vi/vim 教程
+---
 
 *March 10, 2022, [Jingyu Liu](mailto:381258337@qq.com), [Yidong Zhang](mailto:2308353627@qq.com)*
 
