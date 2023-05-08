@@ -1,4 +1,6 @@
-# 在 VSCode 里连接 Python Jupyter Notebook
+---
+title: 在 VSCode 里连接 Python Jupyter Notebook
+---
 
 *April 20, 2023, [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn)*
 

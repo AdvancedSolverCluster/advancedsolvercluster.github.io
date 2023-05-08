@@ -1,4 +1,6 @@
-# 关于服务器各用户储存空间的 Quota
+---
+title: 关于服务器各用户储存空间的 Quota
+---
 
 *February 28, 2022, [Jingyu Liu](mailto:381258337@qq.com), [Xiang Li](mailto:646873166@qq.com)*
 
@@ -50,7 +52,7 @@ Filesystem   Blocks  Quota  Limit Warn/Time    Mounted on
                  4K     5G   200G  00 [------] /sync
 /dev/mapper/centos-home
               64.6G   100G   500G  00 [------] /home
-xfs_quota> q 
+xfs_quota> q
 ```
 
 查询所用 quota 的命令可以看到如上的示例结果. 其含义为

@@ -1,4 +1,6 @@
-# 管理员已经帮我开好了服务器账号，我该怎么连接服务器？
+---
+title: 管理员已经帮我开好了服务器账号，我该怎么连接服务器？
+---
 
 ## 必做任务: 从公网连接
 
@@ -6,7 +8,7 @@
 
 你会看到如下提示:
 ```text
-The authenticity of host '[cluster.advancedsolver.com]:20001 ([*.*.*.*]:20001)' can't be established 
+The authenticity of host '[cluster.advancedsolver.com]:20001 ([*.*.*.*]:20001)' can't be established
 ...
 Are you sure you want to continue connecting (yes/no)?"
 ```
@@ -28,7 +30,7 @@ Loading texlive/2022
 
 ### 可选任务1: 提高访问速度, 从内网连接
 
-上述 `cluster.advancedsolver.com` 是服务器的公网地址. 你会发现, 在公网下命令行中输入经常存在延迟, 令人很不爽. 
+上述 `cluster.advancedsolver.com` 是服务器的公网地址. 你会发现, 在公网下命令行中输入经常存在延迟, 令人很不爽.
 
 如果你在复旦校园网内, 或者, 你可以通过 VPN 连接进入校园网环境, 建议**使用内网地址** `10.88.3.90`. 即, 通过输入`ssh <username>@10.88.3.90 -p 20001`, 连接服务器.
 
@@ -51,7 +53,7 @@ Host loginNode
 
 这里 `<username>` 是管理员指定的你的用户名. 另外还要注意的是, 除第一行外的下面几行均应有行首的 4 空格.
 
-# 接下来干嘛?
+## 接下来干嘛?
 
 请移步[我已经学会连接服务器了，我能在服务器上做些什么？比如，如何运行程序？](how-can-i-run-program.md).
 

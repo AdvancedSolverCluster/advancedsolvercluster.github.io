@@ -6,7 +6,7 @@ output: html_document
 toc: true
 ---
 
-# 基本配置
+
 |节点类型|节点名|CPU 详情|CPU 核数|内存|
 |--|--|--|--|--|
 |登陆节点|`loginNode`|Intel Xeon CPU E5-2670 v3 @ 2.30GHz | 24 | 128 G|

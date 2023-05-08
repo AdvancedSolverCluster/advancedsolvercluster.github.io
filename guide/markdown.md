@@ -1,4 +1,6 @@
-# Markdown教程
+---
+title: Markdown教程
+---
 
 *March 4, 2022, [Jingyu Liu](mailto:381258337@qq.com)*
 

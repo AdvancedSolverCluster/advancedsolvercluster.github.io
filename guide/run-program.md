@@ -1,4 +1,6 @@
-# 在服务器上运行程序及提交作业
+---
+title: 在服务器上运行程序及提交作业
+---
 
 *May 25, 2022, [Jingyu Liu](mailto:381258337@qq.com), [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn), [Xiang Li](mailto:646873166@qq.com)*
 
