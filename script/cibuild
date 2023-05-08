@@ -1,0 +1,8 @@
+#!/bin/sh
+# A small test suite to test if the theme itself works. run bootstrap once first
+set -e
+
+bundle exec jekyll build
+bundle exec htmlproofer ./_site --check-html --check-sri --url-ignore '/fonts.gstatic.com/'
+bundle exec rubocop -D --config .rubocop.yml
+bundle exec script/validate-html

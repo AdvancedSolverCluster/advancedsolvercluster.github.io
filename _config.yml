@@ -1,5 +1,28 @@
-title: Just the Docs Template
-description: A starter template for a Jeykll site using the Just the Docs theme!
+
+# show_downloads: false
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  math_engine: mathjax
+  parse_block_html: true
+
+defaults:
+  -
+    scope:
+      path: "" # empty string for all files
+    values:
+      layout: "home"
+
+title:            'AdvancedSolver Cluster Guide Page'
+tagline:          'Guide Page'
+description:      'From just-the-docs template.'
+url:              http://example.com
+baseurl:          /
+github:
+  repo:           https://github.com/AdvancedSolverCluster/advancedsolvercluster.github.io/
+
 theme: just-the-docs
 
 url: https://just-the-docs.github.io

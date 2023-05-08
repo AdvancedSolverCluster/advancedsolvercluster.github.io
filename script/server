@@ -1,0 +1,9 @@
+#!/bin/sh
+# start server locally
+
+if ! command -v gem &>/dev/null
+then
+    scl enable rh-ruby26 bash
+fi
+bundle exec jekyll serve --port=34000
+

@@ -1,0 +1,11 @@
+#!/bin/sh
+# install and build the necessary packages
+set -e
+
+if ! command -v gem &>/dev/null
+then
+    scl enable rh-ruby26 bash
+fi
+gem install bundler
+bundle config set --local path 'vendor/bundle'
+bundle install

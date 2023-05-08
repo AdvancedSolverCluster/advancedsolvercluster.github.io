@@ -57,7 +57,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rexml (3.2.5)
-    rouge (4.0.0)
+    rouge (3.30.0)
     safe_yaml (1.0.5)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -76,4 +76,4 @@ DEPENDENCIES
   just-the-docs (= 0.5.0)
 
 BUNDLED WITH
-   2.3.9
+   2.4.12
