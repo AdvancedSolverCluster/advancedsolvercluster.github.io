@@ -9,4 +9,3 @@ _site/
 .bundle/
 vendor/
 
-Gemfile.lock

@@ -22,6 +22,8 @@ url:              http://example.com
 baseurl:          /
 github:
   repo:           https://github.com/AdvancedSolverCluster/advancedsolvercluster.github.io/
+logo: "/assets/images/logo/cash-logo.png"
+favicon_ico: "/assets/images/logo/favicon/favicon-32x32.ico"
 
 theme: just-the-docs
 
