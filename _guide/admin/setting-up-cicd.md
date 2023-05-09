@@ -1,4 +1,8 @@
-# [GitLab CI/CD + GitLab Runner in Docker 全自动部署服务器网页](https://zhuanlan.zhihu.com/p/482820237)
+---
+title: "GitLab CI/CD + GitLab Runner in Docker 全自动部署服务器网页"
+---
+
+[GitLab CI/CD + GitLab Runner in Docker 全自动部署服务器网页](https://zhuanlan.zhihu.com/p/482820237)
 
 最近几天尝试给组里做一个用于各类功能的网页, 但苦于每次更新都要上服务器手动关闭打开Flask, 好累...
 
@@ -138,7 +142,7 @@ deploy-stage:
   only:
     - master
   image: docker:19.03.12
-  services: 
+  services:
     - docker:19.03.12-dind
   environment:
     name: production

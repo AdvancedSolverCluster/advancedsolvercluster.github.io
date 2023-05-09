@@ -1,4 +1,7 @@
-# NTP时钟同步
+---
+title: "NTP时钟同步"
+---
+
 
 复旦提供网络时钟同步服务
 
@@ -32,7 +35,7 @@ server 127.127.1.0 fudge
 sudo systemctl restart ntpd
 ```
 
-其他机器定期向loginNode同步时间: 
+其他机器定期向loginNode同步时间:
 
 ```
 sudo ntpdate -vd loginNode

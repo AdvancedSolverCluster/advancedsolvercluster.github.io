@@ -1,4 +1,7 @@
-# Manage Intel Turbo Boost with systemd
+---
+title: "Manage Intel Turbo Boost with systemd"
+---
+
 
 source: https://blog.christophersmart.com/2017/02/08/manage-intel-turbo-boost-with-systemd/
 
@@ -32,14 +35,14 @@ cat << EOF | sudo tee \
 /etc/systemd/system/disable-turbo-boost.service
 [Unit]
 Description=Disable Turbo Boost on Intel CPU
- 
+
 [Service]
 ExecStart=/bin/sh -c "/usr/bin/echo 1 > \
 /sys/devices/system/cpu/intel_pstate/no_turbo"
 ExecStop=/bin/sh -c "/usr/bin/echo 0 > \
 /sys/devices/system/cpu/intel_pstate/no_turbo"
 RemainAfterExit=yes
- 
+
 [Install]
 WantedBy=sysinit.target
 EOF

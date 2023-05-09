@@ -1,4 +1,6 @@
-# SLURM Admin Guide
+---
+title: "SLURM Admin Guide"
+---
 
 如何做一个优秀的SLURM管理员
 
@@ -26,9 +28,9 @@ Accounting: https://slurm.schedmd.com/accounting.html
 
 ## TODO
 
-需求: 
-- 邮件, 
-- PAM, 
+需求:
+- 邮件,
+- PAM,
 - 用户用量限制 resource limit, `sacctmgr`
 
 (2022/05/25)
@@ -44,7 +46,7 @@ Accounting: https://slurm.schedmd.com/accounting.html
 
 ### Useful DEBUG tips
 
-看节点出问题的原因, `sinfo -R` 或者 `scontrol show node bigMem0`. 通常需要到`/var/log/slurmd.log`里看错误的具体原因. 
+看节点出问题的原因, `sinfo -R` 或者 `scontrol show node bigMem0`. 通常需要到`/var/log/slurmd.log`里看错误的具体原因.
 
 `sudo scontrol update nodename=bigMem0 state=idle`
 

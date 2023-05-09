@@ -1,3 +1,7 @@
+---
+title: "How to start an HPC cluster on centos 7 Linux servers"
+---
+
 考虑到书写的方便性，直接在markdown里记录下来了配置的几乎全过程。 不过似乎知乎的配色方案不太好看，原本在mdnice里写的还挺漂亮。经过Grammarly查错，不知道会不会把本来的命令给改了...按说是没有的。**未经许可，请勿翻译/转载。**
 
 ## **How to start an HPC cluster on centos 7 Linux servers**
@@ -35,8 +39,8 @@ Add the port number to the environment, and we will use it later: `export Cluste
 
 ## **Install \&\& start slurm daemon and slurm control daemon on nodes**
 
-1.  ensure that no existed munge user or slurm user in every machine. If yes, delete them directly. `sudo vim /etc/passwd` and find `munge`/`slurm`. To delete, use `userdel`.  
-2.  follow the link `https://www.ni-sp.com/slurm-build-script-and-container-commercial-support/`\(copied and _modified_ version following\) to complete most of the work. These should be modified:  
+1.  ensure that no existed munge user or slurm user in every machine. If yes, delete them directly. `sudo vim /etc/passwd` and find `munge`/`slurm`. To delete, use `userdel`.
+2.  follow the link `https://www.ni-sp.com/slurm-build-script-and-container-commercial-support/`\(copied and _modified_ version following\) to complete most of the work. These should be modified:
 
 - Line 90: The newest VER is now 20.11.8.
 - Line 121: Delete the HOST configuration line.
@@ -130,7 +134,7 @@ sudo chown slurm: /var/log/slurm_jobacct.log /var/log/slurm_jobcomp.log
 
 
 
- 
+
 ```
 
 3\. Go to [https://slurm.schedmd.com/configurator.html](https://link.zhihu.com/?target=https%3A//slurm.schedmd.com/configurator.html) and create a configuration file. Put it to `/etc/slurm/slurm.conf`. Following is an example:
@@ -286,16 +290,16 @@ NodeName=loginNode State=UNKNOWN CPUs=24 Sockets=2 CoresPerSocket=12
 PartitionName=bigMem Nodes=bigMem0 Default=YES MaxTime=4320 State=UP
 
 
- 
+
 ```
 
 ## **Setup `lsync` service to synchronize configuration files between servers**
 
-1.  Make sure `rsync` is installed on each node. Type `rsync --version` to check they have consistent protocol version numbers \(31 for me\).  
-2.  Install `lsync` on each node with `yum -y install lsyncd`.  
-3.  On the manage node, create a list for sync targets in `/etc/cluster` folder: `sudo mkdir /etc/cluster`. Edit file: `sudo vim /etc/cluster/cluster-server.namelist`  
-    loginNode 10.66.66.88 slave manager bigMem0 10.66.66.100 slave  
-    Here, `slave` means this will become a computation node, and `manager` means this node will become a manager node.  
+1.  Make sure `rsync` is installed on each node. Type `rsync --version` to check they have consistent protocol version numbers \(31 for me\).
+2.  Install `lsync` on each node with `yum -y install lsyncd`.
+3.  On the manage node, create a list for sync targets in `/etc/cluster` folder: `sudo mkdir /etc/cluster`. Edit file: `sudo vim /etc/cluster/cluster-server.namelist`
+    loginNode 10.66.66.88 slave manager bigMem0 10.66.66.100 slave
+    Here, `slave` means this will become a computation node, and `manager` means this node will become a manager node.
 4.  Write a script to configure the hostname and open up firewalls between nodes. Centos 7 uses `firewall-cmd` instead of `iptables` to manage this. \(refer: **[Help for firewall-cmd --zone](https://link.zhihu.com/?target=https%3A//access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/sec-using_zones_to_manage_incoming_traffic_depending_on_source)**\) Say, you have saved this file to `~/set-hostname-and-firewall.sh`.
 
 ```bash
@@ -303,7 +307,7 @@ PartitionName=bigMem Nodes=bigMem0 Default=YES MaxTime=4320 State=UP
 
 ips=($(ifconfig -a|grep inet|grep -v 127.0.0.1|
     grep -v inet6|awk '{print $2}'|tr -d "addr:"))
-while read -a namelist; do 
+while read -a namelist; do
     ip=${namelist[1]}
  if [[ ${ips/$ip/} != ${ips} ]]; then
  # this row contains the ip of this machine, set hostname
@@ -321,20 +325,20 @@ while read -a namelist; do
  done < /etc/hosts
  if (( $flag == 0 )); then
  echo "add ${namelist[1]}\t${namelist[0]} to hosts"
-            sudo echo -e "\n${namelist[1]}\t${namelist[0]}\n" >> /etc/hosts 
+            sudo echo -e "\n${namelist[1]}\t${namelist[0]}\n" >> /etc/hosts
  else
  echo "${namelist[1]} is already in hosts, skip"
  fi
  echo -e "add ${namelist[1]}\t${namelist[0]} to firewall trusted zone"
         sudo firewall-cmd --zone=trusted --add-source=${namelist[1]} --permanent
         sudo firewall-cmd --reload
- 
+
  unset flag
  fi
 done < /etc/cluster/cluster-server.namelist
 ```
 
-5.The following script does a lot of things on _all other nodes_.  
+5.The following script does a lot of things on _all other nodes_.
 
 - Copy the `namelist` file to them.
 - Run the script `~/set-hostname-and-firewall.sh`.
@@ -342,14 +346,14 @@ done < /etc/cluster/cluster-server.namelist
 - generate an ssh key pair for `lsync` and change the owner of several directories
 - share this key pair to all nodes for user `lsync`
 
-You can either copy it to your bash shell or save it as a script file to run.  
+You can either copy it to your bash shell or save it as a script file to run.
 
 ```bash
 #!/bin/bash
 
 echo "Add user lsync and set home directory..."
-sudo mkdir /opt/lsync 
-sudo groupadd -g 968 lsync 
+sudo mkdir /opt/lsync
+sudo groupadd -g 968 lsync
 sudo useradd -m -c "lsync writer" -d /opt/lsync \
 -u 968 -g 968 -s /bin/bash lsync/bin/bash
 
@@ -363,10 +367,10 @@ sudo cat $PUBLIC_FILE > /opt/lsync/.ssh/authorized_keys
 
 ips=($(ifconfig -a|grep inet|grep -v 127.0.0.1|
     grep -v inet6|awk '{print $2}'|tr -d "addr:"))
-while read -a namelist; do 
+while read -a namelist; do
     ip=${namelist[1]}
  if [[ ${ips/$ip/} == ${ips} ]]; then
- 
+
         Remote=${ClusterManager}@${ip}
  echo -e "\n======Communicating with $ip======"
  # this row contains the ip of other nodes
@@ -376,39 +380,39 @@ while read -a namelist; do
  'sudo mkdir /etc/cluster && '\
  'sudo mv ~/cluster-server.namelist '\
  '/etc/cluster/cluster-server.namelist && '\
- 'rm -f ~/cluster-server.namelist' 
+ 'rm -f ~/cluster-server.namelist'
  echo -e "\n"
- 
+
         scp -P $ClusterPort ~/set-hostname-and-firewall.sh \
  $Remote:~/set-hostname-and-firewall.sh
         ssh -p $ClusterPort $Remote 'sudo bash ~/set-hostname-and-firewall.sh'
- 
+
  echo "Add user lsync and set home directory..."
         ssh -p $ClusterPort $Remote \
  'sudo mkdir /opt/lsync && sudo groupadd -g 968 lsync && '\
  'sudo useradd -m -c "lsync writer" -d /opt/lsync '\
  '-u 968 -g 968 -s /bin/bash lsync/bin/bash'
  echo -e "\nsuccess"
- 
+
  echo -e "\ncopy ssh key files..."
         scp -P $ClusterPort $SECRET_FILE $Remote:/opt/lsync/.ssh/id_rsa
         scp -P $ClusterPort $PUBLIC_FILE $Remote:/opt/lsync/.ssh/authorized_keys
- 
+
  echo -e "\nChange owner of /etc/slurm, /opt/lsync"
         ssh -p $ClusterPort $Remote 'sudo chown -R lsync /opt/lsync/'
         ssh -p $ClusterPort $Remote 'sudo chown -R lsync /etc/slurm/'
- 
+
  fi
 done < /etc/cluster/cluster-server.namelist
 
 sudo chown -R lsync /etc/slurm/
 sudo chown -R lsync /opt/lsync/
-rm -f $SECRET_FILE 
-rm -f $PUBLIC_FILE 
+rm -f $SECRET_FILE
+rm -f $PUBLIC_FILE
 sudo runuser -l lsync -c "lsyncd -rsyncssh /etc/slurm bigMem0 /etc/slurm"
 
 
- 
+
 ```
 
 ## **How to mount a disk from another Linux machine**
@@ -432,7 +436,7 @@ In case nodes are restarted manually, `scontrol` will set the node to `DOWN` sta
 
 In case you `mount` something wrongly, for me it was `mount \-o loop /mnt/xx/xx /mnt`, try to `umount` with `-f`\(force\) and `-l` \(lazy\) options.
 
-  
+
 
 slurm报错: Job credential expired证书过期
 
@@ -445,9 +449,9 @@ slurm报错: Job credential expired证书过期
 
 **Useful links**
 
-- **[Sudoers Manual](https://link.zhihu.com/?target=https%3A//www.sudo.ws/man/sudoers.man.html)** tells you the syntax of `sudoers` file.  
-- **[Slurm FAQ](https://link.zhihu.com/?target=https%3A//slurm.schedmd.com/faq.html)**.  
-- **[intel Math Kernel Library](https://link.zhihu.com/?target=https%3A//software.intel.com/content/www/us/en/develop/documentation/installation-guide-for-intel-oneapi-toolkits-linux/top/installation/install-using-package-managers/yum-dnf-zypper.html%23yum-dnf-zypper_packages)** installed `intel-hpckit`  
+- **[Sudoers Manual](https://link.zhihu.com/?target=https%3A//www.sudo.ws/man/sudoers.man.html)** tells you the syntax of `sudoers` file.
+- **[Slurm FAQ](https://link.zhihu.com/?target=https%3A//slurm.schedmd.com/faq.html)**.
+- **[intel Math Kernel Library](https://link.zhihu.com/?target=https%3A//software.intel.com/content/www/us/en/develop/documentation/installation-guide-for-intel-oneapi-toolkits-linux/top/installation/install-using-package-managers/yum-dnf-zypper.html%23yum-dnf-zypper_packages)** installed `intel-hpckit`
 
 ## **\=== not done yet ====**
 

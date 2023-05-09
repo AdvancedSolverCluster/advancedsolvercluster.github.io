@@ -1,4 +1,6 @@
-# 如何在服务器上安装并配置 slurm
+---
+title: "如何在服务器上安装并配置 slurm"
+---
 
 *April 1, 2022, [Jingyu Liu](mailto:381258337@qq.com)*
 (6/17 更新到slurm22.05)
@@ -118,7 +120,7 @@ echo "Test munge on $(hostname)"
 munge -n
 munge -n | unmunge
 
-# 遍历所有节点
+---
 munge -n -t 10 | ssh bigMem0 unmunge
 munge -n -t 10 | ssh bigMem1 unmunge
 munge -n -t 10 | ssh -p 10888 loginNode unmunge
@@ -131,12 +133,12 @@ munge -n -t 10 | ssh -p 10888 loginNode unmunge
 ```bash
 wget -c https://dev.mysql.com/get/mysql80-community-release-el7-6.noarch.rpm
 sudo yum -y install mysql80-community-release-el7-6.noarch.rpm
-sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022 
+sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
 sudo yum -y install mysql-community-server
 sudo systemctl start mysqld.service
 ```
 
-使用 
+使用
 
 ```bash
 sudo grep "password" /var/log/mysqld.log
@@ -591,7 +593,7 @@ sudo systemctl enable slurmd
 ```
 on three machines.
 
-## ubuntu上的slurm安装 
+## ubuntu上的slurm安装
 步骤基本一致, 但需要注意的是Ubuntu用的是cgroup/v2而我们的slurm用的是cgroup/v1, 所以需要修改kernel的boot参数：
 ```bash
 sudo vim /etc/default/grub

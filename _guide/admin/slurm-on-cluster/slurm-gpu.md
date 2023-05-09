@@ -1,4 +1,7 @@
-# Set up GPU on slurm
+---
+title: "Set up GPU on slurm"
+---
+
 by Yuejia Zhang, April 11, 2022
 
 ## `nvidia-smi -L`
@@ -93,7 +96,7 @@ bigMem1上的`/var/log/slurmd.log`:
 [2022-04-11T13:49:12.545] debug:      GRES[gpu] Type:(null) Count:1 Cores(64):16-31  Links:0,0,-1,0 Flags:HAS_FILE,ENV_NVML File:/dev/nvidia2 UniqueId:(null)
 [2022-04-11T13:49:12.545] debug:      GRES[gpu] Type:(null) Count:1 Cores(64):16-31  Links:0,0,0,-1 Flags:HAS_FILE,ENV_NVML File:/dev/nvidia3 UniqueId:(null)
 ```
-尽管AutoDetect很好用，但我们还是手工加入了更多信息，按官网上说的，This allows gres.conf to serve as an optional sanity check and notifies administrators of any unexpected changes in GPU properties. 
+尽管AutoDetect很好用，但我们还是手工加入了更多信息，按官网上说的，This allows gres.conf to serve as an optional sanity check and notifies administrators of any unexpected changes in GPU properties.
 
 ## Configuration Files:
 

@@ -1,4 +1,7 @@
-# Overleaf Log
+---
+title: "Overleaf Log"
+---
+
 
 参考 https://github.com/overleaf/overleaf/wiki/
 
@@ -24,8 +27,8 @@ LINE 55 ```SHARELATEX_ADMIN_EMAIL: "gitlab88@163.com"```
 LINE 65 ```SHARELATEX_EMAIL_SMTP_HOST: "smtp.163.com"```
 LINE 66 ```SHARELATEX_EMAIL_SMTP_PORT: 465```
 LINE 67 ```SHARELATEX_EMAIL_SMTP_SECURE: 'true'```
-LINE 68 ```SHARELATEX_EMAIL_SMTP_USER: "gitlab88@163.com"``` 
-LINE 69 ```SHARELATEX_EMAIL_SMTP_PASS: "UDDHGJWKAYPFONYJ"```
+LINE 68 ```SHARELATEX_EMAIL_SMTP_USER: "gitlab88@163.com"```
+LINE 69 ```SHARELATEX_EMAIL_SMTP_PASS: "[MASKED]"```
 LINE 70 ```SHARELATEX_EMAIL_SMTP_TLS_REJECT_UNAUTH: 'true'```
 LINE 71 ```SHARELATEX_EMAIL_SMTP_IGNORE_TLS: 'false'```
 LINE 72 ```SHARELATEX_EMAIL_SMTP_NAME: 'CASH Overleaf Notification'```
@@ -38,7 +41,7 @@ LINE 119 ```- /home/overleaf/redis_data:/data```
 4. 用```sudo docker-compose up -d```启动服务
 5. 用```sudo docker-compose down```停止服务
 5. 把backup的文件都以root身份copy到对应位置```sudo cp -R backup/* ./```
-6. ```sudo docker-compose up -d``` 
+6. ```sudo docker-compose up -d```
 7. 用```sudo docker ps```查看容器是否运行在正确的端口
 
 ### 如用toolkit, 请注意yml文件和env文件的区别，如

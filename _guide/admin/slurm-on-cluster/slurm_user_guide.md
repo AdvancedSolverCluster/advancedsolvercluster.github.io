@@ -1,4 +1,6 @@
-# SLURM User Guide
+---
+title: "SLURM User Guide"
+---
 ### Ver. 2022/1/9 - by Yuejia Zhang, Xiang Li
 
 <details> <summary> <h2> Introduction </h2> </summary>
@@ -49,7 +51,7 @@ If `myTest/test` is a CUDA program, remember to load the environment, **and appl
 module load CUDA
 myTest/test
 ```
-If `myTest/test` is a MPI program, remember to load the environment. 
+If `myTest/test` is a MPI program, remember to load the environment.
 ```bash
 #!/bin/bash
 source /opt/intel/oneapi/setvars.sh
@@ -65,9 +67,9 @@ matlab -batch "testMatlab"
 ```bash
 sbatch test.sbatch
 ```
-It will return `Submitted batch job ###`, where ### is your job id. 
+It will return `Submitted batch job ###`, where ### is your job id.
 
-### STEP 3: View running progress and results 
+### STEP 3: View running progress and results
 When your program is finished, an output file will appear in the directory `slurm-###.out`, where ### is your job id. You can open it using your favorite editor, or run
 ```bash
 cat slurm-###.out
@@ -94,7 +96,7 @@ where ### is the jobid (e.g. 001). After you cancel it, you will no longer see i
 
 **The rest of the document may be a little difficult for beginners, you can skip it in the first reading.**
 
-## Advanced usage of `sbatch` 
+## Advanced usage of `sbatch`
 
 The usual way to allocate resources and execute a job is to write a batch script and submit them to SLURM with the `sbatch` command. The batch script is a shell script consisting of two parts: resources requests and job steps. Resources requests are specifications for number of nodes needed to execute the job, time duration of the job etc. Job steps are user's tasks that must be executed. The resources requests and other SLURM submission options are prefixed by '#SBATCH ' directives and must precede any executable commands in the batch script.
 
@@ -125,7 +127,7 @@ Run sbatch test.sbatch and see the log file.
 ```
 [yjzhang@loginNode ~]$ sbatch test.sbatch
 Submitted batch job 235
-[yjzhang@loginNode ~]$ cat python_235.log 
+[yjzhang@loginNode ~]$ cat python_235.log
 /home/yjzhang
 bigMem0
 2021年 12月 15日 星期三 13:39:07 CST
@@ -143,9 +145,9 @@ The following table describes the most common or required allocation and submiss
 |   --cpus-per-task=\<number> (-c \<number>)                   | 1                              | Number of threads (logical cores) per task. Used for OpenMP or hybrid jobs                                                                                                             |
 |   --output=\<path>\/\<file pattern> (-o \<path>\/\<file pattern>)  |   slurm-%j.out   (%j = JobID)  | Standard output file                                                                                                                                                                   |
 |   --error=\<path>\/\<file pattern> (-e \<path>\/\<file pattern>)   |   slurm-%j.out   (%j = JobID)  | Standard error file                                                                                                                                                                    |
-|   --time=\<walltime> (-t \<walltime>)                         | 3 days        | Requested walltime limit for the job; possible time formats are:     [hours:]minutes[:seconds] e.g. 20, 01:20, 01:20:30   days-hours[:minutes][:seconds] e.g. 2-0, 1-5:20, 1-5:20:30   | 
-|   --partition=\<name> (-p \<name>)                         | bigMem                         | Partition to run the job                                                     | 
-|   --job-name=\<jobname> (-J \<jobname>)                       | job script's name                                   | Job name    
+|   --time=\<walltime> (-t \<walltime>)                         | 3 days        | Requested walltime limit for the job; possible time formats are:     [hours:]minutes[:seconds] e.g. 20, 01:20, 01:20:30   days-hours[:minutes][:seconds] e.g. 2-0, 1-5:20, 1-5:20:30   |
+|   --partition=\<name> (-p \<name>)                         | bigMem                         | Partition to run the job                                                     |
+|   --job-name=\<jobname> (-J \<jobname>)                       | job script's name                                   | Job name
 
 To see more usage of `sbatch`, refer to the below websites:
 - [Official introduction of sbatch](https://slurm.schedmd.com/sbatch.html)
@@ -154,17 +156,17 @@ To see more usage of `sbatch`, refer to the below websites:
 ## SLURM Command Examples
 Below some examples of SLURM query commands are provided.
 
-List all jobs submitted to SLURM: 
+List all jobs submitted to SLURM:
 ```bash
 squeue
 ```
 
-List all jobs submitted by you: 
+List all jobs submitted by you:
 ```bash
 squeue -u $USER
 ```
 
-Check available partitions and nodes: 
+Check available partitions and nodes:
 ```bash
 sinfo
 ```

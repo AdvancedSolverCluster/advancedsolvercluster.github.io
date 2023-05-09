@@ -1,4 +1,7 @@
-# 挂载某个文件夹到其他机器上
+---
+title: "挂载某个文件夹到其他机器上"
+---
+
 
 首先确保server和client都有安装`nfs-utils`: `sudo yum install nfs-utils`, 以下以loginNode挂载到bigMem上为例
 
@@ -25,7 +28,7 @@
 
 在client端尝试mount: `sudo mount -t nfs loginNode:/home /home --verbose` 并观察有无报错信息.
 
-加入 `/etc/fstab` 开机自动mount: 在 `/etc/fstab` 中加入行 
+加入 `/etc/fstab` 开机自动mount: 在 `/etc/fstab` 中加入行
 
 ```text
 loginNode:/home /home                           nfs     defaults        0 0

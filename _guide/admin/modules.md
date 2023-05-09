@@ -1,4 +1,7 @@
-# 关于Modules
+---
+title: "关于Modules"
+---
+
 
 
 `/usr/share/Modeuls/etc/initrc` 登录bash时自动加载

@@ -1,5 +1,8 @@
+---
+title: "Install new system"
+---
 
-### 重装系统 
+### 重装系统
 
 开root账号
 
@@ -68,7 +71,7 @@ sudo apt-get update
 ssh连接新服务器非22端口报错
 ssh_exchange_identification: Connection closed by remote host
 
-排查: 
+排查:
 1. 检查`/etc/ssh/sshd_config`有无明显问题
 2. 检查`iptables`, `firewall-cmd`有无明显问题
 3. 重启`sudo systemctl restart sshd`

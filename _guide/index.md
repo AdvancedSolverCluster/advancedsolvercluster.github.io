@@ -29,26 +29,26 @@ python3 helloworld.py
 
 第一次接触高性能集群？对Linux一窍不通？就从这里开始吧！
 
-- [我还没有服务器账号，我该怎么做？](new-user/i-have-no-account.md)
-- [管理员已经帮我开好了服务器账号，我该怎么连接服务器？](new-user/how-can-i-connect.md)
-- [我已经学会连接服务器了，我能在服务器上做些什么？比如，如何运行程序？](new-user/how-can-i-run-program.md)
+- [我还没有服务器账号，我该怎么做？](new-user/i-have-no-account)
+- [管理员已经帮我开好了服务器账号，我该怎么连接服务器？](new-user/how-can-i-connect)
+- [我已经学会连接服务器了，我能在服务器上做些什么？比如，如何运行程序？](new-user/how-can-i-run-program)
 
 ## 进阶教程
 
 <!-- **<font size=3> 以下提供了一些你可能会用到的教程, 如果您有任何建议和想法, 欢迎修改和补充! </font>** -->
 
-- [首次登录服务器! - 服务器基本操作: SSH & SCP](connect-to-server.md)
-- [服务器的基本操作? - Linux 服务器的基本知识](basic-linux.md)
-- [我的第一个程序! - 运行程序及提交作业](run-program.md)
-  - Python: [Tensorflow + Pytorch](documentation/python-tensorflow-pytorch.md)
-  - [Jupyter Notebook](documentation/python-jupyter-notebook.md)
-- [进阶1: 在命令行里写代码 - vi/vim 教程](vim.md)
-- [进阶2: 使用编辑器里写代码 - VSCode 教程](vscode.md)
-- [进阶3: Markdown 教程](markdown.md)
-- [进阶4: Git 教程](git.md)
-- [关于服务器各用户储存空间的 Quota](xfs-quota.md)
-- [使用Element聊天软件](element.md)
-- [集群中各服务器的配置与性能](benchmark.md)
+- [首次登录服务器! - 服务器基本操作: SSH & SCP](connect-to-server)
+- [服务器的基本操作? - Linux 服务器的基本知识](basic-linux)
+- [我的第一个程序! - 运行程序及提交作业](run-program)
+  - Python: [Tensorflow + Pytorch](documentation/python-tensorflow-pytorch)
+  - [Jupyter Notebook](documentation/python-jupyter-notebook)
+- [进阶1: 在命令行里写代码 - vi/vim 教程](vim)
+- [进阶2: 使用编辑器里写代码 - VSCode 教程](vscode)
+- [进阶3: Markdown 教程](markdown)
+- [进阶4: Git 教程](git)
+- [关于服务器各用户储存空间的 Quota](xfs-quota)
+- [使用Element聊天软件](element)
+- [集群中各服务器的配置与性能](benchmark)
 
 ## FAQ
 
