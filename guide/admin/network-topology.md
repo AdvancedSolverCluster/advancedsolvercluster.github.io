@@ -14,7 +14,7 @@
 |
 |- 192.168.2.11(bigMem1)
 |
-|- 192.168.2.100(web0) 
+|- 192.168.2.100(web0)
 
 ```
 
@@ -30,4 +30,4 @@
 路由器管理地址
 https://cluster.advancedsolver.com
 
-![Fig: network-topology](guide/figure/user-topology.png)
+![Fig: network-topology](/guide/figure/user-topology.png)

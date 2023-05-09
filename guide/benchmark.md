@@ -71,4 +71,4 @@ Reference:
 |Compute throughput (theoretical single precision FMAs) (GFlops) |12336.13  |8140.80 |20643.84 |10129.92 |
 |Memory bandwidth (GB/sec)   |484.44 |320.06 |933.12 |1024.00 |
 
-![benchmark](guide/figure/benchmark.png)
+![benchmark](/guide/figure/benchmark.png)

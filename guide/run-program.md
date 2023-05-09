@@ -13,7 +13,7 @@ title: 在服务器上运行程序及提交作业
 1. 只运行程序 (后面会解释这句话是什么意思) 的话实际上在loginNode上运行了程序.
 
 2. 当你的程序需要很长的运行时间或者很大的内存占用时, 请使用 slurm 提交程序, 它将保证你的程序会在其他地方运行. 下面的图片说明了这件事.
-![user-topology](guide/figure/user-topology.png)
+![user-topology](/guide/figure/user-topology.png)
 
 3. 请检查代码, 形如 `system("pause")` 之类的句子不应当出现在服务器上的代码中, 因为它不适用于 Linux.
 
@@ -271,4 +271,4 @@ scancel <jobid>
 ### 测试性能
 
 我们还可以利用 slurm 测试程序和算法的性能, 为此, 我们需要提交程序占用整个结点资源, 方法是在 sbatch 的时候加参数 `--exclusive`, 这保证了我们独占这个节点 (请注意, 如果是较长时间的锁定 node 进行性能测试, 最好在用户群里和大家说一下大概时间范围和具体的机器, 且在结束时也说一声). 下面是关于 `--exclusive` 的说明
-![slurm_exclusive](guide/figure/slurm_exclusive.png)
+![slurm_exclusive](/guide/figure/slurm_exclusive.png)

@@ -147,7 +147,7 @@ VS Code 全称 Visual Studio Code, 是微软出的一款轻量级代码编辑器
 
 VS Code 有丰富而强大的插件 (Extensions)，这些优秀的插件使得VS Code生态体系更加吸引人，让开发效率大大提升. 要用 VS Code 连接服务器, 就需用到 `Remote - SSH` 和 `Remote - SSH: Editing Configuration` 这两个插件 (前者为必须安装 (install) 的, 后者推荐安装). 安装完成之后会在左侧新增一个选项卡 Remote Explorer (远程资源管理器).
 
-![](guide/figure/extensions.png)
+![](/guide/figure/extensions.png)
 
 #### 添加服务器连接配置
 
@@ -155,7 +155,7 @@ VS Code 有丰富而强大的插件 (Extensions)，这些优秀的插件使得VS
 
 方法二: 安装之后, 应该能在 VS Code 的左下角看到两个上下排列的 $>$ 和 $<$ 组成的图案 (如果没有出现, 则用 `F1` (或 `Ctrl+Shift+P`)调出命令面板, 输入 `Reload Window` 重新加载), 点击它, 选择 `Connect to Host...`, 然后选择 `Configure SSH Hosts`. 再选择(通常来说)在 `username` 目录下 `.ssh` 文件夹内的 `config` 文件 (如果没有该文件, 请参考[首次登录服务器! - 服务器基本操作: SSH & SCP](connect-to-server.md)), 比如 `C:\Users\admin\.ssh\config` . 保存后再次点击左下角的图标, 然后选择要连接的服务器名即可. 在上方的 `Select the plaform of the remote host` 中选择 Linux, 如果左下角显示 `SSH: Hostname`, 则说明连接成功！连接成功的图示如下:
 
-![](guide/figure/login-success.PNG)
+![](/guide/figure/login-success.PNG)
 
 **如果连接不成功, 可以参考的解决方法: **
 

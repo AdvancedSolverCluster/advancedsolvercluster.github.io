@@ -46,7 +46,7 @@ Git的指令通常以 `git command subcommand --args` 的形式出现, 在对某
 
 Git的一大基本功能就是记录代码是由谁编辑的.
 
-![](guide/figure/Git-setup1.webp)
+![](/guide/figure/Git-setup1.webp)
 
 所以首先需要设置一下自己的身份信息. Git用邮箱地址和名字来标识你是谁.
 
