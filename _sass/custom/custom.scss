@@ -1,0 +1,41 @@
+$content-width: 1000px;
+
+
+.side-bar {
+  z-index: 0;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: $sidebar-color;
+
+  @include mq(md) {
+    flex-flow: column nowrap;
+    position: fixed;
+    width: $nav-width-md;
+    height: 100%;
+    border-right: $border $border-color;
+    align-items: flex-end;
+  }
+
+  @include mq(lg) {
+    width: calc((100% - #{$nav-width + $content-width}) / 3 + #{$nav-width});
+    min-width: $nav-width;
+  }
+}
+
+.main {
+  @include mq(md) {
+    position: relative;
+    max-width: $content-width;
+    margin-left: $nav-width-md;
+  }
+
+  @include mq(lg) {
+    // stylelint-disable function-name-case
+    // disable for Max(), we want to use the CSS max() function
+    margin-left: Max(
+      #{$nav-width},
+      calc((100% - #{$nav-width + $content-width}) / 3 + #{$nav-width})
+    );
+    // stylelint-enable function-name-case
+  }
+}
