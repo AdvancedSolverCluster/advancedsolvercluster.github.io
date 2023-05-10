@@ -1,5 +1,5 @@
 $content-width: 1000px;
-
+$nav-width: 300px;
 
 .side-bar {
   z-index: 0;
@@ -17,7 +17,7 @@ $content-width: 1000px;
   }
 
   @include mq(lg) {
-    width: calc((100% - #{$nav-width + $content-width}) / 3 + #{$nav-width});
+    width: calc((100% - #{$nav-width + $content-width}) / 2 + #{$nav-width});
     min-width: $nav-width;
   }
 }
@@ -34,8 +34,19 @@ $content-width: 1000px;
     // disable for Max(), we want to use the CSS max() function
     margin-left: Max(
       #{$nav-width},
-      calc((100% - #{$nav-width + $content-width}) / 3 + #{$nav-width})
+      calc((100% - #{$nav-width + $content-width}) / 2 + #{$nav-width})
     );
     // stylelint-enable function-name-case
+  }
+}
+
+
+.site-nav,
+.site-header,
+.site-footer {
+  width: 100%;
+
+  @include mq(lg) {
+    width: $nav-width;
   }
 }
