@@ -1,119 +1,9 @@
----
-title: 在服务器上运行程序及提交作业
----
-
-*May 25, 2022, [Jingyu Liu](mailto:381258337@qq.com), [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn), [Xiang Li](mailto:646873166@qq.com)*
-
-<!-- todo: 写一个综述, 服务器上运行程序和本地有什么不同. 1是只运行程序的话实际上在loginNode上运行了程序, 2是什么时候要使用slurm到其他地方运行程序(可以使用我们的user-topology.png配图) -->
-
-我有理由相信, 当你点开这篇文档时, 大概是被要求 "去服务器上跑一下代码". 那么你是否想过, 服务器上运行程序和本地有什么不同?
-
-对程序自身而言, 这并没有什么不同 (我并不觉得程序会知道他自己在哪里). 但是对用户而言, 我提醒你注意下面两件事
-
-1. 只运行程序 (后面会解释这句话是什么意思) 的话实际上在loginNode上运行了程序.
-
-2. 当你的程序需要很长的运行时间或者很大的内存占用时, 请使用 slurm 提交程序, 它将保证你的程序会在其他地方运行. 下面的图片说明了这件事.
-![user-topology](/guide/figure/user-topology.png)
-
-3. 请检查代码, 形如 `system("pause")` 之类的句子不应当出现在服务器上的代码中, 因为它不适用于 Linux.
-
-## 使用 module
-
-我们在服务器上提供了很多软件和软件包供使用. 这里核心的命令是 `module`.
-我们只列出一些常用的命令.
-
-`module avail` 查看服务器上已有的软件.
-
-`module load <name>` 加载要用的 module, 例如用 `module load MATLAB` 加载MATLAB. 如果 module 已加载, 不会重新加载.
-
-`module unload <name>` 卸载 module. 如果 module 未被加载, 不会报错.
-
-`module list` 列出当前所用 module.
-
-## 常用软件使用
-
-### Python
-
-`python filename.py`
-
-### C/C++, 包括 CUDA 程序, MPI 程序
-
-gcc 和 g++ 是最常见的 c&c++ 编译器.当你想要运行 c 或 c++ 的代码时,首先需要用编译器编译. 对于最基本的运行 c++ 程序的命令,只需进入程序文件所在位置,在命令行输入
-
-```bash
-gcc <input_file_name> -o <output_file_name>
-```
-
-例如 `gcc helloworld.c -o test_hello_world`, 就能在当前路径下找到一个新的可执行文件 `test_hello_world`. 在当前路径命令行输入 `./<output_file_name>`, 就能得到程序的输出结果啦.
-
-对于 c++ 程序, 以上命令可以改为 `g++ <input_file_name> -o <output_file_name>`. 对于更复杂的编译命令, 可以自行查找 gcc 和 g++ 的参数文档.
-
-如果你想要在服务器上调试代码,可以考虑使用 GDB 工具. 在编译的时候, 加上参数 `-g`, 例如 `gcc -g test.c -o test`, 然后命令行输入 `gdb <filename>`, 对应上面例子则为 `gdb test`, 你就进入了 GDB 调试界面,按 `q` 即可退出. 常见的命令有:
-
-- `r` : 从头开始运行代码.
-- `b <num>` : 列出 num 所在行开始的代码.
-- `b <num>` : 在程序第 num 行打断点.
-- `n` : 单步运行.
-- `c` : 继续运行.
-- `display <var_name>` : 跟踪查看变量 var_name, 每次停下都会显示.
-
-除了在服务器上调试, 也可以通过在 VS Code 上使用 `remote ssh` 连接到服务器上之后进行调试. 一般要求安装插件 C/C++. 之后调试办法有很多,简单的可以使用 `code runner` 插件一键调试, 也可以自行配置 json文件. 具体方法可以根据自己需求自行查阅.
-
-### MATLAB
-
-- 方法一: 直接使用 (无图形化界面)
-  首先用 `module load MATLAB` 加载 MATLAB, 输入 `matlab` (在哪个目录启动的 MATLAB, 启动后的默认工作目录就在哪里) , 然后输入对应的文件名即可 (不要加 `.m`) , 用 `exit` 退出. 可以用 `matlab --help` 查看更详细的说明.
-- 方法二: 利用 X11 Forwarding 打开图形化界面
-
-  (1) 安装 MobaXterm (如已安装可以跳过这一步). 进入 <https://mobaxterm.mobatek.net/download-home-edition.html>, 选择 `Install edition` 进行下载安装.
-
-  (2) 打开 MobaXterm, 点击 `Session`, 选择 `SSH`, 接下来填入 `Remote host`, `specify username`, `Port`, 点击下方 `Advanced SSH Settings` 的选项面板, 在 `Use Private Key` 这一栏里选择自己的 private key, 最后连接到服务器.
-
-  (3) 在现在的 MobaXterm 页面输入 `matlab` 即可打开MATLAB图形化界面.
-
-### Intel OneAPI Toolkit
-
-Intel OneAPI Toolkit 使用一流的编译器, 性能库, 框架以及分析和调试工具在 CPU 和 XPU 上分析和优化高性能, 跨架构应用程序. 我们的服务器上安装了 Base Toolkit 和 HPC Toolkit, 包含 icc compiler, debugger, mkl 数学库, intel MPI, vtune 等软件, 请参阅官网查看完整软件列表及使用方法.
-
-要使用 Intel OneAPI Toolkit, 首先在命令行中运行
-
-```bash
-module use /opt/intel/oneapi/modulefiles
-```
-
-然后再使用`module avail`, 你会看到可用模块中新添了所有 Intel 提供的模块, 这时你可以加载你需要用的模块.
-
-### R
-
-输入 `R` 即可打开 R 语言的命令行界面, 此时在命令行输入
-
-``` R
-print("Hello World!")
-```
-
-即可看到屏幕上输出 `Hello World!`.
-
-运行 R 程序也很容易, 我们新建一个文件 `hello_world.R`
-
-``` R
-print("Hello World!")
-```
-
-输入 `Rscript hello_world.R` 即可看到屏幕上输出 `Hello World!`.
-
-如果是利用 slurm 提交作业, sbatch 文件有以下格式
-
-``` bash
-#!/bin/bash
-
-Rscript hello_world.R
-```
-
-然后利用 sbatch 提交即可.
-
-## <a name="use-slurm"> 如何利用SLURM在集群上运行程序 </a>
+# <a name="use-slurm"> 如何利用SLURM在集群上运行程序 </a>
 
 服务器上已经有很多用户在运行程序了, 你**不可以**和其他人一起抢占资源 (最终导致炸服). 另外, 我们的登陆节点性能也不如计算节点好. 我们的服务器集群使用 SLURM, 一套自动化资源分配的作业调度工具, 帮助你提交作业到计算节点上运行.
+
+当你的程序需要很长的运行时间或者很大的内存占用时, 请使用 slurm 提交程序, 它将保证你的程序会在其他地方运行. 下面的图片说明了这件事.
+![user-topology](/guide/figure/user-topology.png)
 
 ### 申请资源与提交作业
 
@@ -270,5 +160,5 @@ scancel <jobid>
 
 ### 测试性能
 
-我们还可以利用 slurm 测试程序和算法的性能, 为此, 我们需要提交程序占用整个结点资源, 方法是在 sbatch 的时候加参数 `--exclusive`, 这保证了我们独占这个节点 (请注意, 如果是较长时间的锁定 node 进行性能测试, 最好在用户群里和大家说一下大概时间范围和具体的机器, 且在结束时也说一声). 下面是关于 `--exclusive` 的说明
+我们还可以利用 slurm 测试程序和算法的性能, 为此, 我们需要提交程序占用整个结点资源, 方法是在 sbatch 的时候加参数 `--exclusive`, 这保证了我们独占这个节点. 下面是关于 `--exclusive` 的说明
 ![slurm_exclusive](/guide/figure/slurm_exclusive.png)

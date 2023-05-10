@@ -1,21 +1,12 @@
 ---
-title: "首次登录服务器! - 服务器基本操作: SSH & SCP"
+title: SSH 公钥与私钥
 ---
 
 *June 28, 2022, [Jingyu Liu](mailto:381258337@qq.com), [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn), [Yidong Zhang](mailto:2308353627@qq.com), [Xiang Li](mailto:646873166@qq.com), [Ming Li](mailto:19300180127@fudan.edu.cn)*
 
-## 欢迎
+## 创建 Public Key
 
-欢迎使用 Advanced Solver HPC! **请先确保你拥有服务器账户!**
-如果还没有账户, 或者有账户却未在 2022 年 3 月 8 日后登录过, 请按照以下步骤创建 Public Key 并发送邮件给[管理员](mailto:cash_admin@163.com).
-
-## <a name="first-time"> 首次登录到服务器 </a>
-
-登录服务器不是在我们的帮助界面右上角点击登录或登出完成的, 你需要使用 SSH 工具来登录服务器, 期间, SSH 工具会向你索要你的 Key 作为你的身份证明. 因此首先我们需要创建一个 Key.
-
-### 创建 Public Key
-
-#### Step 1 生成 Key
+### Step 1 生成 Key
 
 创建/进入本地的 `.ssh` 目录 (对于 macOS/Linux 是 `~/.ssh/`, 对于 Windows 是 `C:\Users\<user>\.ssh\`, 如果无 Linux 系统, 不必为此下载 Ubuntu 等子系统, 直接在 Windows 里做下述操作即可) 查看是否已有 Key (例如, 私钥 `id_ecdsa` 和公钥 `id_ecdsa.pub`, 也可能是`id_rsa`, `id_rsa.pub`等). 如果已经有一个 Key, 这可能是以前创建的, 如果没有, 使用下面的命令生成一个Key. **无论如何, 我们推荐你再生成一个Key!** Key相当于你的身份证明: **任何获取了你Key的人都可以以你的身份登录你的账户!**
 
@@ -33,7 +24,7 @@ Invalid ECDSA key length: valid lengths are 256, 384 or 521 bits
 
 有效的 521 bits ECDSA 加密公钥 `id_ecdsa.pub` 应当是一整行以 `ecdsa-sha2-nistp521` 开头的字符串. 后面会提到如何验证 rsa key 的长度.
 
-#### Step 2 将 Public key 发送给我们
+### Step 2 将 Public key 发送给我们
 
 将生成的 Public key `id_ecdsa.pub`的内容**复制到正文中**发送至[管理员邮箱](mailto:cash_admin@163.com)后联系管理员添加公钥至对应账号. 账号名将由管理员指定, 如果已经有帐号, 邮件内容应说明所用的账号名.
 请**注意检查复制的内容是否正确**, 例如可能会出现多出空格等问题, 确保无误后再发送. 一个正确的 Public Key 格式如下:
@@ -56,7 +47,7 @@ Invalid ECDSA key length: valid lengths are 256, 384 or 521 bits
 
     例如, 在 Windows CMD 里运行 `ssh-keygen -l -f C:\Users\jyliu\.ssh\id_rsa.pub`. 输出的第一个数即公钥的大小, 如果小于 4096, 请重新生成, 需要指出, 这个长度限制是针对 rsa key 的.
 
-#### Step 3 本地 SSH 配置
+### Step 3 本地 SSH 配置
 
 到本地的 `.ssh` 目录下, 创建/修改 `config` 文件, 编辑一些预存的SSH连接配置. 一个 config 文件中可以有多个 SSH 连接的配置, 每一个配置由以下几行组成: (请根据自己的情况修改, `<hostname>` 是一个服务器的代称, 可以自己指定, `<username>` 是管理员指定的你的用户名, `<path/to/your/key>` 是本地到私钥的路径, 注意除第一行外的下面几行均应有行首的 4 空格)
 
@@ -83,7 +74,7 @@ Host loginNode-aduser
 **注**
 服务器的公网地址是 `cluster.advancedsolver.com`. 如果在复旦校园网内, 或可以通过 VPN 连接进入校园网环境, **应使用内网地址** `10.88.3.90`. 公网 ip 的连接速度**远慢于**使用 VPN 的内网环境 (在公网 ip 下命令行中输入存在延迟也是由于这个原因). 使用内网时, 上述 config 文件应设置 HostName 为内网地址.
 
-### 测试连接
+## 测试连接
 
 通过命令行 (`ssh <username>@cluster.advancedsolver.com -p 20001`) 或者 VS Code 连接 (我们稍后介绍如何用 VS Code 连接) 时, 看到如下提示, 即成功.
 
@@ -100,7 +91,7 @@ Loading texlive/2021
 否则, 请检查以下配置是否正确:
 
 1. 在本地的 `.ssh` 文件夹中含有私钥和公钥对, 如, 私钥 `id_ecdsa` 和公钥 `id_ecdsa.pub`. 私钥是证明自身身份的唯一依据!
-2. (非首次登录) 在服务器的 `~/.ssh` 文件夹中含有文件 `authorized_keys`, 这个文件的权限是 `600` (参考 <a class="one" href="basic-linux#permission"> 文件权限介绍</a>), 其中含有你的公钥信息.
+2. (非首次登录) 在服务器的 `~/.ssh` 文件夹中含有文件 `authorized_keys`, 这个文件的权限是 600 (参考 <a class="one" href="basic-linux#permission"> 文件权限介绍</a>), 其中含有你的公钥信息.
 3. (非首次登录) 在登录服务器时可能出现报错
 
 ```text
