@@ -17,7 +17,7 @@ nav_order: 1
 - [我已经学会连接服务器了，我能在服务器上做些什么？比如，如何运行程序？](new-user/how-can-i-run-program)
 - [新功能：usage](new-user/index#usage)
 
-## ❗使用须知
+## ⚠️使用须知（必读！）
 
 - [请使用 SLURM 运行程序！](you-must/slurm)
 - [请注意储存空间的 Quota！](you-must/xfs-quota)
@@ -35,7 +35,7 @@ nav_order: 1
 
 - [如何查看服务器上有哪些软件？](software/index)
 - [Element聊天软件](software/element)
-- Python
+- [Python](software/python/index)
   - [Jupyter Notebook](software/python/python-jupyter-notebook)
   - [Tensorflow + Pytorch](software/python/python-tensorflow-pytorch)
 - [GCC/GDB](software/gcc-gdb)
