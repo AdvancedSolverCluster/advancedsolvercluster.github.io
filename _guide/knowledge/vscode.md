@@ -18,7 +18,7 @@ VS Code 有丰富而强大的插件 (Extensions)，这些优秀的插件使得VS
 
 ![](/guide/figure/VSCode-extensions.png)
 
-安装之后, 应该能在 VS Code 的左下角看到两个上下排列的 $>$ 和 $<$ 组成的图案 (如果没有出现, 则用 `F1` (或 `Ctrl+Shift+p`)调出命令面板, 输入 `Reload Windows` 重新加载), 点击它, 选择 `Connect to Host...` $\rightarrow$ `Configure SSH Hosts`. 然后选择(通常来说)在 `users` 目录下 `.ssh` 文件夹内的 `config` 文件 (如果没有该文件, 请参考[首次登录服务器! - 服务器基本操作: SSH & SCP](basic-ssh-scp.md)). 保存后再次点击左下角的图标, 然后选择要连接的服务器名即可. 在上方的 `Select the plaform of the remote host` 中选择 Linux, 如果左下角显示 `SSH: Host-name`, 则说明连接成功！连接成功的图示如下:
+安装之后, 应该能在 VS Code 的左下角看到两个上下排列的 $>$ 和 $<$ 组成的图案 (如果没有出现, 则用 `F1` (或 `Ctrl+Shift+p`)调出命令面板, 输入 `Reload Windows` 重新加载), 点击它, 选择 `Connect to Host...` $\rightarrow$ `Configure SSH Hosts`. 然后选择(通常来说)在 `users` 目录下 `.ssh` 文件夹内的 `config` 文件 (如果没有该文件, 请参考[首次登录服务器! - 服务器基本操作: SSH & SCP](../knowledge/ssh)). 保存后再次点击左下角的图标, 然后选择要连接的服务器名即可. 在上方的 `Select the plaform of the remote host` 中选择 Linux, 如果左下角显示 `SSH: Host-name`, 则说明连接成功！连接成功的图示如下:
 ![](/guide/figure/VSCode-login-success.png)
 
 **如果连接不成功, 可以参考的解决方法: **

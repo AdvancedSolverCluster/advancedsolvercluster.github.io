@@ -148,7 +148,7 @@ VS Code 有丰富而强大的插件 (Extensions)，这些优秀的插件使得VS
 
 方法一: 点击 Remote Explorer, 在 SSH Targets 中点击加号, 输入 `ssh <username>@10.88.3.90 -p 20001` (这个命令需要挂学校的 VPN) 即可进行连接. 这个时候相应的信息储存在 `C:\Users\admin\.ssh\config` 中, 你可以参考前面的教程进行修改. 当下次还想连接时, 可以直接在 SSH Targets 中选择.
 
-方法二: 安装之后, 应该能在 VS Code 的左下角看到两个上下排列的 $>$ 和 $<$ 组成的图案 (如果没有出现, 则用 `F1` (或 `Ctrl+Shift+P`)调出命令面板, 输入 `Reload Window` 重新加载), 点击它, 选择 `Connect to Host...`, 然后选择 `Configure SSH Hosts`. 再选择(通常来说)在 `username` 目录下 `.ssh` 文件夹内的 `config` 文件 (如果没有该文件, 请参考[首次登录服务器! - 服务器基本操作: SSH & SCP](connect-to-server.md)), 比如 `C:\Users\admin\.ssh\config` . 保存后再次点击左下角的图标, 然后选择要连接的服务器名即可. 在上方的 `Select the plaform of the remote host` 中选择 Linux, 如果左下角显示 `SSH: Hostname`, 则说明连接成功！连接成功的图示如下:
+方法二: 安装之后, 应该能在 VS Code 的左下角看到两个上下排列的 $>$ 和 $<$ 组成的图案 (如果没有出现, 则用 `F1` (或 `Ctrl+Shift+P`)调出命令面板, 输入 `Reload Window` 重新加载), 点击它, 选择 `Connect to Host...`, 然后选择 `Configure SSH Hosts`. 再选择(通常来说)在 `username` 目录下 `.ssh` 文件夹内的 `config` 文件 (如果没有该文件, 请参考[首次登录服务器! - 服务器基本操作: SSH & SCP](../knowledge/ssh)), 比如 `C:\Users\admin\.ssh\config` . 保存后再次点击左下角的图标, 然后选择要连接的服务器名即可. 在上方的 `Select the plaform of the remote host` 中选择 Linux, 如果左下角显示 `SSH: Hostname`, 则说明连接成功！连接成功的图示如下:
 
 ![](/guide/figure/VSCode-login-success.png)
 

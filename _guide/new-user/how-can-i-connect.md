@@ -44,7 +44,7 @@ Loading texlive/2022
 
 做以下的事情, 则可以避免每次输入这么长的命令, 只要输入 `ssh loginNode` 就能连接了.
 
-具体做法是: 找到本地的 `.ssh` 目录 (在你的 home 目录下, 详见[生成 Key](new-user/i-have-no-account.md)), 创建/修改 `config` 文件, 增加四行:
+具体做法是: 找到本地的 `.ssh` 目录 (在你的 home 目录下, 详见[生成 Key](i-have-no-account)), 创建/修改 `config` 文件, 增加四行:
 
 ``` text
 Host loginNode
@@ -53,13 +53,14 @@ Host loginNode
     User <username>
 ```
 
-> Warning: `.ssh` 文件夹在首次[生成 Key](new-user/i-have-no-account.md) 的时候会被自动生成, 如果没有在该机器上生成过 Key 文件夹则可能不存在. **切勿**手动新建这个文件夹! 可能会导致权限不对从而在这个文件夹下的 Key 失效. 安全的创建文件夹的方式是在本机再次[生成 Key](new-user/i-have-no-account.md)(即使这个 Key 你不会使用).
+{: .important }
+> `.ssh` 文件夹在首次[生成 Key](i-have-no-account) 的时候会被自动生成, 如果没有在该机器上生成过 Key 文件夹则可能不存在. **切勿**手动新建这个文件夹! 可能会导致权限不对从而在这个文件夹下的 Key 失效. 安全的创建文件夹的方式是在本机再次[生成 Key](i-have-no-account)(即使这个 Key 你不会使用).
 
 这里 `<username>` 是管理员指定的你的用户名. 另外还要注意的是, 除第一行外的下面几行均应有行首的 4 空格.
 
 ## 接下来干嘛?
 
-请移步[我已经学会连接服务器了，我能在服务器上做些什么？比如，如何运行程序？](how-can-i-run-program.md).
+请移步[我已经学会连接服务器了，我能在服务器上做些什么？比如，如何运行程序？](how-can-i-run-program).
 
-如果你有兴趣详细了解一下刚才自己都做了什么, 每一步都代表着什么, 如果不这么做会怎么样; 如果你想知道如何用 VS Code连接服务器, 如何上传文件到服务器, 或下载文件, 请参考[首次登录服务器! - 服务器基本操作: SSH & SCP](../connect-to-server.md).
+如果你有兴趣详细了解一下刚才自己都做了什么, 每一步都代表着什么, 如果不这么做会怎么样; 如果你想知道如何用 VS Code连接服务器, 如何上传文件到服务器, 或下载文件, 请参考[首次登录服务器! - 服务器基本操作: SSH & SCP](../knowledge/ssh).
 
