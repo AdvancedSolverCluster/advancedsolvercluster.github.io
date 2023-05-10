@@ -3,6 +3,7 @@ title: Advanced Solver 集群使用指南
 redirect_from:
   - /
   - /index.html
+nav_order: 1
 ---
 
 # Advanced Solver 集群使用指南
@@ -14,7 +15,7 @@ redirect_from:
 - [我还没有服务器账号，我该怎么做？](new-user/i-have-no-account)
 - [管理员已经帮我开好了服务器账号，我该怎么连接服务器？](new-user/how-can-i-connect)
 - [我已经学会连接服务器了，我能在服务器上做些什么？比如，如何运行程序？](new-user/how-can-i-run-program)
-- [一个神奇的命令：usage](new-user/usage)
+- [新功能：usage](new-user/index#usage)
 
 ## ❗使用须知
 

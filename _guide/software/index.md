@@ -1,8 +1,12 @@
 ---
 title: 软件教程
-nav_order: 4
+nav_order: 5
 has_children: true
+has_toc: false
 ---
+
+# Element 软件
+- [Element聊天软件](element)
 
 # 如何查看服务器上有哪些软件？
 
@@ -17,11 +21,19 @@ has_children: true
 
 `module list` 列出当前所用 module.
 
-- [Element聊天软件](software/element)
+# 当前服务器上提供的软件（持续更新）
 - Python
-  - [Tensorflow + Pytorch](software/python/python-tensorflow-pytorch)
-  - [Jupyter Notebook](software/python/python-jupyter-notebook)
-- [GCC/GDB](software/gcc-gdb)
-- [MATLAB](software/matlab)
-- [R](software/R)
-- [Intel OneAPI Toolkit](software/intel)
+  - [Tensorflow + Pytorch](python/python-tensorflow-pytorch)
+  - [Jupyter Notebook](python/python-jupyter-notebook)
+- [GCC/GDB](gcc-gdb)
+- [MATLAB](matlab)
+- [R](R)
+- [Intel OneAPI Toolkit](intel)
+
+
+{: .tip }
+> 我想用的软件机器上没有或者版本过低, 怎么办？
+>
+> 一般软件的主页里会提供 Installation Guide. 请根据安装指南将软件安装到自己的用户目录下(提示: 通过make或cmake编译安装的软件可以在第一步指明安装路径, 这时只要将安装路径指定为自己的用户目录, 就无需管理员权限).
+>
+> 如果安装失败, 或没有找到不需要管理员权限的安装指南, 请 <a class="one" href="mailto:cash_admin@163.com"> 联系管理员 </a>, 邮件里写明软件名称及用途, 管理员会在24小时内回信.
