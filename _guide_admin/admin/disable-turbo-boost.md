@@ -2,6 +2,7 @@
 title: "Manage Intel Turbo Boost with systemd"
 ---
 
+# "Manage Intel Turbo Boost with systemd"
 
 source: https://blog.christophersmart.com/2017/02/08/manage-intel-turbo-boost-with-systemd/
 

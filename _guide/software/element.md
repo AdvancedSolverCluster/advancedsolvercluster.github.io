@@ -2,6 +2,8 @@
 title: Using Element
 ---
 
+# Using Element
+
 *September 5, 2022, [Xiang Li](mailto:646873166@qq.com)*
 
 Element is a decentralized, encrypted chat & collaboration app designed for secure and independent communication.

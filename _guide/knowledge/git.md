@@ -2,6 +2,8 @@
 title: Git 教程
 ---
 
+# Git 教程
+
 *August 9, 2022, [Xiang Li](mailto:646873166@qq.com), [Jingyu Liu](mailto:381258337@qq.com)*
 
 ## 介绍

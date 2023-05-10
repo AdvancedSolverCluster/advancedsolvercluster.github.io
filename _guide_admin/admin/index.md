@@ -2,6 +2,7 @@
 title: "Admin reference page"
 ---
 
+# "Admin reference page"
 
 - [安装新系统](install-new-system)
 - [NTP时钟同步](ntp-time-sync)

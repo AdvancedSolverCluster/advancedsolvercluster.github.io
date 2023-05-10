@@ -2,6 +2,8 @@
 title: Welcome to the Advanced Solver HPC Guide Page!
 ---
 
+# Welcome to the Advanced Solver HPC Guide Page!
+
 ## Tutorial
 
 <div style="color: red">Notice: This is a machine translated version of the guide page. Read carefully.</div>

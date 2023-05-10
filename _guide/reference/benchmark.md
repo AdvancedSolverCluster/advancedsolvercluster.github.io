@@ -2,6 +2,8 @@
 title: 集群中各服务器的配置与性能
 ---
 
+# 集群中各服务器的配置与性能
+
 *March 29, 2023, [Xiang Li](mailto:646873166@qq.com), [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn)*
 
 ## CPU / Memory

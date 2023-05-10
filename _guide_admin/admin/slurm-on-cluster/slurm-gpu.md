@@ -2,6 +2,8 @@
 title: "Set up GPU on slurm"
 ---
 
+# "Set up GPU on slurm"
+
 by Yuejia Zhang, April 11, 2022
 
 ## `nvidia-smi -L`

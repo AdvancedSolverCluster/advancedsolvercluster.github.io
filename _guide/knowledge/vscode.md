@@ -2,6 +2,8 @@
 title: VS Code教程
 ---
 
+# VS Code教程
+
 *June 28, 2022, [Ming Li](mailto:19300180127@fudan.edu.cn)*
 
 VS Code 全称 Visual Studio Code, 是微软出的一款轻量级代码编辑器, 免费、开源而且功能强大. 它支持几乎所有主流的程序语言的语法高亮、智能代码补全、自定义热键、括号匹配、代码片段、代码对比 Diff、GIT 等特性, 支持插件扩展, 并针对网页开发和云端应用开发做了优化. 软件跨平台支持 Win、Mac 以及 Linux.

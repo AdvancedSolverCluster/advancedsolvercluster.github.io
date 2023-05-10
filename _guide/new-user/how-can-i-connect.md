@@ -4,6 +4,8 @@ nav_order: 2
 parent: 入门教程
 ---
 
+# 管理员已经帮我开好了服务器账号，我该怎么连接服务器？
+
 ## 必做任务: 从公网连接
 
 打开一个终端窗口, 输入`ssh <username>@cluster.advancedsolver.com -p 20001`.

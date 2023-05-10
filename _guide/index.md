@@ -5,6 +5,8 @@ redirect_from:
   - /index.html
 ---
 
+# Advanced Solver 集群使用指南
+
 ## 🆕入门教程
 
 第一次接触高性能集群？对Linux一窍不通？就从这里开始吧！
@@ -28,7 +30,7 @@ redirect_from:
   - [VSCode IDE 教程](knowledge/vscode)
   - [Markdown 教程](knowledge/markdown)
   - [Git 教程](knowledge/git)
-  
+
 ## 💻软件教程
 
 - [如何查看服务器上有哪些软件？](software/module)

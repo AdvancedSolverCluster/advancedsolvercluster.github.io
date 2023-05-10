@@ -2,6 +2,8 @@
 title: "Install new system"
 ---
 
+# "Install new system"
+
 ### 重装系统
 
 开root账号

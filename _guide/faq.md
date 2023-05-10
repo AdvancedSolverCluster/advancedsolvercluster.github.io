@@ -2,6 +2,8 @@
 title: FAQ
 ---
 
+# FAQ
+
 - 我想访问的位置提示 Permission denied, 怎么办？
 
 一般来说,每个人的工作区域就在 `/home/username` . 出现 Permission denied 是因为你没有权限访问这个位置, 请不要访问它, 且一般来说你也无须访问.

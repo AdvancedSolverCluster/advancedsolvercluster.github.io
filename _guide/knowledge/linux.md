@@ -2,6 +2,8 @@
 title: 服务器的基本操作? - Linux 服务器的基本知识
 ---
 
+# 服务器的基本操作? - Linux 服务器的基本知识
+
 *May 8, 2023, [Jingyu Liu](mailto:381258337@qq.com), [Xiang Li](mailto:646873166@qq.com), [Ming Li](mailto:19300180127@fudan.edu.cn)*
 
 ## 理解服务器的基本结构

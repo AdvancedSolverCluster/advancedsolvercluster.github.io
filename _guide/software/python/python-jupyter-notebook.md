@@ -2,6 +2,8 @@
 title: 在 VSCode 里连接 Python Jupyter Notebook
 ---
 
+# 在 VSCode 里连接 Python Jupyter Notebook
+
 *April 20, 2023, [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn)*
 
 ## Step 1: 创建一个 notebook 文件

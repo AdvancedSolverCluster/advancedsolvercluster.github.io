@@ -2,6 +2,8 @@
 title: vi/vim 教程
 ---
 
+# vi/vim 教程
+
 *March 10, 2022, [Jingyu Liu](mailto:381258337@qq.com), [Yidong Zhang](mailto:2308353627@qq.com)*
 
 vi/vim 都是 Linux 的文本编辑器. vim 是 vi 的增强版, 功能更加强大, 我们推荐使用 vim. 输入 `vim <filename>` 即可进入相应的文件. 若没有对应的文件, 会新建相应名称的文件.

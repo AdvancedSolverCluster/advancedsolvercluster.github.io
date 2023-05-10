@@ -2,6 +2,8 @@
 title: 关于服务器各用户储存空间的 Quota
 ---
 
+# 关于服务器各用户储存空间的 Quota
+
 *February 28, 2022, [Jingyu Liu](mailto:381258337@qq.com), [Xiang Li](mailto:646873166@qq.com)*
 
 在 Linux 系统中, 由于是多人多任务的环境, 所以经常会出现多人共同使用同一个硬盘空间的情况.

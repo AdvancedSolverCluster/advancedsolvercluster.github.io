@@ -2,6 +2,8 @@
 title: "SLURM Admin Guide"
 ---
 
+# "SLURM Admin Guide"
+
 如何做一个优秀的SLURM管理员
 
 https://ulhpc-tutorials.readthedocs.io/en/latest/scheduling/advanced/

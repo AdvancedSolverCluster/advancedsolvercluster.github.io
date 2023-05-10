@@ -1,6 +1,9 @@
 ---
 title: "SLURM User Guide"
 ---
+
+# "SLURM User Guide"
+
 ### Ver. 2022/1/9 - by Yuejia Zhang, Xiang Li
 
 <details> <summary> <h2> Introduction </h2> </summary>

@@ -3,6 +3,7 @@
 title: "A test page"
 ---
 
+# "A test page"
 
 This is a test page for admins to test if the website is functioning properly.
 

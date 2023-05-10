@@ -2,6 +2,8 @@
 title: "如何在服务器上安装并配置 slurm"
 ---
 
+# "如何在服务器上安装并配置 slurm"
+
 *April 1, 2022, [Jingyu Liu](mailto:381258337@qq.com)*
 (6/17 更新到slurm22.05)
 
@@ -120,7 +122,7 @@ echo "Test munge on $(hostname)"
 munge -n
 munge -n | unmunge
 
----
+```
 munge -n -t 10 | ssh bigMem0 unmunge
 munge -n -t 10 | ssh bigMem1 unmunge
 munge -n -t 10 | ssh -p 10888 loginNode unmunge
