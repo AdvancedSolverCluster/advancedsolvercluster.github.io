@@ -1,7 +1,7 @@
 ---
 title: 管理员已经帮我开好了服务器账号，我该怎么连接服务器？
 nav_order: 2
-parent: new-user
+parent: 入门教程
 ---
 
 ## 必做任务: 从公网连接

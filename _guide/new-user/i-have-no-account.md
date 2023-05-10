@@ -1,7 +1,7 @@
 ---
 title: 我还没有服务器账号，我该怎么做？
 nav_order: 1
-parent: new-user
+parent: 入门教程
 ---
 
 ## Step 1: 生成 Key

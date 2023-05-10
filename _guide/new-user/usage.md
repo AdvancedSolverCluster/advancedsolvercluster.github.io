@@ -1,7 +1,7 @@
 ---
 title: usage
 nav_order: 4
-parent: new-user
+parent: 入门教程
 ```
 
 新功能: 在服务器上使用 `usage` 命令, 可以更迅速地得到帮助. 如:

@@ -1,7 +1,7 @@
 ---
 title: 我已经学会连接服务器了，我能在服务器上做些什么？比如，如何运行程序？
 nav_order: 3
-parent: new-user
+parent: 入门教程
 ---
 
 ## Step 1: 四处看看

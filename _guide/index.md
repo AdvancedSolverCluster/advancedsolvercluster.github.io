@@ -28,7 +28,9 @@ redirect_from:
   - [VSCode IDE 教程](knowledge/vscode)
   - [Markdown 教程](knowledge/markdown)
   - [Git 教程](knowledge/git)
+  
 ## 💻软件教程
+
 - [如何查看服务器上有哪些软件？](software/module)
 - [Element聊天软件](software/element)
 - Python
