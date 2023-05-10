@@ -1,5 +1,7 @@
 ---
 title: "GCC/GDB"
+parent: 软件教程
+nav_order: 3
 ---
 
 # GCC/GDB

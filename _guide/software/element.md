@@ -1,5 +1,7 @@
 ---
-title: Using Element
+title: Element
+parent: 软件教程
+nav_order: 1
 ---
 
 # Using Element

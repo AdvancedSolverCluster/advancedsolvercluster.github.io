@@ -1,5 +1,7 @@
 ---
 title: 在 VSCode 里连接 Python Jupyter Notebook
+parent: Python
+nav_order: 1
 ---
 
 # 在 VSCode 里连接 Python Jupyter Notebook

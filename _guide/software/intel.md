@@ -1,5 +1,7 @@
 ---
 title: Intel OneAPI Toolkit
+parent: 软件教程
+nav_order: 6
 ---
 
 # Intel OneAPI Toolkit

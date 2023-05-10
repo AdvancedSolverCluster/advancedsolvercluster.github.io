@@ -1,5 +1,7 @@
 ---
 title: vi/vim 教程
+nav_order: 3
+parent: 常用教程
 ---
 
 # vi/vim 教程

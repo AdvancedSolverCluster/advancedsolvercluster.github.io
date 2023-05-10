@@ -21,9 +21,8 @@ redirect_from:
 - [请使用 SLURM 运行程序！](you-must/slurm)
 - [请注意储存空间的 Quota！](you-must/xfs-quota)
 
-## ✍常用教程
+## 😊常用教程
 
-<!-- **<font size=3> 以下提供了一些你可能会用到的教程, 如果您有任何建议和想法, 欢迎修改和补充! </font>** -->
   - [Linux 基本知识](knowledge/linux)
   - [SSH 基本知识](knowledge/ssh)
   - [vi/vim 编辑器教程](knowledge/vim)
@@ -33,11 +32,11 @@ redirect_from:
 
 ## 💻软件教程
 
-- [如何查看服务器上有哪些软件？](software/module)
+- [如何查看服务器上有哪些软件？](software/index)
 - [Element聊天软件](software/element)
 - Python
-  - [Tensorflow + Pytorch](software/python/python-tensorflow-pytorch)
   - [Jupyter Notebook](software/python/python-jupyter-notebook)
+  - [Tensorflow + Pytorch](software/python/python-tensorflow-pytorch)
 - [GCC/GDB](software/gcc-gdb)
 - [MATLAB](software/matlab)
 - [R](software/R)
@@ -45,6 +44,6 @@ redirect_from:
 
 ## 📚参考
 
-- [集群中各服务器的配置与性能](reference/benchmark)
+- [集群中各服务器的配置与性能](reference/index)
 
 ## ❓[FAQ](faq)

@@ -1,15 +1,16 @@
 ---
 title: 如何利用SLURM在集群上运行程序
+nav_order: 1
+parent: 使用须知
 ---
 
-# <a name="use-slurm"> 如何利用SLURM在集群上运行程序 </a>
+# 如何利用SLURM在集群上运行程序
 
-服务器上已经有很多用户在运行程序了, 你**不可以**和其他人一起抢占资源 (最终导致炸服). 另外, 我们的登陆节点性能也不如计算节点好. 我们的服务器集群使用 SLURM, 一套自动化资源分配的作业调度工具, 帮助你提交作业到计算节点上运行.
+服务器上已经有很多用户在运行程序了, 你**不可以**和其他人一起抢占资源 (最终导致炸服). 另外, 我们的登陆节点性能也不如计算节点好. 我们的服务器集群使用 SLURM, 一套自动化资源分配的作业调度工具, 帮助你提交作业到计算节点上运行. 当你的程序需要很长的运行时间或者很大的内存占用时, 请使用 slurm 提交程序.
 
-当你的程序需要很长的运行时间或者很大的内存占用时, 请使用 slurm 提交程序, 它将保证你的程序会在其他地方运行. 下面的图片说明了这件事.
 ![user-topology](/guide/figure/user-topology.png)
 
-### 申请资源与提交作业
+## 申请资源与提交作业
 
 将你想要运行的一条或多条指令称为作业 (job). SLURM 提供了运行作业的三种方式:
 
@@ -17,7 +18,7 @@ title: 如何利用SLURM在集群上运行程序
 - `salloc`: 为需要实时处理的作业分配资源, 系统会为你分配一个或多个计算节点, 然后你可以登陆到计算节点上, 使用交互式命令行. 这一用法适用于需要互动处理的作业.
 - `sbatch`: 提交作业脚本, 系统会为你分配一个或多个计算节点, 运行你的作业. 这一用法适用于放在后台慢慢跑的作业.
 
-#### `srun`
+### `srun`
 
 官方文档: <https://slurm.schedmd.com/srun.html>
 
@@ -27,7 +28,7 @@ title: 如何利用SLURM在集群上运行程序
 srun python3 helloworld.py
 ```
 
-#### `salloc`
+### `salloc`
 
 官方文档: <https://slurm.schedmd.com/salloc.html>
 
@@ -51,7 +52,7 @@ salloc: Job allocation 2984 has been revoked.
 
 **注意**: `salloc` 会创建一个新的bash环境, 因此你在登陆节点上加载的模块和设置的环境变量都需要重新加载和设置.
 
-#### `sbatch`
+### `sbatch`
 
 官方文档: <https://slurm.schedmd.com/sbatch.html>
 
@@ -67,7 +68,7 @@ matlab -batch "testMatlab"
 
 **注意**: `sbatch` 会继承你在登陆节点上加载的模块和设置的环境变量. 请注意计算节点上的 MPICH 环境可能和登陆节点不同 (如果未申请计算节点的GPU资源), 所以如果要用 MPICH, 请在 sbatch 脚本里先 `module unload MPICH`, 再 `module load MPICH`.
 
-### 申请资源选项
+## 申请资源选项
 
 在上述案例中, 无论是 `srun`, `salloc` 还是 `sbatch` 都默认你申请一个计算节点, 启动一个进程, 不使用GPU, 并有默认的运行时长上限. 如果你想要申请更多资源 (**比如你需要使用GPU, 就必须加上GPU选项!**), 或者指定一些运行设定, 都可以添加选项.
 
@@ -77,6 +78,12 @@ srun -t 30 python3 helloworld.py
 salloc -t 30
 sbatch -t 30 test.sh
 ```
+
+{: .important }
+> 请注意，选项必须紧跟命令。
+>
+> - ❌ 错误示例： `sbatch test.sh -t 30`
+> - ✅ 正确示例： `sbatch -t 30 test.sh `
 
 对于 `sbatch`, 还可以把选项放在脚本的开头, 以 `#SBATCH` 开头, 而且必须接在 `#!/bin/bash` 的后面, 放在所有的命令前面, 否则就会被当成普通的注释. 比如:
 ```bash
@@ -116,13 +123,13 @@ python3 helloworld.py
 </div>
 
 
-### 其他常用命令
+## 其他常用命令
 
 - `sinfo`: 查看节点状态;
 - `squeue`: 查看作业队列;
 - `scancel`: 取消作业.
 
-#### `sinfo`
+### `sinfo`
 
 官方文档: <https://slurm.schedmd.com/sinfo.html>
 
@@ -138,7 +145,7 @@ partition*    up 7-00:00:00      1   idle bigMem2  gpu:nvidia_geforce_gtx_3090:2
 
 三个计算节点, bigMem0, bigMem1 和 bigMem2 状态是 idle 即完全空闲的 (如果显示 mix, 表示有一部分核被用户使用了; 如果显示 alloc, 表示该计算节点的所有核都被占用了, 此时其他用户无法再申请那台机器上的资源), **作业的时间限制最长为7天**, 以及三台机器上分别拥有的 GPU 卡数及型号.
 
-#### `squeue` & `scancel`
+### `squeue` & `scancel`
 
 在等待你的程序执行的同时, 你可以通过`squeue`知道程序的状态. 例如, 以下命令列出所有用户名提交的作业:
 
@@ -162,7 +169,7 @@ squeue -u <username>
 scancel <jobid>
 ```
 
-### 测试性能
+## 测试性能
 
 我们还可以利用 slurm 测试程序和算法的性能, 为此, 我们需要提交程序占用整个结点资源, 方法是在 sbatch 的时候加参数 `--exclusive`, 这保证了我们独占这个节点. 下面是关于 `--exclusive` 的说明
 ![slurm_exclusive](/guide/figure/slurm_exclusive.png)

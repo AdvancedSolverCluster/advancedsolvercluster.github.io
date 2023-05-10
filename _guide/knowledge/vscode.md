@@ -1,8 +1,10 @@
 ---
-title: VS Code教程
+title: VSCode教程
+nav_order: 4
+parent: 常用教程
 ---
 
-# VS Code教程
+# VS Code 教程
 
 *June 28, 2022, [Ming Li](mailto:19300180127@fudan.edu.cn)*
 

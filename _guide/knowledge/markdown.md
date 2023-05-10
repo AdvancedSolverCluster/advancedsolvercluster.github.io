@@ -1,8 +1,10 @@
 ---
 title: Markdown教程
+nav_order: 5
+parent: 常用教程
 ---
 
-# Markdown教程
+# Markdown 教程
 
 *March 4, 2022, [Jingyu Liu](mailto:381258337@qq.com)*
 

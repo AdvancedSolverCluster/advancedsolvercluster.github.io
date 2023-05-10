@@ -1,5 +1,7 @@
 ---
 title: 关于服务器各用户储存空间的 Quota
+nav_order: 2
+parent: 使用须知
 ---
 
 # 关于服务器各用户储存空间的 Quota

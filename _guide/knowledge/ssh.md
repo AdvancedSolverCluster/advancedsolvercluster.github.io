@@ -1,5 +1,7 @@
 ---
 title: SSH 公钥与私钥
+nav_order: 2
+parent: 常用教程
 ---
 
 # SSH 公钥与私钥

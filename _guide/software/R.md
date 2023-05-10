@@ -1,5 +1,7 @@
 ---
 title: R
+parent: 软件教程
+nav_order: 5
 ---
 
 # R
