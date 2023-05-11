@@ -26,7 +26,7 @@ has_toc: false
   - [Tensorflow + Pytorch](python/python-tensorflow-pytorch)
   - [Jupyter Notebook](python/python-jupyter-notebook)
 - [GCC/GDB](gcc-gdb)
-- [MATLAB](matlab)
+- [MATLAB](MATLAB)
 - [R](R)
 - [Intel OneAPI Toolkit](intel)
 
