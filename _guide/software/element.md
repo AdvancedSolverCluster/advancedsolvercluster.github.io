@@ -44,7 +44,7 @@ It's powered by an open network framework [Matrix](https://matrix.org). You won'
 The place for this file is under your Element installation, which would be `C:\Users\YOUR_USER_NAME\AppData\Roaming\Element\` by default on Windows.
 A sample config is provided below.
 
-```json
+~~~ json
 {
     "update_base_url": "https://packages.element.io/desktop/update/",
     "default_server_name": "matrix.advancedsolver.com",
@@ -87,4 +87,4 @@ A sample config is provided below.
         "https://matrix.advancedsolver.com": true
     }
 }
-```
+~~~

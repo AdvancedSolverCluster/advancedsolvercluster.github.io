@@ -12,12 +12,12 @@ $123 + 456 = 789\frac12$
 
 $$ \int_a^b g(x0) \text{d} x234+567=890 $$
 
-```math
+~~~ math
 \begin{aligned}
 row & 1\\
 rowww & 2
 \end{aligned}
-```
+~~~
 
 
 

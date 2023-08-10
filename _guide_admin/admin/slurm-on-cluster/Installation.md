@@ -25,12 +25,12 @@ title: "如何在服务器上安装并配置 slurm"
 
 在每个节点运行下面的脚本:
 
-```bash
+~~~ bash
 sudo systemctl stop slurmd
 sudo systemctl stop slurmdbd
 sudo systemctl stop slurmctld
 sudo systemctl stop munge
-```
+~~~
 
 ## STEP 1 安装 munge
 
@@ -38,22 +38,22 @@ sudo systemctl stop munge
 
 主要的命令是
 
-``` bash
+~~~  bash
 tar xJf munge-0.5.14.tar.xz
 cd munge-0.5.14
 ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --runstatedir=/run
 make                     \
 make check               \
 sudo make install
-```
+~~~
 
 然后使用 `munge -V` 来检查是否安装成功, 若成功, 会显示形如 `munge-0.5.14 (2020-01-14)` 的信息.
 
 你可能在执行第三行 `./configure` 时遇到 `configure: error: unable to locate cryptographic library`, 此时可以运行
 
-``` bash
+~~~  bash
 yum -y install openssl openssl-devel
-```
+~~~
 
 来安装所需要的包，注意 yum 源下的 openssl 版本较低.
 
@@ -63,19 +63,19 @@ yum -y install openssl openssl-devel
 
 此时, 请运行下面的命令.
 
-``` bash
+~~~  bash
 ldd /usr/sbin/mungekey | grep libmunge
     libmunge.so.2 => not found
 sudo ldconfig
 ldd /usr/sbin/mungekey | grep libmunge
-```
+~~~
 
 
 请对比第一行和第三行出现的结果. 然后重新 `sudo make install` 即可.
 
 在安装好了之后, 我们在每个节点运行 `add_munge_and_slurm_user.sh`:
 
-``` bash
+~~~  bash
 if id munge; then sudo userdel -r -f munge; fi
 if id slurm; then sudo userdel -r -f slurm; fi
 
@@ -86,13 +86,13 @@ sudo useradd  -m -c "SLURM workload manager" -d /var/lib/slurm -u 967 -g slurm  
 
 id munge
 id slurm
-```
+~~~
 
 它的作用是创建 munge 组 和 slurm 组.
 
 然后, 我们在任何一个管理节点 (这里是 bigMem0) 上运行 `generate_munge_key.sh`:
 
-``` bash
+~~~  bash
 sudo rngd -r /dev/urandom
 sudo /usr/sbin/create-munge-key -r -f
 
@@ -101,60 +101,60 @@ sudo chown munge: /etc/munge/munge.key
 sudo chmod 400 /etc/munge/munge.key
 sudo cp /etc/munge/munge.key ~
 sudo chown munge: ~/munge.key
-```
+~~~
 
 之后, 我们将 munge.key 用 scp 复制到其他每个节点下, 并运行 `sync_munge_key.sh` (在管理节点也要运行这个):
 
-```bash
+~~~ bash
 sudo cp ~/munge.key /etc/munge
 sudo chown -R munge: /etc/munge/ /var/log/munge/ /run/munge /var/lib/munge
 sudo chmod 0700 /etc/munge/ /var/log/munge/
 sudo systemctl enable munge
 sudo systemctl restart munge
-```
+~~~
 
 特别注意, 在执行这一步前, 我们需要保证时钟是同步的, 这可以通过 `sudo ntpdate 10.108.68.100` 做到, 这里 `10.108.68.100` 是复旦的内网 ip.
 
 在做完上面这些后, 我们在所有节点运行 `test_munge.sh` 以检查是否成功, 脚本如下:
 
-```bash
+~~~ bash
 echo "Test munge on $(hostname)"
 munge -n
 munge -n | unmunge
 
-```
+~~~
 munge -n -t 10 | ssh bigMem0 unmunge
 munge -n -t 10 | ssh bigMem1 unmunge
 munge -n -t 10 | ssh -p 10888 loginNode unmunge
-```
+~~~
 
 这里要注意, 我们的最后几行事实上需要遍历所有节点, 请根据实际情况修改.
 
 ## STEP 2: 安装 MYSQL
 为了记录任务所用资源需要一个数据库. 在loginNode上安装MySQL.
-```bash
+~~~ bash
 wget -c https://dev.mysql.com/get/mysql80-community-release-el7-6.noarch.rpm
 sudo yum -y install mysql80-community-release-el7-6.noarch.rpm
 sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
 sudo yum -y install mysql-community-server
 sudo systemctl start mysqld.service
-```
+~~~
 
 使用
 
-```bash
+~~~ bash
 sudo grep "password" /var/log/mysqld.log
-```
+~~~
 
 查看root的初始密码, 然后登录
 
-```bash
+~~~ bash
 mysql -u root -p
-```
+~~~
 
 在mySQL里
 
-```sql
+~~~ sql
 CREATE USER 'slurm'@'%' IDENTIFIED WITH mysql_native_password BY 'da4jia1deTeXshi4ti3yu4lao3shi1jiao1de?';
 GRANT ALL ON slurm_acct_db.* TO 'slurm'@'%';
 CREATE DATABASE slurm_acct_db;
@@ -162,17 +162,17 @@ GRANT ALL ON job_comp_db.* TO 'slurm'@'%';
 CREATE DATABASE job_comp_db;
 SHOW ENGINES;
 SHOW VARIABLES LIKE 'innodb_buffer_pool_size';
-```
+~~~
 
 接下来`sudo vim /etc/my.cnf`
 加入这四行
 
-```
+~~~
 [mysqld]
 innodb_buffer_pool_size=4096M
 innodb_log_file_size=64M
 innodb_lock_wait_timeout=900
-```
+~~~
 
 然后 `sudo systemctl restart mysqld`. 再次打开MySQL看 `SHOW VARIABLES LIKE 'innodb_buffer_pool_size';` 会发现这个变量增大了.
 
@@ -181,7 +181,7 @@ innodb_lock_wait_timeout=900
 
 JSON:
 
-```bash
+~~~ bash
 module load CMake
 git clone --depth 1 --single-branch -b json-c-0.15-20200726 https://github.com/json-c/json-c.git json-c
 mkdir json-c-build
@@ -190,21 +190,21 @@ cmake ../json-c
 make -j24
 sudo make install
 cd ..
-```
+~~~
 
 HTTP Parser:
 
-```bash
+~~~ bash
 git clone --depth 1 --single-branch -b v2.9.4 https://github.com/nodejs/http-parser.git http_parser-c
 cd http_parser-c
 make -j24
 sudo make install
 cd ..
-```
+~~~
 
 YAML Parser:
 
-```bash
+~~~ bash
 git clone --depth 1 --single-branch -b 0.2.5 https://github.com/yaml/libyaml libyaml
 cd libyaml
 ./bootstrap
@@ -212,11 +212,11 @@ cd libyaml
 make -j24
 sudo make install
 cd ..
-```
+~~~
 
 JWT:
 
-```bash
+~~~ bash
 git clone --depth 1 --single-branch -b v1.12.0 https://github.com/benmcollins/libjwt.git libjwt
 cd libjwt
 autoreconf --force --install
@@ -225,57 +225,57 @@ make -j24
 sudo make install
 sudo ldconfig -v
 cd ..
-```
+~~~
 
 如果configure过程遇到需要`jansson`的问题, 则应该 `sudo yum install jansson jansson-devel`.
 
 JWT配置: 在loginNode上
 
-```bash
+~~~ bash
 sudo dd if=/dev/random of=/var/spool/slurmctld/jwt_hs256.key bs=32 count=1
 sudo chown slurm:slurm /var/spool/slurmctld/jwt_hs256.key
 sudo chmod 0600 /var/spool/slurmctld/jwt_hs256.key
-```
+~~~
 
 并把这个key也复制到计算节点的对应位置并更改权限.
 
 安装其他依赖
 
-```bash
+~~~ bash
 sudo yum install mysql-devel pam-devel hdf5 hdf5-devel hwloc hwloc-devel
-```
+~~~
 
 
 ## 安装 slurm
 下载slurm最新版本22.05.2.
 
-```bash
+~~~ bash
 wget https://download.schedmd.com/slurm/slurm-22.05.2.tar.bz2
 tmp=$(md5sum slurm-22.05.2.tar.bz2)
 if [[ $tmp != a56f520b022dcd7610de4082fcb4ac7a* ]]; then exit 1;  fi
 tar --bzip -x -f slurm-22.05.2.tar.bz2
 unset tmp
 cd slurm-22.05.2
-```
+~~~
 
 修改`src/salloc/salloc.c`, 1135行把`i>1`改成`i>=0`.
 
 编译安装slurm.
 
-```bash
+~~~ bash
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/:$PKG_CONFIG_PATH
 ./configure --prefix=/usr --sysconfdir=/etc/slurm --enable-pam --with-pam_dir=/lib/slurm/pam --with-http-parser=/usr/local/ --with-yaml=/usr/local/  --with-jwt=/usr/local/ --enable-slurmrestd
 make -j24
 sudo make install
 slurmd -V
-```
+~~~
 注意看`./configure`的结果, 留意`MySQL test program built properly`之类的字眼.
 
 安装成功的标志是, 输入 `slurmd -V` 显示类似于 `slurm 22.05.02` 的结果.
 
 ## STEP 3 配置 slurm
 `slurm.conf` (lscpu):
-```conf
+~~~ conf
 # slurm.conf file generated by configurator.html.
 # Put this file on all nodes of your cluster.
 # See the slurm.conf man page for more information.
@@ -426,12 +426,12 @@ NodeName=bigMem0 CPUs=64 RealMemory=1030499 Sockets=2 CoresPerSocket=16 ThreadsP
 NodeName=bigMem1 CPUs=64 RealMemory=1030499 Sockets=2 CoresPerSocket=16 ThreadsPerCore=2 State=UNKNOWN Gres=gpu:nvidia_a30:4
 NodeName=bigMem2 CPUs=256 RealMemory=1030499 Sockets=2 CoresPerSocket=64 ThreadsPerCore=2 State=UNKNOWN
 PartitionName=partition Nodes=bigMem[0-2] MaxTime=7-0 DefaultTime=1-0 Default=YES State=UP
-```
+~~~
 
 之后, 我们将 `slurm.conf` 复制到其他每个节点.
 
 `cgroup.conf`:
-```
+~~~
 ###
 #
 # Slurm cgroup support configuration file
@@ -449,11 +449,11 @@ ConstrainRAMSpace=yes
 ConstrainSwapSpace=yes
 #ConstrainCores=no
 #ConstrainRAMSpace=no
-```
+~~~
 
 然后再每个节点运行 `configure_slurm.sh`:
 
-``` bash
+~~~  bash
 for dir in /var/spool/slurm /var/spool/slurmd /var/spool/slurmctld /var/spool/slurm/slurmctld /etc/slurm
 do
     sudo mkdir -p $dir
@@ -469,10 +469,10 @@ done
 
 sudo ldconfig -n /usr/lib/slurm
 sudo cp slurm-22.05.2/etc/*.service /etc/systemd/system
-```
+~~~
 
 在loginNode上`/etc/slurm/slurmdbd.conf`:
-```conf
+~~~ conf
 #
 # Sample /etc/slurm/slurmdbd.conf
 #
@@ -503,19 +503,19 @@ SlurmUser=slurm
 StoragePass=da4jia1deTeXshi4ti3yu4lao3shi1jiao1de?
 StorageType=accounting_storage/mysql
 StorageUser=slurm
-```
+~~~
 并且
-```bash
+~~~ bash
 sudo chown slurm: /etc/slurm/slurmdbd.conf
 sudo chmod 600 /etc/slurm/slurmdbd.conf
-```
+~~~
 
 ## STEP 4 启动服务, 检查
 
 注册cluster:
-```bash
+~~~ bash
 sacctmgr create cluster clusterHPC
-```
+~~~
 
 先启动 slurmdbd, 再启动 slurmctld, 最后 slurmd.
 
@@ -539,10 +539,10 @@ sacctmgr create cluster clusterHPC
 
 因此我们在每个节点手动运行
 
-``` bash
+~~~  bash
 sudo touch /var/run/slurmctld.pid
 sudo chown slurm: /var/run/slurmctld.pid
-```
+~~~
 
 然后启动服务, 发现仍出现相同错误. 查看 `slurmd.log` 提示
 
@@ -550,12 +550,12 @@ sudo chown slurm: /var/run/slurmctld.pid
 
 输入 `slurmctld -Dvvvvvv` 发现错误
 
-``` txt
+~~~  txt
 (null): _log_init: Unable to open logfile `/var/log/slurmctld.log': Permission denied
 slurmctld: error: Unable to open pidfile `/var/run/slurmctld.pid': Permission denied
 slurmctld: Not running as root. Can't drop supplementary groups
 slurmctld: fatal: Failed to set GID to 967
-```
+~~~
 
 最后发现是 `configure_slurm.sh` 写错, 我们已经改正 (你现在看到的是改正后的版本).
 
@@ -565,13 +565,13 @@ slurmctld: fatal: Failed to set GID to 967
 
 随后发现是防火墙的问题, 我们在 bigMem0 和 bigMem1 上打开对内网的防火墙, 操作如下 (我们以在 bigMem1 上为例, 对其它节点类似)
 
-``` bash
+~~~  bash
 sudo systemctl status firewalld
 sudo firewall-cmd --get-active-zones
 sudo firewall-cmd --list-all --zone=trusted
 sudo firewall-cmd --zone=trusted --add-source=192.168.2.0/24 --permanent
 sudo systemctl restart firewalld
-```
+~~~
 
 这样问题就得到了解决.
 
@@ -579,30 +579,30 @@ sudo systemctl restart firewalld
 
 输入 `slurmd -Dvvvvvv` 提示
 
-``` txt
+~~~  txt
 (null): _log_init: Unable to open logfile `/var/log/slurmd.log': Permission denied
 slurmd: error: chmod(/var/spool/slurmd, 0755): Operation not permitted
 slurmd: error: Unable to initialize slurmd spooldir
 slurmd: error: slurmd initialization failed
-```
+~~~
 
 还是防火墙的问题.
 
 ## 开机自启
 Yuejia Zhang, Apr 12, 2022
-```bash
+~~~ bash
 sudo systemctl enable slurmd
-```
+~~~
 on three machines.
 
 ## ubuntu上的slurm安装
 步骤基本一致, 但需要注意的是Ubuntu用的是cgroup/v2而我们的slurm用的是cgroup/v1, 所以需要修改kernel的boot参数：
-```bash
+~~~ bash
 sudo vim /etc/default/grub
 GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1 systemd.unified_cgroup_hierarchy=false systemd.legacy_systemd_cgroup_controller=false"
 sudo update-grub
 sudo reboot
-```
+~~~
 参考资料(从Debian玩家那里找来的):
 
 - https://groups.google.com/g/slurm-users/c/EJWn7nC6z7g?pli=1

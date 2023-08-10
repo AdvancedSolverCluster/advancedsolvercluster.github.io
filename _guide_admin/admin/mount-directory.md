@@ -13,9 +13,9 @@ title: "挂载某个文件夹到其他机器上"
 
 在`loginNode`上更新为(以下使用ip地址的地方都是已知不可以用hostname的地方)
 
-```text
+~~~ text
 /home 192.168.2.0/26(rw,root_squash,sync,security_label) 192.168.2.100(ro)
-```
+~~~
 
 关于参数的含义也可以参考`man exports`.
 
@@ -31,32 +31,32 @@ title: "挂载某个文件夹到其他机器上"
 
 加入 `/etc/fstab` 开机自动mount: 在 `/etc/fstab` 中加入行
 
-```text
+~~~ text
 loginNode:/home /home                           nfs     defaults        0 0
-```
+~~~
 
 reload daemon: `sudo systemctl daemon-reload`, [参考链接](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/nfs-clientconfig#s2-nfs-fstab).
 
 开放ssh访问`authorized_keys`的权限(SELinux): [参考链接](https://stackoverflow.com/questions/36682870/passwordless-ssh-on-shared-nfs-home-directory-does-not-work-centos-7)
 
-```bash
+~~~ bash
 sudo setsebool -P use_nfs_home_dirs 1
-```
+~~~
 
 ## 执行记录
 
 `/etc/exports` on loginNode:
 
-```text
+~~~ text
 /home 192.168.2.0/26(rw,root_squash,sync,security_label) 192.168.2.100(ro,no_root_squash)
 /scratch 192.168.2.0/26(rw,root_squash,sync,security_label)
 /sync 192.168.2.0/26(rw,no_root_squash)
 /etc/share 192.168.2.0/26(ro,no_root_squash)
-```
+~~~
 
 `/etc/fstab` on bigMem0:
 
-```text
+~~~ text
 /dev/mapper/centos-root /                       xfs     defaults        0 0
 UUID=1aae08bb-4581-49b1-aac8-6c595266eb7b /boot                   xfs     defaults        0 0
 /dev/mapper/centos-sync /sync                   xfs     defaults        0 0
@@ -65,11 +65,11 @@ loginNode:/home /home                           nfs     defaults        0 0
 loginNode:/scratch /scrach                      nfs     defaults        0 0
 loginNode:/sync /mnt/loginNode/sync             nfs     defaults        0 0
 loginNode:/etc/share /etc/share                 nfs     defaults        0 0
-```
+~~~
 
 `/etc/fstab` on bigMem1:
 
-```text
+~~~ text
 /dev/mapper/centos-root /                       xfs     defaults        0 0
 UUID=ca86668f-ebc7-43ea-81da-9711007cb858 /boot                   xfs     defaults        0 0
 UUID=666D-00DA          /boot/efi               vfat    umask=0077,shortname=winnt 0 0
@@ -79,15 +79,15 @@ loginNode:/home /home                           nfs     defaults        0 0
 loginNode:/scratch /scratch                     nfs     defaults        0 0
 loginNode:/sync /mnt/loginNode/sync             nfs     defaults        0 0
 loginNode:/etc/share /etc/share                 nfs     defaults        0 0
-```
+~~~
 
 `/etc/fstab` on web0:
 
-```text
+~~~ text
 /dev/mapper/centos-root /                       xfs     defaults        0 0
 UUID=c00e98aa-aec4-4587-927e-ba6bfb3969e2 /boot                   xfs     defaults        0 0
 UUID=2BDD-D898          /boot/efi               vfat    umask=0077,shortname=winnt 0 0
 /dev/mapper/centos-home /home                   xfs     defaults        0 0
 /dev/mapper/centos-swap swap                    swap    defaults        0 0
 loginNode:/home /mnt/loginNode/home                           nfs     defaults        0 0
-```
+~~~

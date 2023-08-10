@@ -31,10 +31,10 @@ parent: 使用须知
 
 在命令行界面输入 `xfs_quota` 后, 会进入 `xfs_quota` 的交互界面中:
 
-```bash
+~~~ bash
 $ xfs_quota
 xfs_quota>
-```
+~~~
 
 在交互状态下, 使用命令:
 
@@ -44,7 +44,7 @@ xfs_quota>
 
 ### 示例
 
-```bash
+~~~ bash
 $ xfs_quota
 xfs_quota>
 xfs_quota> quota -h
@@ -57,7 +57,7 @@ Filesystem   Blocks  Quota  Limit Warn/Time    Mounted on
 /dev/mapper/centos-home
               64.6G   100G   500G  00 [------] /home
 xfs_quota> q
-```
+~~~
 
 查询所用 quota 的命令可以看到如上的示例结果. 其含义为
 

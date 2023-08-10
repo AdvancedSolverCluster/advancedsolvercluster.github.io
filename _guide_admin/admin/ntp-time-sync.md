@@ -19,25 +19,25 @@ ping其服务器`ntp.fudan.edu.cn`可得其内网ip: `10.108.68.100`.
 
 ## 当前方案
 
-```
+~~~
 vim /etc/ntp.conf
-```
+~~~
 
 在 `ntpd` 服务端(`loginNode`)的配置中添加
 
-```
+~~~
 server 127.127.1.0 fudge
 127.127.1.0 stratum 8 
-```
+~~~
 
 然后
 
-```
+~~~
 sudo systemctl restart ntpd
-```
+~~~
 
 其他机器定期向loginNode同步时间:
 
-```
+~~~
 sudo ntpdate -vd loginNode
-```
+~~~

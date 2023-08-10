@@ -39,7 +39,7 @@ nav_order: 1
   - [Jupyter Notebook](software/python/python-jupyter-notebook)
   - [Tensorflow + Pytorch](software/python/python-tensorflow-pytorch)
 - [GCC/GDB](software/gcc-gdb)
-- [MATLAB](software/matlab)
+- [MATLAB](software/MATLAB)
 - [R](software/R)
 - [Intel OneAPI Toolkit](software/intel)
 

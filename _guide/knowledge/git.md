@@ -54,10 +54,10 @@ Git的一大基本功能就是记录代码是由谁编辑的.
 
 所以首先需要设置一下自己的身份信息. Git用邮箱地址和名字来标识你是谁.
 
-```bash
+~~~ bash
 git config --global user.name "my-awesome-name"
 git config --global user.email "one.of.my@email.com"
-```
+~~~
 
 > **Note.** 在为某个repo编辑的时候, 你可以不加 `--global` 选项从而只配置当前repo.
 
@@ -65,19 +65,19 @@ git config --global user.email "one.of.my@email.com"
 
 开始创建一个由Git进行版本控制的project文件夹吧~
 
-```bash
+~~~ bash
 mkdir myproject
 cd myproject
-```
+~~~
 
 > **Note.** 如果你已经有一个文件夹, 你可以直接进那个文件夹. 在Windows里如果你装了Git可以在对应文件夹右键并选择 `Git Bash here`.
 
 选好了文件夹, 在文件夹里初始化
 
-```bash
+~~~ bash
 $ git init
 Initialized empty Git repository in /sample/myproject
-```
+~~~
 
 就创建成功了!
 
@@ -130,26 +130,26 @@ Initialized empty Git repository in /sample/myproject
 
 连接到我们的 gitlab.advancedsolver.com 时, 如果你之前没有写过 config 文件, 请注意, 在clone或者设置地址时要对应的地址(`git@gitlab.advancedsolver.com/name/repo.git`)改成形如
 
-```bash
+~~~ bash
 ssh://git@gitlab.advancedsolver.com:10888/name/repo.git
-```
+~~~
 
 的地址. 例如添加一个地址时使用的命令应为
 
-```bash
+~~~ bash
 git remote add origin ssh://git@gitlab.advancedsolver.com:10888/name/repo.git
-```
+~~~
 
 当然, 更方便的方法是写一个 config 文件(类似于配置 SSH 时使用的配置, 即在 `.ssh` 文件夹下的 `config` 文件), 添加一条记录
 
-```text
+~~~ text
 Host gitlab.advancedsolver.com
     HostName gitlab.advancedsolver.com
     User git
     Port 10888
     PreferredAuthentications publickey
     IdentityFile ~/.ssh/id_rsa
-```
+~~~
 
 如此, 在使用默认的repo地址时, 系统会匹配到这一条记录并读取相应的端口和身份文件.
 

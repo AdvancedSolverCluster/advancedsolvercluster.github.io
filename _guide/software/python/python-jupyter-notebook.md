@@ -18,10 +18,10 @@ nav_order: 1
 
 可以选择 Python 3.8 或 Python 3.10.
 
-```bash
+~~~ bash
 module load Python/3.8.12
 pip install jupyter notebook
-```
+~~~
 
 ## Step 3: 申请计算节点资源并登陆计算节点
 
@@ -30,9 +30,10 @@ pip install jupyter notebook
 命令行会提示你为你分配的主机名 (如: `bigMem1`).
 
 在终端运行以下命令:
-```bash
+
+~~~ bash
 ssh -L 127.0.0.1:55555:127.0.0.1:55555 bigMem1
-```
+~~~
 
 其中, 55555 可以换成一个任意的 50000 到 60000 之间的数字. 如果报错提示端口占用, 就更换一个数字. `bigMem1` 是你被分配的主机名.
 
@@ -42,15 +43,15 @@ ssh -L 127.0.0.1:55555:127.0.0.1:55555 bigMem1
 
 加载你选择的 Python 版本.
 
-```bash
+~~~ bash
 module load Python/3.8.12
-```
+~~~
 
 运行以下命令 (端口是刚才你选择的 50000 到 60000 之间的数字):
 
-```bash
+~~~ bash
 jupyter notebook --port=55555 --ip=127.0.0.1
-```
+~~~
 
 ![step4](/guide/figure/python-jupyter-notebook/step4.png)
 
@@ -78,9 +79,9 @@ jupyter notebook --port=55555 --ip=127.0.0.1
 
 最后, 红框内出现 Python 3 (ipykernel) 即成功. 可以在 Notebook 的 code block 内运行以下代码:
 
-```python
+~~~ python
 !hostname
 %pip --version
-```
+~~~
 
 如果返回了计算节点的主机名, 则连接成功. 你还可以确认 pip 版本是否正确.

@@ -16,9 +16,9 @@ parent: 常用教程
 
 在本地的命令行里通过 `ssh-keygen -t ecdsa -b 521` 生成使用ECDSA算法加密的 521 bits Key, 使用命令如果输入的bit数不对则会得到:
 
-``` bash
+~~~ bash
 Invalid ECDSA key length: valid lengths are 256, 384 or 521 bits
-```
+~~~
 
 我们推荐使用 521 bits 加密的 Key.
 
@@ -45,9 +45,9 @@ Invalid ECDSA key length: valid lengths are 256, 384 or 521 bits
 
     如果你本来就是通过 SSH Key 连接到服务器的, 请在本地通过以下命令查看公钥的长度:
 
-    ```shell
+    ~~~ bash
     ssh-keygen -l -f <path/to/your/public/key>
-    ```
+    ~~~
 
     例如, 在 Windows CMD 里运行 `ssh-keygen -l -f C:\Users\jyliu\.ssh\id_rsa.pub`. 输出的第一个数即公钥的大小, 如果小于 4096, 请重新生成, 需要指出, 这个长度限制是针对 rsa key 的.
 
@@ -55,23 +55,23 @@ Invalid ECDSA key length: valid lengths are 256, 384 or 521 bits
 
 到本地的 `.ssh` 目录下, 创建/修改 `config` 文件, 编辑一些预存的SSH连接配置. 一个 config 文件中可以有多个 SSH 连接的配置, 每一个配置由以下几行组成: (请根据自己的情况修改, `<hostname>` 是一个服务器的代称, 可以自己指定, `<username>` 是管理员指定的你的用户名, `<path/to/your/key>` 是本地到私钥的路径, 注意除第一行外的下面几行均应有行首的 4 空格)
 
-``` text
+~~~ text
 Host <hostname>
     HostName cluster.advancedsolver.com
     Port 20001
     User <username>
     IdentityFile <path_to_your_private_key>
- ```
+~~~
 
 例如, 在 Windows 上的用户 winuser, 管理员指定了用户名为 aduser:
 
-``` text
+~~~ text
 Host loginNode-aduser
     HostName cluster.advancedsolver.com
     Port 20001
     User aduser
     IdentityFile C:\Users\winuser\.ssh\id_ecdsa
- ```
+~~~
 
 完成这步后, 以后可以直接通过 `ssh <hostname>` 连接服务器,例如 `ssh loginNode-aduser`.
 
@@ -82,7 +82,7 @@ Host loginNode-aduser
 
 通过命令行 (`ssh <username>@cluster.advancedsolver.com -p 20001`) 或者 VS Code 连接 (我们稍后介绍如何用 VS Code 连接) 时, 看到如下提示, 即成功.
 
-```text
+~~~ text
 > ssh aduser@cluster.advancedsolver.com -p 20001
 Last login: Fri May 27 01:11:35 2022 from xx.xx.xx.xx
 Loading GCC/9.4.0
@@ -90,7 +90,7 @@ Loading CUDA/11.6
 Loading MATLAB/R2021b
 Loading texlive/2021
 [aduser@loginNode ~]$
- ```
+~~~
 
 否则, 请检查以下配置是否正确:
 
@@ -98,7 +98,7 @@ Loading texlive/2021
 2. (非首次登录) 在服务器的 `~/.ssh` 文件夹中含有文件 `authorized_keys`, 这个文件的权限是 600 (参考 <a class="one" href="basic-linux#permission"> 文件权限介绍</a>), 其中含有你的公钥信息.
 3. (非首次登录) 在登录服务器时可能出现报错
 
-```text
+~~~ text
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -112,21 +112,21 @@ Add correct host key in ...
 Offending RSA key in ...
 RSA host key for [cluster.advancedsolver.com]:20001 has changed and you have requested strict checking.
 Host key verification failed.
-```
+~~~
 
 或者连接 `cluster.advancedsolver.com` 时也会有类似报错. 两种问题解决方法相同.
 
 这是因为服务器重装后指纹变化, 而您的连接记录中没有对应改变. 解决方法为删除本地 .ssh/known_hosts 中对应服务器 IP 的内容. 使用命令
 
-```shell
+~~~ bash
 ssh-keygen -R [cluster.advancedsolver.com]:20001
-```
+~~~
 
 或直接编辑 .ssh/known_hosts, 删除对应于服务器公网/内网地址的行, 形如
 
-```text
+~~~ text
 [cluster.advancedsolver.com]:20001 ecdsa-sha2-nistp256 AAAAE2V...Vg3RQ=
-```
+~~~
 
 如果以上检查都没问题仍然无法免密登录到服务器, 请联系管理员.
 

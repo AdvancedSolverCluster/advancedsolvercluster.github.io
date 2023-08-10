@@ -12,9 +12,9 @@ parent: 入门教程
 
 当用户 aduser 登陆服务器的 loginNode 端口后, 你会看到下面的界面
 
-``` text
+~~~ text
 [aduser@loginNode ~]$
-```
+~~~
 
 这里 `~` 表示 home 目录, 也称为家目录. 它是你的出生点, 是你存放自己东西的地方, 只有你自己可以访问. 而 `aduser@loginNode` 表示一个叫 `aduser` 的用户在 loginNode 上.
 
@@ -38,30 +38,33 @@ parent: 入门教程
 在上一步中我们做的所有事情, 其实都可以放入一个脚本中, 让服务器一键执行. 是不是很方便?
 
 我们已经知道可以通过 `echo something >> output.txt` 的方式将一行字输入进文本文件. 请运行下面的命令:
-```bash
+
+~~~ bash
 echo '#!/bin/bash' >> dothis.sh
 echo 'hostname' >> dothis.sh
 echo 'echo Let me show you our cluster users:' >> dothis.sh
 echo 'ls /home' >> dothis.sh
 cat dothis.sh
-```
+~~~
 
 (实际上, 我们还可以使用 vim 文本编辑器, 来修改文本文件的内容. 尽管一开始你可能不习惯, 但用多了以后就会发现它的强大. 请参考: [vi/vim 教程](../knowledge/vim))
 
 `cat dothis.sh` 返回了 `dothis.sh` 脚本中的内容:
-```bash
+
+~~~ bash
 #!/bin/bash
 hostname
 echo Let me show you our cluster users:
 ls /home
-```
+~~~
 
 第一行 `#!/bin/bash` 的意思是: 此脚本使用`/bin/bash`来解释执行. 目前你只需要记住在每次写脚本的时候都在之前加上这句话就行. 第二行返回主机名. 第三行表示输出 `Let me show you our cluster users:`. 第四行表示展示 `/home` 目录下的子目录与子文件. (即, 看看家里有哪些人.)
 
 运行以下命令, 是否输出了你预期的内容?
-```bash
+
+~~~ bash
 bash dothis.sh
-```
+~~~
 
 ## Step 3: 到计算节点上运行脚本
 到目前为止, 我们运行的命令和脚本都能在一眨眼间输出结果. 如果我们需要运行大型程序, 那么登陆节点就不适用了. 我们要通过作业调度工具 slurm, 将我们的脚本放到计算节点上运行.
@@ -69,35 +72,39 @@ bash dothis.sh
 在这个入门教程中, 我们只简单地接触一下 slurm 的用法, 当你明白 slurm 在做什么了的时候, 请务必阅读: [使用 slurm 运行程序及提交作业](../you-must/slurm)
 
 首先, 试试运行
-```bash
+
+~~~ bash
 hostname
-```
+~~~
 
 它会返回 `loginNode`, 这是当前的主机名. 接下来, 试试运行
-```bash
+
+~~~ bash
 srun hostname
-```
+~~~
 
 输出结果可能是 `bigMem0`, `bigMem1` 或 `bigMem2`, 但绝不会是 `loginNode`. 发生了什么? `srun` 是 slurm 提供的功能之一, 它将后面的内容放到计算节点上运行. 因此, `srun hostname` 相当于在某一个计算节点上运行了 `hostname`, 就会返回那一个计算节点的主机名.
 
 你一定想到了我们刚才的 `dothis.sh`, 也可以被放到计算节点上运行.
-```bash
+
+~~~ bash
 srun bash dothis.sh
-```
+~~~
 
 `dothis.sh` 的第一行就是 `hostname`, 所以我们可以通过第一行输出来知道我们的脚本究竟在哪一个计算节点上运行. 接下来的输出和在 `loginNode` 上格式有所不同, 但内容是完全一样的. 这是因为无论在哪个计算节点上, `/home` 目录下的内容都是一致的, 所以你可以放心地在登陆节点上写代码, 在计算节点上运行.
 
 注意到用 `srun` 执行命令是即时的, 即 slurm 当场就把你的程序安排给某一个计算节点去运行, 然后迅速返回你结果. 它的好处是及时性, 它的坏处是, 假设你的程序需要运行好几个小时, 那么你的命令行就会始终卡在这个界面. 如果你想交给 slurm 一个任务, 然后关机睡觉, 第二天早上再来看结果, 那么 `srun` 就不适用于你的场景, 得用 `sbatch`.
 
 只需要稍作修改:
-```bash
+
+~~~ bash
 sbatch dothis.sh
-```
+~~~
 
 登陆节点会告诉你, 我已经提交了你的任务, 任务编号 (假设为 1234). 通过 `ls`, 你会发现在你的目录下多出了一个文件, 叫`slurm-1234.out`. 让我们看看里面有什么.
 
-```bash
+~~~ bash
 cat slurm-1234.out
-```
+~~~
 
 和刚才用 `srun` 输出的结果一样, 只不过被写到了一个文件里. 这样一来, 你就不用守在屏幕前等着程序的输出结果了, 想什么时候看这个文件, 就可以什么时候看.

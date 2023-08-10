@@ -24,9 +24,9 @@ parent: 使用须知
 
 直接在你要运行的程序前加一个 `srun`, slurm 就会自动帮你把这个程序放到可用的计算节点上运行. 比如, 原本需要运行 `python3 helloworld.py`, 现在就可以输入
 
-```bash
+~~~ bash
 srun python3 helloworld.py
-```
+~~~
 
 ### `salloc`
 
@@ -34,7 +34,7 @@ srun python3 helloworld.py
 
 `salloc`相当于向slurm申请计算资源, 然后直接登陆到计算节点上操作.
 
-```
+~~~
 [yjzhang@loginNode ~]$ salloc
 salloc: Granted job allocation 2984
 salloc: Waiting for resource configuration
@@ -47,7 +47,7 @@ Connection to 192.168.2.11 closed.
 exit
 salloc: Relinquishing job allocation 2984
 salloc: Job allocation 2984 has been revoked.
-```
+~~~
 首先, 用 `salloc` 申请资源, 然后通过 `ssh` 登录到分配的计算节点上. 输入一次 `exit` 回退到登陆节点, 再输入一次 `exit` 将任务结束 (请务必记得结束任务, 避免占用不使用的资源).
 
 **注意**: `salloc` 会创建一个新的bash环境, 因此你在登陆节点上加载的模块和设置的环境变量都需要重新加载和设置.
@@ -58,11 +58,11 @@ salloc: Job allocation 2984 has been revoked.
 
 可以把所有需要运行的命令写进一个脚本里, 然后通过 `sbatch` 提交. 脚本就是平时的 shell 脚本, 以 `#!/bin/bash` 开头. 例如:
 
-```bash
+~~~ bash
 #!/bin/bash
 # module load MATLAB # this line can be omitted because MATLAB is loaded by default
 matlab -batch "testMatlab"
-```
+~~~
 
 接下来, 用 `sbatch <shell script>` 提交作业, 其中 `<shell script>` 是你刚写的脚本名. 屏幕上会打印 `Submitted batch job ###`, 其中 `###` 是你的作业 id. 当作业结束后, 输出结果会打印到当前目录下的 `slurm-###.out`.
 
@@ -73,11 +73,12 @@ matlab -batch "testMatlab"
 在上述案例中, 无论是 `srun`, `salloc` 还是 `sbatch` 都默认你申请一个计算节点, 启动一个进程, 不使用GPU, 并有默认的运行时长上限. 如果你想要申请更多资源 (**比如你需要使用GPU, 就必须加上GPU选项!**), 或者指定一些运行设定, 都可以添加选项.
 
 比如, 加 `-t 30` 表示申请运行30分钟的任务, 就直接把选项加在命令后面:
-```bash
+
+~~~ bash
 srun -t 30 python3 helloworld.py
 salloc -t 30
 sbatch -t 30 test.sh
-```
+~~~
 
 {: .important }
 > 请注意，选项必须紧跟命令。
@@ -86,13 +87,14 @@ sbatch -t 30 test.sh
 > - ✅ 正确示例： `sbatch -t 30 test.sh `
 
 对于 `sbatch`, 还可以把选项放在脚本的开头, 以 `#SBATCH` 开头, 而且必须接在 `#!/bin/bash` 的后面, 放在所有的命令前面, 否则就会被当成普通的注释. 比如:
-```bash
+
+~~~ bash
 #!/bin/bash
 #SBATCH -t 30
 pwd; hostname; date
 echo "Running python on the server"
 python3 helloworld.py
-```
+~~~
 
 下面介绍一些其它常用选项. 长选项和短选项都是可用的, 短选项备注在括号中 (若存在).
 
@@ -135,13 +137,13 @@ python3 helloworld.py
 
 `sinfo`命令报告分区和节点的状态.
 
-``` bash
+~~~  bash
 $ sinfo
  PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST                          GRES
 partition*    up 7-00:00:00      1   idle bigMem0          gpu:tesla_t4:4(S:0-1)
 partition*    up 7-00:00:00      1   idle bigMem1        gpu:nvidia_a30:4(S:0-1)
 partition*    up 7-00:00:00      1   idle bigMem2  gpu:nvidia_geforce_gtx_3090:2
-```
+~~~
 
 三个计算节点, bigMem0, bigMem1 和 bigMem2 状态是 idle 即完全空闲的 (如果显示 mix, 表示有一部分核被用户使用了; 如果显示 alloc, 表示该计算节点的所有核都被占用了, 此时其他用户无法再申请那台机器上的资源), **作业的时间限制最长为7天**, 以及三台机器上分别拥有的 GPU 卡数及型号.
 
@@ -149,25 +151,25 @@ partition*    up 7-00:00:00      1   idle bigMem2  gpu:nvidia_geforce_gtx_3090:2
 
 在等待你的程序执行的同时, 你可以通过`squeue`知道程序的状态. 例如, 以下命令列出所有用户名提交的作业:
 
-``` bash
+~~~  bash
 squeue -u <username>
-```
+~~~
 
 你会看到
 
-``` bash
+~~~  bash
   JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
     001    bigMem  python3  yjzhang PD       0:00     10 (PartitionNodeLimit)
     002    bigMem  python3  yjzhang  R       0:56      1 bigMem0
-```
+~~~
 
 从提交到完成的典型作业状态是: PENDING (PD) 和 RUNNING (R). 如果你没有看到你的作业, 那么很可能它已经完成了.
 
 如果你不想再运行作业, 请使用以下命令取消它:
 
-``` bash
+~~~  bash
 scancel <jobid>
-```
+~~~
 
 ## 测试性能
 

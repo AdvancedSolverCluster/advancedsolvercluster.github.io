@@ -12,30 +12,30 @@ parent: 入门教程
 
 在你的电脑上, 打开一个终端窗口. 输入`ssh-keygen -t ecdsa -b 521`.
 
-```text
+~~~ text
 > ssh-keygen -t ecdsa -b 521
 Generating public/private ecdsa key pair.
 Enter file in which to save the key (C:\Users\<username>/.ssh/id_ecdsa):
-```
+~~~
 
 敲击 `Enter`.
 
-```text
+~~~ text
 > ssh-keygen -t ecdsa -b 521
 Generating public/private ecdsa key pair.
 Enter file in which to save the key (C:\Users\<username>/.ssh/id_ecdsa):
 Enter passphrase (empty for no passphrase):
-```
+~~~
 
 再次敲击 `Enter`.
 
-```text
+~~~ text
 > ssh-keygen -t ecdsa -b 521
 Generating public/private ecdsa key pair.
 Enter file in which to save the key (C:\Users\<username>/.ssh/id_ecdsa):
 Enter passphrase (empty for no passphrase):
 Enter same passphrase again:
-```
+~~~
 
 再次敲击 `Enter`. (你可能已经嫌烦了, 别着急, 这就结束了.)
 

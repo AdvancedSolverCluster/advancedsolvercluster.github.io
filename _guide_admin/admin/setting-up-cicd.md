@@ -36,24 +36,24 @@ Option 1/2 指定了在哪里保存gitlab-runner的config, 这里就用Option 2�
 
 在打算运行runner的机器上执行
 
-```bash
+~~~ bash
 docker volume create <volume name>
-```
+~~~
 
 生成一个volume. 拉取gitlab/gitlab-runner的image并启动container:
 
-```bash
+~~~ bash
 docker run -d --name <container name> --restart always \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v <volume name>:/etc/gitlab-runner \
     gitlab/gitlab-runner:latest
-```
+~~~
 
 确认启动正常之后就可以配置config了, 用他自带的script:
 
-```bash
+~~~ bash
 docker run --rm -it -v <volume name>:/etc/gitlab-runner gitlab/gitlab-runner:latest register
-```
+~~~
 
 其中选择`docker`作为我们的runner executor. 默认的image选择了`docker:dind` (Docker-in-Docker).
 
@@ -77,7 +77,7 @@ docker run --rm -it -v <volume name>:/etc/gitlab-runner gitlab/gitlab-runner:lat
 
 当点击Create New Pipeline后, GitLab会生成一个默认的`.gitlab-ci.yml`模板.
 
-```yml
+~~~ yml
 stages:          # List of stages for jobs, and their order of execution
   - build
   - test
@@ -108,7 +108,7 @@ deploy-job:      # This job runs in the deploy stage.
   script:
     - echo "Deploying application..."
     - echo "Application successfully deployed."
-```
+~~~
 
 这个模板的意思是这样的:
 
@@ -132,7 +132,7 @@ deploy-job:      # This job runs in the deploy stage.
 
 了解了CI/CD的运行机制, 我们就可以写自己的`.gitlab-ci.yml`了.
 
-```yaml
+~~~ yaml
 stages:
   - deploy
 
@@ -159,7 +159,7 @@ deploy-stage:
     - docker-compose down
     - docker-compose build
     - docker-compose up -d
-```
+~~~
 
 - `stages`: 我们部署服务器网页只有部署阶段, 没有编译和运行, 所以在stages阶段只需要写一个阶段的任务: deploy.
 - `variables`: 在scripts里用到的变量都在这里指明. `DOCKER_TLS_CERTDIR: "/certs"`: 由于我们使用的是dind服务，我们必须指示Docker与服务内部启动的守护进程进行对话. 这里向Docker指定创建证书的位置, Docker会在启动时自动创建它们, 并创建 `/certs/client`以在服务和作业容器之间共享, 由于在`config.toml`指定了卷挂载.
@@ -179,7 +179,7 @@ deploy-stage:
 
 首先, 跑到同事的仓库里去, 改他的`.gitlab-ci.yml`(同事不会CI/CD, 说到这里, 我的privilege已经尽数体现了):
 
-```yaml
+~~~ yaml
 stages:          # List of stages for jobs, and their order of execution
   - deploy
 
@@ -189,7 +189,7 @@ deploy-to-web-job:      # This job runs in the deploy stage.
     changes:
       - <folder>/*
   trigger: <my-project-owner>/<my-project-name>
-```
+~~~
 
 这是一个非常简单的CI/CD配置, 意思就是, 当且仅当你更新`<folder>`文件夹里的文件时, 自动触发`<my-project-owner>/<my-project-name>`(我的repo的相对uri)的CI/CD(可能有的project的深度不止2层, 根据实际情况).
 
@@ -197,27 +197,27 @@ deploy-to-web-job:      # This job runs in the deploy stage.
 
 第一, 添加一个submodule, 连上同事的仓库, 这样可以直接在我的仓库里访问他的文件. 只需要更新`.gitmodules`:
 
-```text
+~~~ text
 [submodule <repo-name>]
     path = <repo-name>
     url = ../../<project-path>/<repo-name>
     branch = main
-```
+~~~
 
 这里按照GitLab的要求, url用了相对路径. 从当前project的位置回到根的位置后再转到别的project所在的位置.
 
 第二, 对`.gitlab-ci.yml`做一些更改. 新增一个阶段的任务, 写在stages里. 在variables里新增两行:
 
-```yaml
+~~~ yaml
   GIT_SUBMODULE_STRATEGY: recursive
   GIT_SUBMODULE_UPDATE_FLAGS: --remote
-```
+~~~
 
 表示在任务中下载仓库的过程中, 也要递归地下载submodule的内容, 且按照远程的最新commit更新(相当于我们平时用的`git submodule update --remote --recursive`).
 
 新增的update阶段的任务我是这样写的:
 
-```yaml
+~~~ yaml
 update-stage:
   stage: update
   image:
@@ -232,7 +232,7 @@ update-stage:
   artifacts:
     paths:
       - $GUIDE_TARGET
-```
+~~~
 
 `$IMG_TARGET`和`$GUIDE_TARGET`都是在前面的variables里定义的. 这里拉取了pandoc镜像, 然后我在仓库里写了一个把Markdown文件转换成HTML的脚本(`scripts/markdown-to-html.sh`, 利用了pandoc命令). 需要注意的是**必须要指定artifacts**了, 否则在这个阶段生成的HTML全部会被丢弃, 不会自动传入下一阶段的任务! 那我们就全白干了. 指定artifacts的path后, path里的东西会自动传入下一阶段.
 

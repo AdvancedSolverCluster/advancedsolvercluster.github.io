@@ -14,9 +14,9 @@ parent: 常用教程
 
 当用户 aduser 登陆服务器的 loginNode 端口后, 你会看到下面的界面
 
-``` text
+~~~ text
 [aduser@loginNode ~]$
-```
+~~~
 
 这里 `~` 表示 home 目录, 也称为家目录. 它是你的出生点, 是你存放自己东西的地方, 只有你自己可以访问. 而 `aduser@loginNode` 表示一个叫 `aduser` 的用户在 loginNode 上. 顺便一提, 你可以输入 `w` 查看有谁在当前节点上.
 
@@ -126,9 +126,9 @@ Linux 系统上对文件的权限有着严格的控制, 用于如果相对某个
 
 `.bashrc` 是纯文本文件, 可以在终端中使用任何文本编辑器对 `.bashrc` 进行编辑. 比如使用 vim 来编辑 `.bashrc`, 只需在 bash 中输入
 
-```bash
+~~~ bash
 $ vim ~/.bashrc
-```
+~~~
 
 `.bashrc` 有以下功能:
 
@@ -136,9 +136,9 @@ $ vim ~/.bashrc
 
 可以使用更简单的命令来优先执行带参数的命令, 语法为
 
-```text
+~~~ text
 alias <my_alias>='longer command'
-```
+~~~
 
 比如, alias ll='ls -alF', 此时执行 `ll` 就相当于执行了 `ls -alF`, 这一命令的作用是使得你可以查看关于文件的大部分细节并显示隐藏文件, 当然, 这里的 `ll` 完全由你来定义.
 
@@ -146,18 +146,18 @@ alias <my_alias>='longer command'
 
 当 Alias 无法满足你的需求时, 可以用函数功能来执行更复杂的代码, 语法为
 
-```text
+~~~ text
 function funct_name() {
 	# code;
 }
-```
+~~~
 
 比如, 以下的命令结合了 `mkdir` 和 `cd` (还记得这两个命令的含义吗? 请参考[服务器的基本操作? - Linux 服务器的基本知识](../knowledge/linux)). 在 bash 中输入 `md folder_name` 将在工作目录中创建一个名为 folder_name 的目录，并立即导航到该目录. 这里, `-p` 表示确认目录存在, 不存在的话就新建一个;  `$1` 在 bash 中表示传入的第一个参数.
 
-```text
+~~~ text
 md () {
   mkdir -p $1
   cd $1
 }
-```
+~~~
 

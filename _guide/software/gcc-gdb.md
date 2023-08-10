@@ -8,9 +8,9 @@ nav_order: 3
 
 gcc 和 g++ 是最常见的 c&c++ 编译器.当你想要运行 c 或 c++ 的代码时,首先需要用编译器编译. 对于最基本的运行 c++ 程序的命令,只需进入程序文件所在位置,在命令行输入
 
-```bash
+~~~ bash
 gcc <input_file_name> -o <output_file_name>
-```
+~~~
 
 例如 `gcc helloworld.c -o test_hello_world`, 就能在当前路径下找到一个新的可执行文件 `test_hello_world`. 在当前路径命令行输入 `./<output_file_name>`, 就能得到程序的输出结果啦.
 

@@ -26,31 +26,31 @@ sar.py依赖 `pandas matplotlib`, `sudo apt install sysstat`, `sudo vim /etc/def
 
 自动同步账户信息, 手动同步group信息, 为admin号创建home目录
 
-```bash
+~~~ bash
 cp -r /etc/skel /opt/home-admin/yingzhouli
 chown -R yingzhouli-admin: /opt/home-admin/yingzhouli
-```
+~~~
 
 ### 切换yum/apt源
 
 **yum**:
 
-```bash
+~~~ bash
 sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 sudo wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 sudo yum clean all
 sudo yum makecache
-```
+~~~
 
 **apt**:
 
-```bash
+~~~ bash
 sudo vim /etc/apt/sources.list
-```
+~~~
 
 edit: (focal is the version name of 20.04, 22.04 is jammy (`lsb_release -a`, `:%s/focal/jammy/g
 `))
-```bash
+~~~ bash
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
 deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
 
@@ -63,11 +63,11 @@ deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restri
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
 deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
 
-```
+~~~
 
-```bash
+~~~ bash
 sudo apt-get update
-```
+~~~
 
 ### 开启10888端口
 ssh连接新服务器非22端口报错
@@ -89,7 +89,7 @@ https://blog.tinned-software.net/change-ssh-port-in-centos-with-selinux/
 
 允许10888端口
 
-```bash
+~~~ bash
 sudo semanage port -a -t ssh_port_t -p tcp 10888
 sudo semanage port -l | grep ssh
 sudo firewall-cmd --add-port=10888/tcp --permanent
@@ -97,15 +97,15 @@ sudo firewall-cmd --add-port=10888/udp --permanent
 sudo firewall-cmd --reload
 sudo vim /etc/ssh/sshd_config
 sudo systemctl restart sshd
-```
+~~~
 配合路由器端口转发 可外网直连 关闭root远程登陆
 
 信任其他机器
 
-```bash
+~~~ bash
 sudo firewall-cmd --add-source=192.168.2.100 --zone=trusted --permanent
 sudo firewall-cmd --add-source=192.168.2.0/26 --zone=trusted --permanent
-```
+~~~
 
 ### 安装slurm
 

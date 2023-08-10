@@ -34,67 +34,67 @@ SLURM offers a variety of user commands for all the necessary actions concerning
 
 ### STEP 1: Write bash script
 Use your favorite editor to generate the below script `test.sbatch`. The first line must be
-```bash
+~~~ bash
 #!/bin/bash
-```
+~~~
 From the second line, list all the commands you want to run on the server. For example, if you want to run a python 3 program called `helloworld.py`, then you only need to make your `test.sbatch` look like this:
-```bash
+~~~ bash
 #!/bin/bash
 python3 helloworld.py
-```
+~~~
 Or if you want to run a binary file `myTest/test` generated from `myTest/test.c`, then your `test.sbatch` should look like this:
-```bash
+~~~ bash
 #!/bin/bash
 myTest/test
-```
+~~~
 If `myTest/test` is a CUDA program, remember to load the environment, **and apply for GPU resources (second line).**
-```bash
+~~~ bash
 #!/bin/bash
 #SBATCH --gpus=1
 module load CUDA
 myTest/test
-```
+~~~
 If `myTest/test` is a MPI program, remember to load the environment.
-```bash
+~~~ bash
 #!/bin/bash
 source /opt/intel/oneapi/setvars.sh
 mpirun -n 10 ./testmpi
-```
+~~~
 If you run a MATLAB program, remember to load the environment and run `testMatlab.m`. **Remember to `cd` to the directory where matlab file is before submitting your job.**
-```bash
+~~~ bash
 #!/bin/bash
 module load MATLAB
 matlab -batch "testMatlab"
-```
+~~~
 ### STEP 2: Submit your job
-```bash
+~~~ bash
 sbatch test.sbatch
-```
+~~~
 It will return `Submitted batch job ###`, where ### is your job id.
 
 ### STEP 3: View running progress and results
 When your program is finished, an output file will appear in the directory `slurm-###.out`, where ### is your job id. You can open it using your favorite editor, or run
-```bash
+~~~ bash
 cat slurm-###.out
-```
+~~~
 to see it in the terminal.
 
 While waiting for your program to execute, you can know the status of the program through `squeue`. For example, the following command list all the job submitted by `username`:
-```bash
+~~~ bash
 squeue -u username
-```
+~~~
 where `username` is your username (e.g. yjzhang). You will see your job with your jobid, job name, status and time spent, like the following:
-```
+~~~
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
                001    bigMem  python3  yjzhang PD       0:00     10 (PartitionNodeLimit)
                002    bigMem  python3  yjzhang  R       0:56      1 bigMem0
-```
+~~~
 Typical job states from submission until completion are: PENDING (PD) and RUNNING (R). If you don't see your job then most likely it is finished.
 
 If you don't want to run a job anymore, cancel it using the following command:
-```bash
+~~~ bash
 scancel ###
-```
+~~~
 where ### is the jobid (e.g. 001). After you cancel it, you will no longer see it in the queue.
 
 **The rest of the document may be a little difficult for beginners, you can skip it in the first reading.**
@@ -105,7 +105,7 @@ The usual way to allocate resources and execute a job is to write a batch script
 
 Below is an example of sbatch script:
 
-```bash
+~~~ bash
 #!/bin/bash
 #SBATCH --job-name=python_job_test    # Job name
 #SBATCH --nodes=1                     # Number of nodes to use
@@ -116,18 +116,18 @@ Below is an example of sbatch script:
 pwd; hostname; date
 echo "Running python on the server"
 python3 helloworld.py
-```
+~~~
 where `helloworld.py` is just reading the local file `helloworld.txt` and print out the content.
 
-```python
+~~~ python
 with open("helloworld.txt", "r") as f:
     s = f.readline()
     print(s)
-```
+~~~
 
 Run sbatch test.sbatch and see the log file.
 
-```
+~~~
 [yjzhang@loginNode ~]$ sbatch test.sbatch
 Submitted batch job 235
 [yjzhang@loginNode ~]$ cat python_235.log
@@ -136,7 +136,7 @@ bigMem0
 2021年 12月 15日 星期三 13:39:07 CST
 Running python on the server
 Hello File!
-```
+~~~
 
 The following table describes the most common or required allocation and submission options that can be defined in a batch script (short options are listed in parentheses):
 
@@ -160,35 +160,35 @@ To see more usage of `sbatch`, refer to the below websites:
 Below some examples of SLURM query commands are provided.
 
 List all jobs submitted to SLURM:
-```bash
+~~~ bash
 squeue
-```
+~~~
 
 List all jobs submitted by you:
-```bash
+~~~ bash
 squeue -u $USER
-```
+~~~
 
 Check available partitions and nodes:
-```bash
+~~~ bash
 sinfo
-```
+~~~
 The sinfo command reports the states of the partitions and the nodes. The partitions may be in state UP, DOWN or INACTIVE. The UP state means that a partition will accept new submissions and the jobs will be scheduled. The DOWN state allows submissions to a partition but the jobs will not be scheduled. The INACTIVE state means that submissions are not allowed. The nodes also can be in various states, such as alloc (allocated), comp (completing), down, idle, maint, resv (reserved) etc. Description of all node states can be get from the sinfo man page.
 
 List partition state summary
-```bash
+~~~ bash
 sinfo -s
-```
+~~~
 The column NODES(A/I/O/T) shows number of nodes in the states "allocated/idle/other/total" for each SLURM partition.
 
 Cancel job with SLURM JobId 4711:
-```bash
+~~~ bash
 scancel 4711
-```
+~~~
 Cancel all your jobs:
-```bash
+~~~ bash
 scancel -u $USER
-```
+~~~
 
 
 ## Reference

@@ -11,16 +11,18 @@ parent: 入门教程
 打开一个终端窗口, 输入`ssh <username>@cluster.advancedsolver.com -p 20001`.
 
 你会看到如下提示:
-```text
+
+~~~ text
 The authenticity of host '[cluster.advancedsolver.com]:20001 ([*.*.*.*]:20001)' can't be established
 ...
 Are you sure you want to continue connecting (yes/no)?"
-```
+~~~
+
 (*.*.*.*是某个ip地址, 省略号处的内容可以忽略)
 
 这是因为这是你第一次连接. 请输入 `yes`, 然后敲击 `Enter`. 以后就不会再出现这个提示了.
 
-```text
+~~~ text
 > ssh <username>@cluster.advancedsolver.com -p 20001
 Last login: Fri May 27 01:11:35 2022 from xx.xx.xx.xx
 Loading GCC/9.4.0
@@ -28,7 +30,7 @@ Loading CUDA/11.6
 Loading MATLAB/R2022b
 Loading texlive/2022
 [<username>@loginNode ~]$
- ```
+~~~
 
 当你看到这个提示, 就说明你已经连接成功了, 恭喜!
 
@@ -46,12 +48,12 @@ Loading texlive/2022
 
 具体做法是: 找到本地的 `.ssh` 目录 (在你的 home 目录下, 详见[生成 Key](i-have-no-account)), 创建/修改 `config` 文件, 增加四行:
 
-``` text
+~~~ text
 Host loginNode
     HostName 10.88.3.90
     Port 20001
     User <username>
-```
+~~~
 
 {: .important }
 > `.ssh` 文件夹在首次[生成 Key](i-have-no-account) 的时候会被自动生成, 如果没有在该机器上生成过 Key 文件夹则可能不存在. **切勿**手动新建这个文件夹! 可能会导致权限不对从而在这个文件夹下的 Key 失效. 安全的创建文件夹的方式是在本机再次[生成 Key](i-have-no-account)(即使这个 Key 你不会使用).
