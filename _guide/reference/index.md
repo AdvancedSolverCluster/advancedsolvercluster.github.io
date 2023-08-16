@@ -75,3 +75,22 @@ Reference:
 |Memory bandwidth (GB/sec)   |484.44 |320.06 |933.12 |1024.00 |
 
 ![benchmark](/guide/figure/benchmark.png)
+
+## 磁盘读写速度
+
+评测程序: `fio-3.7`
+
+命令 `$ fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=test --filename=/tmp/random_read_write.fio --bs=4ki --iodepth=64 --size=400Mi --readwrite={method} --rwmixread={rwrate}`,
+
+其中 `method=randrw | rw`, `rwrate=0 | 75 | 100`.
+
+| Spec                  | r/w   | loginNode:/ | loginNode:/home, /scratch |
+|-----------------------|-------|-------------|---------------------------|
+| randrw, 75read25write | read  | 1.5 MiB/s   | 3.4 MiB/s                 |
+|                       | write | 0.5 MiB/s   | 1.1 MiB/s                 |
+| randrw, 100read       | read  | 4.1 MiB/s   | 12.5 MiB/s                |
+| randrw, 100write      | write | 1.4 MiB/s   | 1.6 MiB/s                 |
+| rw, 75read25write     | read  | 21.8 MiB/s  | 27.5 MiB/s                |
+|                       | write | 7.6 MiB/s   | 9.4 MiB/s                 |
+| rw, 100read           | read  | 176 MiB/s   | 407 MiB/s                 |
+| rw, 100write          | write | 161 MiB/s   | 14.0 MiB/s                |
