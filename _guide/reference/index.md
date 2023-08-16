@@ -5,7 +5,7 @@ nav_order: 6
 
 # 集群中各服务器的配置与性能
 
-*March 29, 2023, [Xiang Li](mailto:646873166@qq.com), [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn)*
+*August 16, 2023, [Xiang Li](mailto:646873166@qq.com), [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn)*
 
 ## CPU / Memory
 评测程序 Source: [PassMark Performance Testing Linux](https://www.passmark.com/products/pt_linux/)
@@ -80,17 +80,17 @@ Reference:
 
 评测程序: `fio-3.7`
 
-命令 `$ fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=test --filename=/tmp/random_read_write.fio --bs=4ki --iodepth=64 --size=400Mi --readwrite={method} --rwmixread={rwrate}`,
+命令 `$ fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=test --filename={} --bs=4ki --iodepth=64 --size=400Mi --readwrite={method} --rwmixread={rwrate}`,
 
-其中 `method=randrw | rw`, `rwrate=0 | 75 | 100`.
+其中 `method=randrw | rw`, `rwrate=0 | 75 | 100`, `filename` 指定为对应硬盘下的位置.
 
-| Spec                  | r/w   | loginNode:/ | loginNode:/home, /scratch |
-|-----------------------|-------|-------------|---------------------------|
-| randrw, 75read25write | read  | 1.5 MiB/s   | 3.4 MiB/s                 |
-|                       | write | 0.5 MiB/s   | 1.1 MiB/s                 |
-| randrw, 100read       | read  | 4.1 MiB/s   | 12.5 MiB/s                |
-| randrw, 100write      | write | 1.4 MiB/s   | 1.6 MiB/s                 |
-| rw, 75read25write     | read  | 21.8 MiB/s  | 27.5 MiB/s                |
-|                       | write | 7.6 MiB/s   | 9.4 MiB/s                 |
-| rw, 100read           | read  | 176 MiB/s   | 407 MiB/s                 |
-| rw, 100write          | write | 161 MiB/s   | 14.0 MiB/s                |
+| Spec                         | r/w   | loginNode:/ | loginNode:/home, /scratch |
+|------------------------------|-------|------------:|--------------------------:|
+| randrw, 75% read + 25% write | read  | 1.5 MiB/s   | 3.4 MiB/s                 |
+|                              | write | 0.5 MiB/s   | 1.1 MiB/s                 |
+| randrw, 100% read            | read  | 4.1 MiB/s   | 12.5 MiB/s                |
+| randrw, 100% write           | write | 1.4 MiB/s   | 1.6 MiB/s                 |
+| rw, 75% read + 25% write     | read  | 21.8 MiB/s  | 27.5 MiB/s                |
+|                              | write | 7.6 MiB/s   | 9.4 MiB/s                 |
+| rw, 100% read                | read  | 176.0 MiB/s | 407.0 MiB/s               |
+| rw, 100% write               | write | 161.0 MiB/s | 14.0 MiB/s                |
