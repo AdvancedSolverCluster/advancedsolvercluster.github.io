@@ -104,7 +104,7 @@ python3 helloworld.py
 |`--ntasks=<number> (-n <number>)`| 1 | 启动的进程数量, 当你运行MPI程序时需要修改这个选项. |
 |`--cpus-per-task=<number> (-c <number>)`  | 1 | 每个进程使用的线程数(逻辑核数), 当你运行OpenMP程序时需要修改这个选项. |
 |`--nodelist=<node_name_list> (-w <node_name_list>)` |  | 指定在哪台机器上运行, 可能的值为 `bigMem0`, `bigMem1` 或 `bigMem2`.|
-|`--gres=gpu:[gpu_type:]:<number>`| 无 | 指定要用的 gpu 数量或类型, 如 `--gres=gpu:1` 不指定类型, 或 `--gres=gpu:tesla_t4:1`, `--gres=gpu:nvidia_a30:1`, `--gres=gpu:nvidia_geforce_gtx_3090:1`. 其中 `tesla_t4`表示 bigMem0 上的 GPU, `nvidia_a30` 表示 bigMem1 上的 GPU, `nvidia_geforce_gtx_3090` 表示 bigMem2 上的GPU. 目前只支持这三种类型的 GPU. GPU的性能详见[我们的Benchmark页面](../reference/index) |
+|`--gres=gpu:[gpu_type:]:<number>`| 无 | 指定要用的 gpu 数量或类型, 如 `--gres=gpu:1` 不指定类型, 或 `--gres=gpu:tesla_t4:1`, `--gres=gpu:nvidia_a30:1`. 其中 `tesla_t4`表示 bigMem0 上的 GPU, `nvidia_a30` 表示 bigMem1 上的 GPU, bigMem2 上的GPU为AMD系GPU, 暂无访问控制. 目前只支持这三种类型的 GPU. GPU的性能详见[我们的Benchmark页面](../reference/index) |
 | `--job-name=<jobname> (-J <jobname>) `                      | 命令名                                | 作业的名称, 有助于帮助你记录你正在运行什么作业.|
 | `--output=<path>/<file pattern> (-o <path>/<file pattern>)`  |   slurm-%j.out   (%j = JobID)  | 指定标准输出文件的路径以及名字. |
 | `--error=<path>/<file pattern> (-e <path>/<file pattern>) `  |   slurm-%j.out   (%j = JobID)  | 指定错误输出文件的路径以及名字. |
@@ -142,7 +142,7 @@ $ sinfo
  PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST                          GRES
 partition*    up 7-00:00:00      1   idle bigMem0          gpu:tesla_t4:4(S:0-1)
 partition*    up 7-00:00:00      1   idle bigMem1        gpu:nvidia_a30:4(S:0-1)
-partition*    up 7-00:00:00      1   idle bigMem2  gpu:nvidia_geforce_gtx_3090:2
+partition*    up 7-00:00:00      1   idle bigMem2                         (null)
 ~~~
 
 三个计算节点, bigMem0, bigMem1 和 bigMem2 状态是 idle 即完全空闲的 (如果显示 mix, 表示有一部分核被用户使用了; 如果显示 alloc, 表示该计算节点的所有核都被占用了, 此时其他用户无法再申请那台机器上的资源), **作业的时间限制最长为7天**, 以及三台机器上分别拥有的 GPU 卡数及型号.
