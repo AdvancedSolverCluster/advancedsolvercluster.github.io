@@ -39,10 +39,12 @@ It's powered by an open network framework [Matrix](https://matrix.org). You won'
 
 ## Appendix: `config.json`
 
-**Deprecated Warning:** A recent update in Element may have made this script invalid on newer versions. We are working on providing compatible scripts. You should not use this script and leave the config in its default state for now.
+<!-- **Deprecated Warning:** A recent update in Element may have made this script invalid on newer versions. We are working on providing compatible scripts. You should not use this script and leave the config in its default state for now. -->
 
 The place for this file is under your Element installation, which would be `C:\Users\YOUR_USER_NAME\AppData\Roaming\Element\` by default on Windows.
 A sample config is provided below.
+
+If there is already a `config.json` file, you should open and edit it carefully.
 
 ~~~ json
 {
