@@ -6,7 +6,10 @@ nav_order: 1
 
 # Using Element
 
-*September 5, 2022, [Xiang Li](mailto:646873166@qq.com)*
+Created: *September 5, 2022, [Xiang Li](mailto:646873166@qq.com)*
+
+Last update: *October 30, 2023, [Xiang Li](mailto:646873166@qq.com)*
+
 
 Element is a decentralized, encrypted chat & collaboration app designed for secure and independent communication.
 
@@ -39,7 +42,12 @@ It's powered by an open network framework [Matrix](https://matrix.org). You won'
 
 ## Appendix: `config.json`
 
-<!-- **Deprecated Warning:** A recent update in Element may have made this script invalid on newer versions. We are working on providing compatible scripts. You should not use this script and leave the config in its default state for now. -->
+**🦖 Deprecation notice:**
+
+Configuration keys were previously a mix of `camelCase` and `snake_case`. Element standardised to `snake_case` but maintained partial compatibility for `camelCase` to several settings. This backwards compatibility will be getting removed in a future release so please ensure you are updating your previous `camelCase` settings to `snake_case`.
+
+Example: `roomDirectory` -> `room_directory`, `showLabsSettings` -> `show_labs_settings`
+
 
 The place for this file is under your Element installation, which would be `C:\Users\YOUR_USER_NAME\AppData\Roaming\Element\` by default on Windows.
 A sample config is provided below.
@@ -67,12 +75,12 @@ If there is already a `config.json` file, you should open and edit it carefully.
     ],
     "hosting_signup_link": "",
     "bug_report_endpoint_url": "",
-    "roomDirectory": {
+    "room_directory": {
         "servers": [
             "matrix.advancedsolver.com"
         ]
     },
-    "showLabsSettings": true,
+    "show_labs_settings": true,
     "features": {
             "feature_latex_maths": true,
             "feature_pinning": true,
