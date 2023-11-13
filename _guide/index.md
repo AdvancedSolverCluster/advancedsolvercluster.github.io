@@ -15,6 +15,7 @@ nav_order: 1
 - [我还没有服务器账号，我该怎么做？](new-user/i-have-no-account)
 - [管理员已经帮我开好了服务器账号，我该怎么连接服务器？](new-user/how-can-i-connect)
 - [我已经学会连接服务器了，我能在服务器上做些什么？比如，如何运行程序？](new-user/how-can-i-run-program)
+- [我换了电脑, 怎么在新电脑上连接服务器? (如何自己给现有的账号里添加一个key)](new-user/add-key)
 - [新功能：usage](new-user/index#usage)
 
 ## ⚠️使用须知（必读！）
@@ -24,12 +25,12 @@ nav_order: 1
 
 ## 😊常用教程
 
-  - [Linux 基本知识](knowledge/linux)
-  - [SSH 基本知识](knowledge/ssh)
-  - [vi/vim 编辑器教程](knowledge/vim)
-  - [VSCode IDE 教程](knowledge/vscode)
-  - [Markdown 教程](knowledge/markdown)
-  - [Git 教程](knowledge/git)
+- [Linux 基本知识](knowledge/linux)
+- [SSH 基本知识](knowledge/ssh)
+- [vi/vim 编辑器教程](knowledge/vim)
+- [VSCode IDE 教程](knowledge/vscode)
+- [Markdown 教程](knowledge/markdown)
+- [Git 教程](knowledge/git)
 
 ## 💻软件教程
 
