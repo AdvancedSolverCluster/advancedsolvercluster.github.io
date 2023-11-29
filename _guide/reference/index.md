@@ -26,16 +26,16 @@ nav_order: 6
 |CPU Cache (MiB/CPU)                                     | 30 | 22 | 22 | 64 | 256 |
 |Lithography (Nanometer)                                 | 22 | 14 | 14 | 14(?) | 5 |
 |**CPU Speed** |`loginNode`|`bigMem0`|`bigMem1`|`bigMem2`|`bigMem3`|
-|Integer Math (Million Operations/s)                     |62,275 |206,066 |209,673 |328,027 |1,934,032 |
-|Floating Point Math (Million Operations/s)              |48,122 |129,819 |130,277 |146,501 |702,493? |
-|Prime Numbers (Million Primes/s)                        |188 |209 |230 |289 |1,571 |
-|Sorting (Thousand Strings/s)                            |41,063 |90,967|106,039 |172,684 |467,535? |
-|Encryption (MB/s)                                       |5,959 |25,616 |27,013 |99,718 |421,490? |
-|Compression (MB/s)                                      |315 |817 |865 |1,330 |6,250 |
-|CPU Single Threaded (Million Operations/s)              |1,414 |2,421 |2,407 |1,478 |2,424 |
-|Physics (Frames/s)                                      |1,229 |2,336 |3,002 |7,420 |13,954 |
-|Extended Instructions (SSE) (Million Matrices/s)        |21,430 |46,552 |47,889 |45,259 |140,466 |
-|**CPU Final Mark**                                      |19,471 | 42,705 | 46,047 |53,223 |118,024? |
+|Integer Math (Million Operations/s)                     |62,275 |206,066 |209,673 |328,027 |2,054,471 |
+|Floating Point Math (Million Operations/s)              |48,122 |129,819 |130,277 |146,501 |1,149,133 |
+|Prime Numbers (Million Primes/s)                        |188 |209 |230 |289 |1,728 |
+|Sorting (Thousand Strings/s)                            |41,063 |90,967|106,039 |172,684 |783,396 |
+|Encryption (MB/s)                                       |5,959 |25,616 |27,013 |99,718 |492,442 |
+|Compression (MB/s)                                      |315 |817 |865 |1,330 |6,933 |
+|CPU Single Threaded (Million Operations/s)              |1,414 |2,421 |2,407 |1,478 |2,444 |
+|Physics (Frames/s)                                      |1,229 |2,336 |3,002 |7,420 |22,446 |
+|Extended Instructions (SSE) (Million Matrices/s)        |21,430 |46,552 |47,889 |45,259 |428,652 |
+|**CPU Final Mark**                                      |19,471 | 42,705 | 46,047 |53,223 |138,716 |
 | **Memory Info** |`loginNode`|`bigMem0`|`bigMem1`|`bigMem2`|`bigMem3`|
 |Total Available RAM (GiB)                   |125.5 |1,006.4 |1,006.3 |485.6 |1007.0 |
 |Memory Frequency (MHz)                      |2,133 | 2,666 | 2,933 | 3200 | 4800 |
@@ -43,10 +43,10 @@ nav_order: 6
 |Memory Latency (Nanoseconds)                |50 |53 |52 |62 |70 |
 |Memory Read Cached (MB/s)                   |17,005 |27,710  |27,698  |18,298 |23,561 |
 |Memory Read Uncached (MB/s)                 |8,187  |12,093  |11,800  |8700  |23,334 |
-|Memory Write (MB/s)                         |7,665  |10,100  |8,890  |7338  |11,768 |
-|Memory Threaded (MB/s)                      |71,989  |100,377  |169,758  |259,208 |747,800 |
-|Database Operations (Thousand Operations/s) |10,649 |18,742 |19,791 |16,254 |28,514 |
-|**Memory Final Mark**                       |2,277 | 2,827 | 2,799 | 2,321 | 2,724 |
+|Memory Write (MB/s)                         |7,665  |10,100  |8,890  |7338  |23,305 |
+|Memory Threaded (MB/s)                      |71,989  |100,377  |169,758  |259,208 |726,276 |
+|Database Operations (Thousand Operations/s) |10,649 |18,742 |19,791 |16,254 |29,555 |
+|**Memory Final Mark**                       |2,277 | 2,827 | 2,799 | 2,321 | 2,876 |
 
 Reference:
 
