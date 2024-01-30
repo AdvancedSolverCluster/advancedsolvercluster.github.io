@@ -10,6 +10,11 @@ parent: 使用须知
 
 ![user-topology](/guide/figure/user-topology.png)
 
+- 新手👉[申请资源与提交作业](#申请资源与提交作业), 介绍了slurm的三种提交作业的方法: `srun`, `salloc`, `sbatch`.
+- 进阶👉[申请资源选项](#申请资源选项), 介绍了在提交作业的同时，如何指定作业时限、核数等参数. 
+- 补充👉[其他常用命令](#其他常用命令), 介绍了`sinfo`, `squeue`, `scancel`, `scontrol`等其它slurm命令, 帮助你更好地了解服务器状态与作业状态.
+- 为什么我的作业永远在排队? 什么时候才能执行我的作业? 如何独占一个节点的资源? 👉[FAQ](#faq)
+
 ## 申请资源与提交作业
 
 将你想要运行的一条或多条指令称为作业 (job). SLURM 提供了运行作业的三种方式:
@@ -60,13 +65,13 @@ salloc: Job allocation 2984 has been revoked.
 
 ~~~ bash
 #!/bin/bash
-# module load MATLAB # this line can be omitted because MATLAB is loaded by default
+module load MATLAB
 matlab -batch "testMatlab"
 ~~~
 
 接下来, 用 `sbatch <shell script>` 提交作业, 其中 `<shell script>` 是你刚写的脚本名. 屏幕上会打印 `Submitted batch job ###`, 其中 `###` 是你的作业 id. 当作业结束后, 输出结果会打印到当前目录下的 `slurm-###.out`.
 
-**注意**: `sbatch` 会继承你在登陆节点上加载的模块和设置的环境变量. 请注意计算节点上的 MPICH 环境可能和登陆节点不同 (如果未申请计算节点的GPU资源), 所以如果要用 MPICH, 请在 sbatch 脚本里先 `module unload MPICH`, 再 `module load MPICH`.
+**注意**: 和 `salloc` 不同的是, `sbatch` 会继承你在登陆节点上加载的模块和设置的环境变量. 
 
 ## 申请资源选项
 
@@ -103,7 +108,7 @@ python3 helloworld.py
 |`--nodes=<number> (-N <number>)`| 1 | 分配的节点数, 由于目前只有两个计算节点, 因此最大值为2.
 |`--ntasks=<number> (-n <number>)`| 1 | 启动的进程数量, 当你运行MPI程序时需要修改这个选项. |
 |`--cpus-per-task=<number> (-c <number>)`  | 1 | 每个进程使用的线程数(逻辑核数), 当你运行OpenMP程序时需要修改这个选项. |
-|`--nodelist=<node_name_list> (-w <node_name_list>)` |  | 指定在哪台机器上运行, 可能的值为 `bigMem0`, `bigMem1` 或 `bigMem2`.|
+|`--nodelist=<node_name_list> (-w <node_name_list>)` |  | 指定在哪台机器上运行, 可能的值为 `bigMem{0-3}`.|
 |`--gres=gpu:[gpu_type:]:<number>`| 无 | 指定要用的 gpu 数量或类型, 如 `--gres=gpu:1` 不指定类型, 或 `--gres=gpu:tesla_t4:1`, `--gres=gpu:nvidia_a30:1`. 其中 `tesla_t4`表示 bigMem0 上的 GPU, `nvidia_a30` 表示 bigMem1 上的 GPU, bigMem2 上的GPU为AMD系GPU, 暂无访问控制. 目前只支持这三种类型的 GPU. GPU的性能详见[我们的Benchmark页面](../reference/index) |
 | `--job-name=<jobname> (-J <jobname>) `                      | 命令名                                | 作业的名称, 有助于帮助你记录你正在运行什么作业.|
 | `--output=<path>/<file pattern> (-o <path>/<file pattern>)`  |   slurm-%j.out   (%j = JobID)  | 指定标准输出文件的路径以及名字. |
@@ -145,25 +150,45 @@ partition*    up 7-00:00:00      1   idle bigMem1        gpu:nvidia_a30:4(S:0-1)
 partition*    up 7-00:00:00      1   idle bigMem2                         (null)
 ~~~
 
-三个计算节点, bigMem0, bigMem1 和 bigMem2 状态是 idle 即完全空闲的 (如果显示 mix, 表示有一部分核被用户使用了; 如果显示 alloc, 表示该计算节点的所有核都被占用了, 此时其他用户无法再申请那台机器上的资源), **作业的时间限制最长为7天**, 以及三台机器上分别拥有的 GPU 卡数及型号.
+上述输出表示有三个计算节点, bigMem0, bigMem1 和 bigMem2 状态是 idle 即完全空闲的 (如果显示 mix, 表示有一部分核被用户使用了; 如果显示 alloc, 表示该计算节点的所有核都被占用了, 此时其他用户无法再申请那台机器上的资源), **作业的时间限制最长为7天**, 以及三台机器上分别拥有的 GPU 卡数及型号.
 
 ### `squeue` & `scancel`
 
-在等待你的程序执行的同时, 你可以通过`squeue`知道程序的状态. 例如, 以下命令列出所有用户名提交的作业:
+官方文档: <https://slurm.schedmd.com/squeue.html>, <https://slurm.schedmd.com/scancel.html>
+
+在等待你的程序执行的同时, 你可以通过 `squeue` 知道程序的状态. 例如, 在 `loginNode` 上列出所有正在队列中的作业:
 
 ~~~  bash
-squeue -u <username>
+squeue
 ~~~
 
 你会看到
 
 ~~~  bash
-  JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-    001    bigMem  python3  yjzhang PD       0:00     10 (PartitionNodeLimit)
-    002    bigMem  python3  yjzhang  R       0:56      1 bigMem0
+   JOBID NODELIST         NAME     USER ST       TIME CPUS             END_TIME REQ_NODE
+   15341  bigMem2    seurat.sh    gszou  R    6:55:02   32  2024-02-06T14:33:19  bigMem2
+   15351  bigMem3 correctness.  yjzhang  R    6:55:02  256  2024-02-06T14:33:19
+   15366  bigMem1 starmapMPFC_    gszou  R    6:40:35    2  2024-02-06T14:47:46  bigMem1
+   15367  bigMem1 starmapMPFC_    gszou  R    6:40:35    2  2024-02-06T14:47:46  bigMem1
+   15368  bigMem1 starmapMPFC_    gszou  R    6:40:35    2  2024-02-06T14:47:46  bigMem1
+   15369  bigMem0 starmapMPFC_    gszou  R    6:55:02    2  2024-02-06T14:33:19  bigMem0
+   15370  bigMem0 starmapMPFC_    gszou  R    6:55:02    2  2024-02-06T14:33:19  bigMem0
+   15371  bigMem0 starmapMPFC_    gszou  R    6:55:02    2  2024-02-06T14:33:19  bigMem0
+   15378  bigMem0  interactive   yjshao  R    6:55:42    2  2024-01-31T14:32:39
+   15379  bigMem1 HTucker3D_HL    jyliu  R    6:40:08    2  2024-02-06T14:48:13  bigMem1
+   15383  bigMem0  explore_cpu   yjshao  R    3:14:02   10  2024-02-06T18:14:19
+   15384  bigMem0  explore_cpu   yjshao  R    2:54:18   10  2024-02-06T18:34:03
 ~~~
 
-从提交到完成的典型作业状态是: PENDING (PD) 和 RUNNING (R). 如果你没有看到你的作业, 那么很可能它已经完成了.
+- `JOBID`: 作业编号.
+- `NODELIST`: 作业所占用的节点.
+- `NAME`: 作业名称.
+- `USER`: 提交作业的用户名.
+- `ST`: 作业状态. 从提交到完成的典型作业状态是: PENDING (PD) 和 RUNNING (R). 如果你没有看到你的作业, 那么很可能它已经完成了. 此外有时候你能看到的状态是 COMPLETING (CG), 表示作业已完成, 正在结束.
+- `TIME`: 作业已运行的时长. PD 状态的作业这一列显示 0:00.
+- `CPUS`: 作业申请的核数. 你可以通过这一列推断某一个节点上还有多少空闲的核可用.
+- `END_TIME`: 作业预计结束时间. **如果该作业正在运行中**, 这个时间表示该作业最晚可能的结束时间 (注意到所有作业都有运行时长限制, 如果不设置时长, 默认的运行时长是一天; 最多可申请的运行时长是七天.) **如果该作业正在排队中**, 这是 slurm 根据当前队伍的长度为你预估的结束时间, **没有任何保障你的任务一定会在这个时间点前结束**. 如果显示 N/A, 表明 slurm 暂时未安排你的任务, 无法预估何时结束.
+- `REQ_NODE`: 用户申请的节点. 如果为空, 表示用户并没有指定节点.
 
 如果你不想再运行作业, 请使用以下命令取消它:
 
@@ -171,7 +196,82 @@ squeue -u <username>
 scancel <jobid>
 ~~~
 
-## 测试性能
+### `scontrol`
 
-我们还可以利用 slurm 测试程序和算法的性能, 为此, 我们需要提交程序占用整个结点资源, 方法是在 sbatch 的时候加参数 `--exclusive`, 这保证了我们独占这个节点. 下面是关于 `--exclusive` 的说明
+官方文档: <https://slurm.schedmd.com/scontrol.html>
+
+提交作业后你会得到一个作业号, 以下用 `<jobid>` 表示. 如果忘了你的作业号, 且你的作业还没有运行结束, 可以通过 `squeue` 命令查看你的作业编号.
+
+用以下命令查看你提交的作业状态:
+
+~~~  bash
+scontrol show job <jobid>
+~~~
+
+用以下命令查看节点的状态:
+
+~~~  bash
+scontrol show node <nodename>
+~~~
+
+例如
+
+~~~  bash
+[yjzhang@loginNode ~]$ scontrol show node bigMem0
+NodeName=bigMem0 Arch=x86_64 CoresPerSocket=16
+   CPUAlloc=28 CPUEfctv=64 CPUTot=64 CPULoad=3.78
+   AvailableFeatures=(null)
+   ActiveFeatures=(null)
+   Gres=gpu:tesla_t4:4(S:0-1)
+   NodeAddr=bigMem0 NodeHostName=bigMem0 Version=22.05.2
+   OS=Linux 3.10.0-1160.36.2.el7.x86_64 #1 SMP Wed Jul 21 11:57:15 UTC 2021
+   RealMemory=1030499 AllocMem=0 FreeMem=717245 Sockets=2 Boards=1
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=partition
+   BootTime=2023-09-11T13:27:35 SlurmdStartTime=2023-11-30T07:26:18
+   LastBusyTime=2024-01-30T14:32:36
+   CfgTRES=cpu=64,mem=1030499M,billing=64
+   AllocTRES=cpu=28
+   CapWatts=n/a
+   CurrentWatts=0 AveWatts=0
+   ExtSensorsJoules=n/s ExtSensorsWatts=0 ExtSensorsTemp=n/s
+~~~
+
+用以下命令查看系统中的预约信息:
+~~~  bash
+scontrol show reservation
+~~~
+
+## FAQ
+
+### 为什么我的作业状态是PD (Pending)?
+
+作业排队的原因有很多, 你可以通过 `scontrol show job <jobid>` 的方式查看具体原因, 在输出内容中, JobState=PENDING 后面会跟着一个 Reason, 显示作业未被执行的原因. 常见的作业未开始执行的原因是 Resources, 即你所申请的资源不可用. 比如, 你申请了 `bigMem1` 上32核的资源, 但当前已有一个用户使用了 `bigMem1` 上48核, 这时你的作业就会进入队列排队. 如果对排队的原因有所疑问, 请直接联系服务器管理员.
+
+### 我的作业 (或其他人的作业) 什么时候才能开始/结束运行?
+
+当你在 `loginNode` 上使用 `squeue` 命令时, 你可以看到倒数第二列 `END_TIME`, 对于正在运行的作业, 这个时间表示作业最晚可能结束的时间, 作业可能比这个时间更早结束, **但绝不会晚于这个时间点** (除非计算节点崩溃, 任务重新排队). 对于正在排队的作业, `END_TIME` 表示作业预计结束的时间, 并不保证一定会在这个时间点前结束, 且会根据队列的状态实时更新相应的估计.
+
+### 如何独占节点资源?
+
+无论是出于测试程序和算法的性能, 还是其他原因, 我们理解用户需要独占节点资源的需求. 有以下两种方法可以保证你的作业独占节点资源: 
+
+第一种方式, 在 `srun`/`salloc`/`sbatch` 的时候加上选项 `--exclusive`, 这保证了我们的作业独占这个节点. 下面是关于 `--exclusive` 的说明
+
 ![slurm_exclusive](/guide/figure/slurm_exclusive.png)
+
+使用方式请参考[申请资源选项](#申请资源选项).
+
+如果当前有完全空闲 (IDLE) 的计算节点, 则你的作业可以立刻运行. 否则, 你的任务将在队列中排队. 在排队的过程中, 如果有其他用户希望不独占节点地运行任务, 出于计算资源最大化利用的考量, 他们可以插队运行他们的任务. 考虑最坏的情况下, 我们对你的任务最终开始运行的时间没有任何保障. 因此, 如果你对作业运行的时间有所需求, 我们建议使用第二种方式：预约节点.
+
+预约节点就像在饭店里预定座位一样, 你可以预订从某个时间点开始到某个时间点结束, 只有你指定的一部分用户可以使用你指定的一部分节点. 一旦节点被预约, 则其他用户无法提交可能结束时间晚于预约开始时间的作业. 如果你需要预约节点, 请发邮件至[管理员邮箱](mailto:cash_admin@163.com). 邮件内容必须包括:
+
+1. 预约开始时间 (精确到某一个小时，如北京时间2月1日上午9点) 和预约结束时间 (精确到某一个小时，如北京时间2月4日上午9点). 除非有特殊需求，否则预约时间不得超过七天.
+2. 预约的节点名称, bigMem0, bigMem1, bigMem2 或 bigMem3. 除非有特殊需求，否则预约节点数不得超过一个.
+3. 需要在这段时间内使用节点的用户名称, 用逗号分隔. 如: xli, yjzhang, jyliu.
+4. 使用节点的具体用途, 以及经过导师批准的证明, 证明形式包括但不限于微信截图、邮件截图或签字拍照.
+
+**预约条件**: 预约开始时间必须晚于当前节点正在运行的任务的最终结束时间, 请提前用 `squeue` 查看节点状态.
+
+管理员会及时和你联系, 告知预约是否成功. 预约成功后, 请在预约时间内用 slurm 提交任务. 如果管理员在24小时内连续两次看到被预约的节点并没有在运行任何任务, 管理员有权取消你的预约. 若多次违约, 管理员有权取消你的预约资格.
+

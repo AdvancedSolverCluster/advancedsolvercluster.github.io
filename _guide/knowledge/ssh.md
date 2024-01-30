@@ -95,7 +95,7 @@ Loading texlive/2021
 否则, 请检查以下配置是否正确:
 
 1. 在本地的 `.ssh` 文件夹中含有私钥和公钥对, 如, 私钥 `id_ecdsa` 和公钥 `id_ecdsa.pub`. 私钥是证明自身身份的唯一依据!
-2. (非首次登录) 在服务器的 `~/.ssh` 文件夹中含有文件 `authorized_keys`, 这个文件的权限是 600 (参考 <a class="one" href="basic-linux#permission"> 文件权限介绍</a>), 其中含有你的公钥信息.
+2. (非首次登录) 在服务器的 `~/.ssh` 文件夹中含有文件 `authorized_keys`, 这个文件的权限是 600 (参考 <a class="one" href="linux#permission"> 文件权限介绍</a>), 其中含有你的公钥信息.
 3. (非首次登录) 在登录服务器时可能出现报错
 
 ~~~ text
