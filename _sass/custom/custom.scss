@@ -49,4 +49,51 @@ $nav-width: 300px;
   @include mq(lg) {
     width: $nav-width;
   }
+
+}
+
+.site-nav {
+  .nav-category:not(:first-of-type) {
+    margin-top: 5rem;
+  }
+
+  div.nav-category.hidden + ul.nav-list {
+    display: none;
+  }
+
+  div.nav-category:not(.hidden) + ul.nav-list {
+    display: block;
+  }
+}
+
+.main-content {
+  h1 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    a {
+      color: inherit; // Keep the original color
+      text-decoration: none;  // remove underline
+    }
+  }
+  h2 {
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    &::after {
+      content: "";
+      display: block;
+      height: 1px;
+      background-color: $border-color;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+  h3 {
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
 }
