@@ -242,7 +242,7 @@ NodeName=bigMem0 Arch=x86_64 CoresPerSocket=16
 scontrol show reservation
 ~~~
 
-## 预约节点资源
+## <a name="reservations"> 预约节点资源 </a>
 
 (since Feb 1, 2024)
 
