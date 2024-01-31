@@ -80,10 +80,62 @@ function hideAdminArea() {
     }
   });
 }
+// Function to toggle visibility based on the stylesheet href and change the logo
+function updateThemeBasedElements() {
+  const lightThemeStylesheet = '/assets/css/just-the-docs-light.css';
+  const darkThemeStylesheet = '/assets/css/just-the-docs-dark.css';
+  const linkTag = document.querySelector('link[href*="just-the-docs-"]');
+  const isLightTheme = linkTag && linkTag.href.includes(lightThemeStylesheet);
+  const isDarkTheme = linkTag && linkTag.href.includes(darkThemeStylesheet);
+
+  // // Update visibility for only-light and only-dark elements
+  // const onlyLightDivs = document.querySelectorAll('.only-light');
+  // onlyLightDivs.forEach(div => {
+  //   div.style.display = isLightTheme ? 'block' : 'none';
+  // });
+
+  // const onlyDarkDivs = document.querySelectorAll('.only-dark');
+  // onlyDarkDivs.forEach(div => {
+  //   div.style.display = isDarkTheme ? 'block' : 'none';
+  // });
+
+  // Update site logo background image
+  const siteLogo = document.querySelector('.site-logo');
+  if (siteLogo) {
+    let backgroundImage = getComputedStyle(siteLogo).backgroundImage;
+
+    if (isDarkTheme && backgroundImage.includes('light')) {
+      backgroundImage = backgroundImage.replace('light', 'dark');
+    } else if (isLightTheme && backgroundImage.includes('dark')) {
+      backgroundImage = backgroundImage.replace('dark', 'light');
+    }
+
+    siteLogo.style.backgroundImage = backgroundImage;
+  }
+}
+
 
 // when DOM is ready
 jtd.onReady(function () {
   insertAvatar();
   hideAdminArea();
+
+  // Set up a MutationObserver to listen for changes to the link element's href
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'href') {
+        updateThemeBasedElements();
+      }
+    });
+  });
+
+  // Start observing the link element for attribute changes
+  const linkTag = document.querySelector('link[href*="just-the-docs-"]');
+  if (linkTag) {
+    observer.observe(linkTag, { attributes: true });
+  }
+
+  // Initial theme update
+  updateThemeBasedElements();
 });
 
