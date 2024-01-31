@@ -1,6 +1,6 @@
 ---
 title: 我换了电脑, 怎么在新电脑上连接服务器? (如何自己给现有的账号里添加一个key)
-nav_order: 2
+nav_order: 4
 parent: 入门教程
 ---
 
