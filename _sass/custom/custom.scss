@@ -56,14 +56,50 @@ $nav-width: 300px;
   .nav-category:not(:first-of-type) {
     margin-top: 5rem;
   }
+}
 
-  div.nav-category.hidden + ul.nav-list {
-    display: none;
+.breadcrumb-nav-list-item {
+  display: table-cell;
+
+  border-right: 1px dashed $purple-000;
+  padding-right: $sp-2;
+  padding-left: $sp-2;
+
+  &::after {
+    content: "";
+    margin: 0
   }
 
-  div.nav-category:not(.hidden) + ul.nav-list {
-    display: block;
+  &:last-child {
+    border-right: none;
   }
+}
+
+.back-to-top-abs {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+#back-to-top-button {
+  display: inline-block;
+  padding: 0.3em 0.5em;
+  background-color: $grey-lt-000; /* Change to match your theme's color */
+  color: $purple-000;
+  border-radius: 32px;
+  text-decoration: none;
+  cursor: pointer; /* Indicates the button is clickable */
+  svg {
+    padding-right: 0.4rem;
+    width: 1.5em;
+    height: 1.5em;
+    transform: rotate(-90deg);
+  }
+}
+
+#back-to-top-button:hover {
+  background-color: $grey-lt-100; /* Darker shade for hover effect */
 }
 
 .main-content {

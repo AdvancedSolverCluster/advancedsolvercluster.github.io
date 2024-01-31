@@ -37,8 +37,10 @@ just_the_docs:
   collections:
     guide:
       name: guide
+      nav_fold: true
     guide_admin:
       name: admin area
+      nav_fold: true
 
 title:            'AdvancedSolver Cluster Guide Page'
 tagline:          'Guide Page'

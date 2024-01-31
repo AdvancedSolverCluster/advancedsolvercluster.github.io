@@ -26,43 +26,43 @@ function insertAvatar() {
 
 function hideAdminArea() {
   // Select the parent element with the 'site-nav' ID
-  var siteNav = document.getElementById('site-nav');
+  // var siteNav = document.getElementById('site-nav');
 
-  // Select all <ul> elements with the class 'nav-list' within the 'site-nav' element
-  var navLists = siteNav.querySelectorAll('ul.nav-list');
+  // // Select all <ul> elements with the class 'nav-list' within the 'site-nav' element
+  // var navLists = siteNav.querySelectorAll('ul.nav-list');
 
-  // Function to check recursively if any descendants have the 'active' class
-  function hasActiveDescendant(element) {
-    // Base case: If the current element has the 'active' class
-    if (element.classList.contains('active')) {
-      return true;
-    }
-    // Recursively check children
-    for (var child of element.children) {
-      if (hasActiveDescendant(child)) {
-        return true; // Found an active descendant
-      }
-    }
-    // No active descendants were found
-    return false;
-  }
+  // // Function to check recursively if any descendants have the 'active' class
+  // function hasActiveDescendant(element) {
+  //   // Base case: If the current element has the 'active' class
+  //   if (element.classList.contains('active')) {
+  //     return true;
+  //   }
+  //   // Recursively check children
+  //   for (var child of element.children) {
+  //     if (hasActiveDescendant(child)) {
+  //       return true; // Found an active descendant
+  //     }
+  //   }
+  //   // No active descendants were found
+  //   return false;
+  // }
 
-  // Iterate through each <ul> element
-  navLists.forEach(function (navList) {
-    // Check if the <ul> is exactly after a div with the 'nav-category' class
-    var prevSibling = navList.previousElementSibling;
-    if (prevSibling && prevSibling.classList.contains('nav-category')) {
-      // Check if any descendant of the <ul> has the 'active' class
-      var hasActiveChild = hasActiveDescendant(navList);
+  // // Iterate through each <ul> element
+  // navLists.forEach(function (navList) {
+  //   // Check if the <ul> is exactly after a div with the 'nav-category' class
+  //   var prevSibling = navList.previousElementSibling;
+  //   if (prevSibling && prevSibling.classList.contains('nav-category')) {
+  //     // Check if any descendant of the <ul> has the 'active' class
+  //     var hasActiveChild = hasActiveDescendant(navList);
 
-      // Add or remove the 'hidden' class on the div.nav-category based on whether an active descendant was found
-      if (hasActiveChild) {
-        prevSibling.classList.remove('hidden');
-      } else {
-        prevSibling.classList.add('hidden');
-      }
-    }
-  });
+  //     // Add or remove the 'hidden' class on the div.nav-category based on whether an active descendant was found
+  //     if (hasActiveChild) {
+  //       prevSibling.classList.remove('hidden');
+  //     } else {
+  //       prevSibling.classList.add('hidden');
+  //     }
+  //   }
+  // });
 
   jtd.addEvent(document, 'click', function (e) {
     var target = e.target;
@@ -73,7 +73,10 @@ function hideAdminArea() {
     // If a 'nav-category' was indeed clicked
     if (target) {
       e.preventDefault(); // Prevent default behavior if needed
-      target.classList.toggle('hidden');
+      // toggle its parent only if its parent is a li with nav-list-item
+      if (target.parentNode.classList.contains('nav-list-item')) {
+        target.parentNode.classList.toggle('active');
+      }
     }
   });
 }
