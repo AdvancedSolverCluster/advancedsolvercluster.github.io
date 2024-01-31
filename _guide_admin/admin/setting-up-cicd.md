@@ -24,15 +24,15 @@ title: "GitLab CI/CD + GitLab Runner in Docker 全自动部署服务器网页"
 
 登录具有管理员权限的账号, 比如这里用的root账号, 打开 Admin Area. 在左侧找到Overview -- Runners打开配置Runners.
 
-![admin area - runners](guide/figure/setting-up-cicd/admin-area-runners.png)
+![admin area - runners](/guide/figure/setting-up-cicd/admin-area-runners.png)
 
 在Runners的配置界面可以找到已经有配置好的Runner. 右侧选择Register an instance runner, 在里面可以复制之后要用的Registration token, 跳转去看官方的教程(或者下面的截图).
 
-![runner list](guide/figure/setting-up-cicd/runner-list.png)
+![runner list](/guide/figure/setting-up-cicd/runner-list.png)
 
 Option 1/2 指定了在哪里保存gitlab-runner的config, 这里就用Option 2把config存在docker volume中.
 
-![option 2: use docker volumes to start the runner container](guide/figure/setting-up-cicd/use-docker-volumes.png)
+![option 2: use docker volumes to start the runner container](/guide/figure/setting-up-cicd/use-docker-volumes.png)
 
 在打算运行runner的机器上执行
 
@@ -57,7 +57,7 @@ docker run --rm -it -v <volume name>:/etc/gitlab-runner gitlab/gitlab-runner:lat
 
 其中选择`docker`作为我们的runner executor. 默认的image选择了`docker:dind` (Docker-in-Docker).
 
-![Follow up steps](guide/figure/setting-up-cicd/follow-up-steps.png)
+![Follow up steps](/guide/figure/setting-up-cicd/follow-up-steps.png)
 
 在这些都做完以后, 用`docker ps`可以看到你新开的用于跑GitLab Runner的container. 用`docker exec -it <CONTAINER ID> bash`可以进入那个container, 这时候可以运行一系列`gitlab-runner`命令. 比如, `gitlab-runner list`就能看到你刚刚注册的那个GitLab Runner. 更多命令参考`gitlab-runner help`.
 
@@ -73,7 +73,7 @@ docker run --rm -it -v <volume name>:/etc/gitlab-runner gitlab/gitlab-runner:lat
 
 所谓的给项目配置CI/CD, 其实是在项目的根目录下新建一个`.gitlab-ci.yml`文件, 接下来每次push的时候, GitLab都会查看这个文件里的配置运行CI/CD. GitLab提供了一个在线编辑器, 就在侧边栏的CI/CD下的Editor里, 直接编辑这个`.gitlab-ci.yml`文件.
 
-![GitLab project CI/CD page](guide/figure/setting-up-cicd/project-cicd.png)
+![GitLab project CI/CD page](/guide/figure/setting-up-cicd/project-cicd.png)
 
 当点击Create New Pipeline后, GitLab会生成一个默认的`.gitlab-ci.yml`模板.
 
@@ -119,7 +119,7 @@ deploy-job:      # This job runs in the deploy stage.
 
 我们点击最下方的commit-changes, 表示保存配置并push, 这时候你就可以看到pipeline已经开始运行了, 而且其中包含三个阶段的任务. 每一阶段的任务它做以下几件事(你可以在View Pipeline的每一个阶段里看到, 蓝色的字体):
 
-![CI/CD running page](guide/figure/setting-up-cicd/cicd-running.png)
+![CI/CD running page](/guide/figure/setting-up-cicd/cicd-running.png)
 
 1. "Preparing the "docker" executor": 拉取镜像. 如果你没有在script里指定镜像(就像这个模板里没有指定), 它就会拉取你前面配置runner时所声明的默认镜像(比如我们前面默认镜像选了docker:dind). 默认的拉取策略是从docker仓库里拉取镜像(注: 可以在上文中提到的`config.toml`里在`[runners.docker]`里加上`pull_policy = "if-not-present"`, 这样就使得拉取策略变成了先找本地有没有这个镜像, 如果找不到再去远程拉取).
 2. "Preparing environment": 准备环境. 新建了一个名为`runner-<runner id>-project-<project id>-concurrent-<...>`的docker container, 这里面是一个全新的环境, 里面所有东西都是初始化的. 除了镜像自带的环境外(比如docker镜像自带docker, python镜像自带python), 其他什么都没有.
@@ -242,4 +242,4 @@ update-stage:
 
 最终这个配置用于展示了一个教程页面. 服务器其他管理员在写好Markdown文档之后push到仓库就会自动upstream更新到网页上, 全过程不导致掉线且大约1分钟就能看到更新. 对于没有太多计算机背景刚进组的同学也算是比较方便的一个展示服务器基本用法的入口. 终于不用再让服务器管理员当客服了!
 
-![outcome](guide/figure/setting-up-cicd/outcome.png)
+![outcome](/guide/figure/setting-up-cicd/outcome.png)
