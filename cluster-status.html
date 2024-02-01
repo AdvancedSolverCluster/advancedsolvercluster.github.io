@@ -1,0 +1,43 @@
+---
+layout: home
+permalink: /cluster-status
+collection: cluster-status
+title: Advanced Solver Cluster Load Status
+nav_order: 1
+svg_data:
+    - cash-logo.svg
+---
+
+<div class="text-center">
+    <h3>
+        Status are refreshed every 10 mins.
+    </h3>
+
+    <div class="mb-0 bg-white shadow border-0 rounded border-light card shadow">
+        <div class="">
+            <button class="btn btn-blue" type="button">% CPU usage</button>
+            <button class="btn btn-green" type="button">% mem usage</button>
+            <button class="btn btn-red" type="button">load average 5min</button>
+            <button class="btn btn-yellow" type="button">load average 15min</button>
+        </div>
+        <div class="">
+            {% for svg in page.svg_data %}
+            <div class="">{% include {{ svg }} %}</div>
+            {% endfor %}
+            <br />
+        </div>
+        <div class="card-footer">
+            <p>Records are on a daily basis, available from 00:10 to 23:50. Only records in the previous 24 hours are plotted.</p>
+            <p>Memory usage is recorded as <b>active memory usage</b>; memory that has been used more recently.</p>
+            <p><b>System load/CPU load</b> is a measurement of CPU over or under-utilization in a Linux system;
+              the number of processes which are being executed by the CPU or in waiting state (readily waiting for execution).</p>
+            <p><b>Load average</b> is the average system load calculated over a given period of time of 5 and 15 minutes.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Specific Page JS goes HERE  -->
+<script>
+let refreshTime = 600*1000;  // automatically refresh every 10 min
+setTimeout(function() {location.reload();}, refreshTime);
+</script>

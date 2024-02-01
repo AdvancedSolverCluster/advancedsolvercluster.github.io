@@ -133,3 +133,13 @@ $nav-width: 300px;
   }
 
 }
+
+
+
+.btn-red {
+  @include btn-color($white, $red-000);
+}
+
+.btn-yellow {
+  @include btn-color($white, $yellow-100);
+}
