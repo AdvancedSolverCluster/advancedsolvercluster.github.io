@@ -11,7 +11,7 @@ parent: 使用须知
 ![user-topology](/guide/figure/user-topology.png)
 
 - 新手👉[申请资源与提交作业](#申请资源与提交作业), 介绍了slurm的三种提交作业的方法: `srun`, `salloc`, `sbatch`.
-- 进阶👉[申请资源选项](#申请资源选项), 介绍了在提交作业的同时，如何指定作业时限、核数等参数. 
+- 进阶👉[申请资源选项](#申请资源选项), 介绍了在提交作业的同时，如何指定作业时限、核数等参数.
 - 补充👉[其他常用命令](#其他常用命令), 介绍了`sinfo`, `squeue`, `scancel`, `scontrol`等其它slurm命令, 帮助你更好地了解服务器状态与作业状态.
 - 🆕预约👉[预约节点资源](#预约节点资源)
 
@@ -71,7 +71,7 @@ matlab -batch "testMatlab"
 
 接下来, 用 `sbatch <shell script>` 提交作业, 其中 `<shell script>` 是你刚写的脚本名. 屏幕上会打印 `Submitted batch job ###`, 其中 `###` 是你的作业 id. 当作业结束后, 输出结果会打印到当前目录下的 `slurm-###.out`.
 
-**注意**: 和 `salloc` 不同的是, `sbatch` 会继承你在登陆节点上加载的模块和设置的环境变量. 
+**注意**: 和 `salloc` 不同的是, `sbatch` 会继承你在登陆节点上加载的模块和设置的环境变量.
 
 ## 申请资源选项
 
@@ -115,19 +115,28 @@ python3 helloworld.py
 | `--error=<path>/<file pattern> (-e <path>/<file pattern>) `  |   slurm-%j.out   (%j = JobID)  | 指定错误输出文件的路径以及名字. |
 | `--time=<walltime> (-t <walltime>)` | 1 天        | 运行任务的时间限制, 格式如下 [hours:]minutes[:seconds] 如 20, 01:20, 01:20:30   days-hours[:minutes][:seconds] 如 2-0, 1-5:20, 1-5:20:30   |
 
-<div style="background-color: #008080; color: white; ">
+<!-- <div style="background-color: #008080; color: white; ">
  <p style="margin: 10px">小练习</p>
  <div style="background-color: #BFDFDF; color: black">
   <p style="margin: 10px">以下哪个说法是正确的？</p>
-  <p style="margin: 10px"><table>
+  <table>
     <td><input type="radio" name="slurmquestion1" id="slurmq1opt1" /><label for="slurmq1opt1">用`srun -w bigMem0 nvidia-smi`可以查看`bigMem0`上的GPU情况</label></td>
     <td><input type="radio" name="slurmquestion1" id="slurmq1opt2" /><label for="slurmq1opt2">没有申请过资源，也可以直接`ssh bigMem0`或`ssh bigMem1`</label></td>
     <td><input type="radio" name="slurmquestion1" id="slurmq1opt3" /><label for="slurmq1opt3">可以在登陆节点编译完后再到计算节点上运行</label></td>
   </table>
-  </p>
   <p style="margin: 10px"><button onclick="window.alert(document.getElementById('slurmq1opt3').checked ? '正确, 因为我们的集群软件环境是一样的' : document.getElementById('slurmq1opt1').checked ? '错误, 必须加上`--gres`选项' : '错误, 你试试就知道了')">提交</button></p>
  </div>
-</div>
+</div> -->
+
+{: .tip }
+> 以下哪个说法是正确的？
+> <ul class="example-question">
+>    <li><input type="radio" name="slurmquestion1" id="slurmq1opt1" /><label for="slurmq1opt1" markdown="1">用 `srun -w bigMem0 nvidia-smi` 可以查看 `bigMem0` 上全部 GPU 的使用情况</label></li>
+>    <li><input type="radio" name="slurmquestion1" id="slurmq1opt2" /><label for="slurmq1opt2" markdown="1">没有申请过资源，也可以直接 `ssh bigMem0` 或 `ssh bigMem1`</label></li>
+>    <li><input type="radio" name="slurmquestion1" id="slurmq1opt3" /><label for="slurmq1opt3" markdown="1">可以在登陆节点编译完后再到计算节点上运行</label></li>
+> </ul>
+> <button onclick="window.alert(document.getElementById('slurmq1opt3').checked ? '正确, 因为我们的集群软件环境是一样的' : document.getElementById('slurmq1opt1').checked ? '错误, 必须加上`--gres`选项' : '错误, 你试试就知道了')">提交</button>
+
 
 
 ## 其他常用命令
@@ -266,7 +275,7 @@ scontrol show reservation
 
 **预约条件**: 预约开始时间必须晚于当前节点正在运行的任务的最终结束时间, 请提前用 `squeue` 查看节点状态. 此外, 每一个被包含在上述用户列表中的用户每个月有1024核时的额度, 且预约次数不得超过3次. 若超出额度, 则需要提供导师知情且同意的证明.
 
-例: 
+例:
 
 - 用户 yjzhang 申请1月7日9点-21点使用bigMem1:64核, 12小时, 若当前没有任务预计运行到1月7日9点, 则预约成功. 用户 yjzhang 申请1月14日9点-21点使用bigMem1:64核, 12小时, 预约不成功, 因为超出了该月使用额度.
 - 用户 yjzhang 申请1月的每个周六使用bigMem1一小时, 管理员只能为她预约前三次, 因为第四次超出了该月使用额度.

@@ -23,13 +23,13 @@ title: "集群网络结构"
 ~~~
 
 
-|   Server   | Campus URL/IP |     Off-Campus URL     | Port  |
-| ---------- | ------------- | ---------------------- | ----- |
-| router     | 10.88.3.90    | cluster.yingzhouli.com | 20254 |
-| loginNode  | 10.88.3.90    | cluster.yingzhouli.com | 20001 |
-| bigMem0    | 10.88.3.90    | cluster.yingzhouli.com | 20010 |
-| bigMem1    | 10.88.3.90    | cluster.yingzhouli.com | 20011 |
-| web0       | 10.88.3.90    | cluster.yingzhouli.com | 20100 |
+|   Server   | Campus URL/IP |       Off-Campus URL       | Port  |
+| ---------- | ------------- | -------------------------- | ----- |
+| router     | 10.88.3.90    | cluster.advancedsolver.com | 20254 |
+| loginNode  | 10.88.3.90    | cluster.advancedsolver.com | 20001 |
+| bigMem0    | 10.88.3.90    | cluster.advancedsolver.com | 20010 |
+| bigMem1    | 10.88.3.90    | cluster.advancedsolver.com | 20011 |
+| web0       | 10.88.3.90    | cluster.advancedsolver.com | 20100 |
 
 路由器管理地址
 https://cluster.advancedsolver.com
