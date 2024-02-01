@@ -143,3 +143,17 @@ $nav-width: 300px;
 .btn-yellow {
   @include btn-color($white, $yellow-100);
 }
+
+ul.example-question {
+  li {
+    // remove psudeo element before content
+    &::before {
+      content: none;
+    }
+
+    // add padding to the input radio inside
+    input[type="radio"] {
+      margin-right: 0.5rem;
+    }
+  }
+}

@@ -17,9 +17,6 @@ collections:
     permalink: "/guide/:path"
     output: true
     # track_modified_time: true
-  cluster-status:
-    permalink: "/:collection"
-    output: true
 
 defaults:
   - scope:
@@ -36,13 +33,6 @@ defaults:
       layout: "home"
       # last_modified_date: true
 
-  - scope:
-      path: ""
-      type: "cluster-status"
-    values:
-      layout: "home"
-      # last_modified_date: true
-
 just_the_docs:
   collections:
     guide:
@@ -51,9 +41,7 @@ just_the_docs:
     guide_admin:
       name: admin area
       nav_fold: true
-    cluster-status:
-      name: cluster status
-      nav_fold: true
+
 
 title:            'AdvancedSolver Cluster Guide Page'
 tagline:          'Guide Page'
