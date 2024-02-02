@@ -10,7 +10,7 @@ variables:
 build-stage:
   stage: build
   only:
-    - master
+    - main
   image: ruby:3.1
   variables:
     JEKYLL_ENV: production
@@ -33,7 +33,7 @@ build-stage:
 deploy-stage:
   stage: deploy
   only:
-    - master
+    - main
   image: docker:19.03.12
   environment:
     name: production
