@@ -1,0 +1,54 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+  GIT_SUBMODULE_STRATEGY: normal
+  GIT_SUBMODULE_UPDATE_FLAGS: --remote
+
+build-stage:
+  stage: build
+  only:
+    - master
+  image: ruby:3.1
+  variables:
+    JEKYLL_ENV: production
+  environment:
+    name: production
+  before_script:
+    - bundle install
+  script:
+    - echo "Start building ..."
+    - cp -r ./server-management/guide ./_guide
+    - mv ./_guide/admin ./_guide_admin
+    - bundle exec jekyll build --incremental
+  artifacts:
+    paths:
+      - _guide
+      - _guide_admin
+      - _site
+      - _site/guide
+
+deploy-stage:
+  stage: deploy
+  only:
+    - master
+  image: docker:19.03.12
+  environment:
+    name: production
+    url: https://test.advancedsolver.com/
+  dependencies:
+    - build-stage
+  script:
+    - echo "Start deploying ..."
+    - docker stop my-jekyll-container 2>/dev/null || true
+    - docker rm my-jekyll-container 2>/dev/null || true
+    - docker build -t my-jekyll-app .
+    - docker run --name my-jekyll-container -d -p 55589:5000 -v /mnt/loginNode/home/admin/cluster-status:/app/assets/cluster-status my-jekyll-app
+  artifacts:
+    paths:
+      - _guide
+      - _guide_admin
+      - _site
+      - _site/guide

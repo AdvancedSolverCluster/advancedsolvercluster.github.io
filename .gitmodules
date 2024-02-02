@@ -1,0 +1,4 @@
+[submodule "server-management"]
+	path = server-management
+	url = ../server-management
+	branch = main
