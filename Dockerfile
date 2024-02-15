@@ -5,6 +5,7 @@ COPY . /app
 RUN bundle install
 CMD ["bundle", "exec", "jekyll", "serve", "--port", "5000", "--host", "0.0.0.0", "--no-watch"]
 RUN ls -al /app/_site/guide
+RUN ln -s /cluster-status /app/_site/assets/images/cluster-status
 RUN ls -al /app/_site/assets/images/cluster-status
 RUN rm -rf /app/server-management
 EXPOSE 5000
