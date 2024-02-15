@@ -1,0 +1,1 @@
+This folder will be overwritten by docker volume mount, so that cluster-status svgs can be included.

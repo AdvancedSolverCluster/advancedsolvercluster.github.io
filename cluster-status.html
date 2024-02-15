@@ -5,32 +5,41 @@ collection: cluster-status
 title: Advanced Solver Cluster Load Status
 nav_order: 1
 svg_data:
-    - cash-logo.svg
+    - assets/images/cluster-status/loginNode.svg
+    - assets/images/cluster-status/bigMem0.svg
+    - assets/images/cluster-status/bigMem1.svg
+    - assets/images/cluster-status/bigMem2.svg
+    - assets/images/cluster-status/bigMem3.svg
 ---
 
 <div class="text-center">
-    <h3>
-        Status are refreshed every 10 mins.
-    </h3>
-
-    <div class="mb-0 bg-white shadow border-0 rounded border-light card shadow">
+    <div class="cluster-status-not-available" style="display: none">
+        <h2>
+            ⚠ Cluster Status Unavailable
+        </h2>
+        <p class="text-left">
+            If you are accessing this page from github.io, the cluster status is not available there. Please access <a href="https://advancedsolver.com/cluster-status">our self-hosted page</a> instead.
+            <br />
+            If you see this from our self-hosted page, the cluster status is not available at the moment. Admin Team is working on it. Please try again later.
+        </p>
+    </div>
+    <div class="cluster-status-available" style="display: none">
+        <h3>
+            Status are refreshed every 10 mins.
+        </h3>
         <div class="">
             <button class="btn btn-blue" type="button">% CPU usage</button>
             <button class="btn btn-green" type="button">% mem usage</button>
             <button class="btn btn-red" type="button">load average 5min</button>
             <button class="btn btn-yellow" type="button">load average 15min</button>
         </div>
-        <div class="">
-            {% for svg in page.svg_data %}
-            <div class="">{% include {{ svg }} %}</div>
-            {% endfor %}
-            <br />
-        </div>
-        <div class="card-footer">
+        <ul class="svg-container">
+        </ul>
+        <div>
             <p>Records are on a daily basis, available from 00:10 to 23:50. Only records in the previous 24 hours are plotted.</p>
             <p>Memory usage is recorded as <b>active memory usage</b>; memory that has been used more recently.</p>
             <p><b>System load/CPU load</b> is a measurement of CPU over or under-utilization in a Linux system;
-              the number of processes which are being executed by the CPU or in waiting state (readily waiting for execution).</p>
+            the number of processes which are being executed by the CPU or in waiting state (readily waiting for execution).</p>
             <p><b>Load average</b> is the average system load calculated over a given period of time of 5 and 15 minutes.</p>
         </div>
     </div>
@@ -38,6 +47,40 @@ svg_data:
 
 <!-- Specific Page JS goes HERE  -->
 <script>
-let refreshTime = 600*1000;  // automatically refresh every 10 min
+let refreshTime = 600*1000;
 setTimeout(function() {location.reload();}, refreshTime);
+
+let svgLoaded = false;
+function loadSVG(svgPath) {
+    return fetch(svgPath)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(svgData => {
+            svgLoaded = true;
+            const container = document.querySelector('ul.svg-container');
+            const listItem = document.createElement('li');
+            listItem.innerHTML = svgData;
+            container.appendChild(listItem);
+            document.querySelector('.cluster-status-available').style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Error loading SVG from ' + svgPath + ':', error);
+        });
+}
+
+function loadAllSVGs(svgList) {
+    let loadPromises = svgList.map(svgFile => loadSVG(svgFile));
+
+    Promise.allSettled(loadPromises).then(() => {
+        if (!svgLoaded) {
+            document.querySelector('.cluster-status-not-available').style.display = 'block';
+        }
+    });
+}
+var svgList = {{ page.svg_data | jsonify }};
+loadAllSVGs(svgList);
 </script>
