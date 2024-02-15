@@ -73,9 +73,13 @@ function loadSVG(svgPath) {
 }
 
 function loadAllSVGs(svgList) {
-    let loadPromises = svgList.map(svgFile => loadSVG(svgFile));
+    let promiseChain = Promise.resolve();
 
-    Promise.allSettled(loadPromises).then(() => {
+    svgList.forEach(svgFile => {
+        promiseChain = promiseChain.then(() => loadSVG(svgFile));
+    });
+
+    promiseChain.then(() => {
         if (!svgLoaded) {
             document.querySelector('.cluster-status-not-available').style.display = 'block';
         }
