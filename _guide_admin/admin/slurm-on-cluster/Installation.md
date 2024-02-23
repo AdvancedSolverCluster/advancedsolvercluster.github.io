@@ -121,6 +121,7 @@ sudo systemctl restart munge
 echo "Test munge on $(hostname)"
 munge -n
 munge -n | unmunge
+~~~
 
 ~~~
 munge -n -t 10 | ssh bigMem0 unmunge
