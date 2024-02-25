@@ -6,7 +6,11 @@ parent: 使用须知
 
 # 关于服务器各用户储存空间的 Quota
 
-*February 28, 2022, [Jingyu Liu](mailto:381258337@qq.com), [Xiang Li](mailto:646873166@qq.com)*
+*Updated: February 26, 2024*
+
+*Created: February 28, 2022*
+
+*[Jingyu Liu](mailto:381258337@qq.com), [Xiang Li](mailto:646873166@qq.com)*
 
 在 Linux 系统中, 由于是多人多任务的环境, 所以经常会出现多人共同使用同一个硬盘空间的情况.
 
@@ -14,9 +18,8 @@ parent: 使用须知
 
 1. `/home/solver/` (quota=100G limit=500G 每日备份)
 2. `/scratch/solver/` (quota=limit=1000G 无备份)
-3. `/sync/solver/` (quota=5G limit=200G 未正式上线)
 
-`home` 目录用于存放常用的文档代码等; `scratch` 目录用于存放临时使用的数据等大文件; `sync` 目录未来提供同步功能, 可以将其中文件同步到集群中其他机器上, 提高集群多线程多 gpu 程序性能.
+`home` 目录用于存放常用的文档代码等; `scratch` 目录用于存放临时使用的数据等大文件.
 
 文件大小累计超过 quota 后达 1 周，或超过 limit 则无法写入任何数据, 可能会导致无法保存文档, 无法获得代码运行结果等情况, 请及时注意所用空间大小. 请参考 <a class="one" href="xfs-quota"> 教程 </a> 确认当前使用空间.
 
@@ -52,8 +55,6 @@ Disk quotas for User xli (1026)
 Filesystem   Blocks  Quota  Limit Warn/Time    Mounted on
 /dev/mapper/centos-scratch
              794.9M  1000G  1000G  00 [------] /scratch
-/dev/mapper/centos-sync
-                 4K     5G   200G  00 [------] /sync
 /dev/mapper/centos-home
               64.6G   100G   500G  00 [------] /home
 xfs_quota> q
@@ -61,7 +62,7 @@ xfs_quota> q
 
 查询所用 quota 的命令可以看到如上的示例结果. 其含义为
 
-- 对于当前用户 xli, 总共有3个文件夹下有quota限制: `/scratch, /sync, /home`.
+- 对于当前用户 xli, 总共有3个文件夹下有quota限制: `/scratch, /home`.
 - 以 `/home` 为例, 所有在这个文件夹下属于xli的文件大小总计为 `64.6G`. xli在 `/home` 下的Quota为 `100G`, Limit为 `500G`.
 - 即, xli **最多可以在 `/home` 里使用 `500G` 的空间**, 且一旦**超过 `100G` (Quota), 就必须在7天之内恢复到 `100G` 以下**.
 - 一旦超出 `500G`, 或是连续7天超出 `100G`, xli 将无法在 `/home` 下保存(写入)任何数据.

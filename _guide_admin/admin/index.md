@@ -15,6 +15,7 @@ title: "Admin reference page"
 - [制作CentOS启动盘](make-centos-boost-stick)
 - [在教程文档中插入小测验](guide-inline-exercise-sample)
 - [关于Modules](modules)
+- [设置quota](quota)
 
 ## Web Server
 
