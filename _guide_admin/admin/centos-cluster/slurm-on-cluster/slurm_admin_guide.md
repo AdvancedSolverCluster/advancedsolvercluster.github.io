@@ -1,5 +1,7 @@
 ---
-title: "SLURM Admin Guide"
+title: 如何做一个优秀的SLURM管理员
+nav_order: 9
+parent: CentOS Cluster (legacy)
 ---
 
 # "SLURM Admin Guide"

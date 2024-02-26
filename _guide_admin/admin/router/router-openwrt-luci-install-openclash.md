@@ -1,3 +1,8 @@
+---
+title: install openclash on R4S router
+nav_order: 1
+parent: Router
+---
 
 # install openclash on R4S router
 
@@ -13,7 +18,7 @@ https://github.com/vernesong/OpenClash
 
 - the arch is `aarch64_generic`
 
-for example 
+for example
 
 https://openwrt.proxy.ustclug.org/snapshots/packages/aarch64_generic/base/
 

@@ -1,5 +1,7 @@
 ---
-title: "How to start an HPC cluster on centos 7 Linux servers"
+title: How to start an HPC cluster on centos 7 Linux servers
+nav_order: 7
+parent: CentOS Cluster (legacy)
 ---
 
 # "How to start an HPC cluster on centos 7 Linux servers"

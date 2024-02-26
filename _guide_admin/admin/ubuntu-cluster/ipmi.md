@@ -1,5 +1,7 @@
 ---
-title: "IPMI备忘"
+title: IPMI备忘
+nav_order: 4
+parent: Ubuntu Cluster
 ---
 
 # IPMI备忘

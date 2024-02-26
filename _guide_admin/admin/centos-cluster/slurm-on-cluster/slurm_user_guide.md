@@ -1,8 +1,10 @@
 ---
-title: "SLURM User Guide"
+title: SLURM User Guide
+nav_order: 10
+parent: CentOS Cluster (legacy)
 ---
 
-# "SLURM User Guide"
+# SLURM User Guide
 
 ### Ver. 2022/1/9 - by Yuejia Zhang, Xiang Li
 

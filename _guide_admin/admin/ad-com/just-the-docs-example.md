@@ -1,5 +1,7 @@
 ---
 title: Just-the-docs Example Reference
+nav_order: 3
+parent: AdvancedSolver.com
 ---
 
 {: .highlight }

@@ -1,5 +1,7 @@
 ---
-title: "Set up GPU on slurm"
+title: Set up GPU on slurm
+nav_order: 11
+parent: CentOS Cluster (legacy)
 ---
 
 # "Set up GPU on slurm"

@@ -1,5 +1,7 @@
 ---
-title: "如何在服务器上安装并配置 slurm"
+title: 如何在服务器上安装并配置 slurm
+nav_order: 8
+parent: CentOS Cluster (legacy)
 ---
 
 # "如何在服务器上安装并配置 slurm"

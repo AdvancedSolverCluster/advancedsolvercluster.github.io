@@ -1,7 +1,9 @@
+---
+title: 设置 Quota
+nav_order: 5
+parent: Ubuntu Cluster
+---
 
----
-title: "设置 Quota"
----
 
 # 设置 Quota
 

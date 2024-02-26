@@ -1,8 +1,10 @@
 ---
-title: "Making Installation USB Media on Windows"
+title: Making Installation USB Media on Windows
+nav_order: 1
+parent: CentOS Cluster (legacy)
 ---
 
-# "Making Installation USB Media on Windows"
+# Making Installation USB Media on Windows
 
 [Making Installation USB Media on Windows](https://docs.centos.org/en-US/centos/install-guide/Making_Media_USB_Windows/)
 

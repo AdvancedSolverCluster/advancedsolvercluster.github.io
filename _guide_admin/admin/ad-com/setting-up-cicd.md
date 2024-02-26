@@ -1,10 +1,14 @@
 ---
-title: "GitLab CI/CD + GitLab Runner in Docker 全自动部署服务器网页"
+title: GitLab CI/CD + GitLab Runner in Docker 全自动部署服务器网页
+nav_order: 1
+parent: AdvancedSolver.com
 ---
 
-# "GitLab CI/CD + GitLab Runner in Docker 全自动部署服务器网页"
+# GitLab CI/CD + GitLab Runner in Docker 全自动部署服务器网页
 
-[GitLab CI/CD + GitLab Runner in Docker 全自动部署服务器网页](https://zhuanlan.zhihu.com/p/482820237)
+*Updated: February 26, 2024*
+
+Zhihu: [GitLab CI/CD + GitLab Runner in Docker 全自动部署服务器网页](https://zhuanlan.zhihu.com/p/482820237)
 
 最近几天尝试给组里做一个用于各类功能的网页, 但苦于每次更新都要上服务器手动关闭打开Flask, 好累...
 
@@ -63,11 +67,9 @@ docker run --rm -it -v <volume name>:/etc/gitlab-runner gitlab/gitlab-runner:lat
 
 用`docker volume ls`可以看到你新开的用于存放Runner配置文件的volume. 用`docker volume inspect <VOLUME NAME>`可以看到相关配置文件挂载在文件系统的哪个位置, 可以修改里面的配置文件`config.toml`, 会立刻生效.
 
-比如, 笔者在后续运行的过程中曾经遇到这样的报错:
+这个文件里有两个东西必须要修改, 第一是 `privileged = true`. If you want to use Docker-in-Docker, you must always use privileged = true in your Docker containers. [[1](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker)]
 
-> `ERROR: error during connect: Get http://docker:2375/v1.40/info: dial tcp: lookup docker on 192.168.2.254:53: no such host.`
-
-上网查了以后, 把`config.toml`里的`volumes = ["/cache"]`改成了`volumes = ["/var/run/docker.sock:/var/run/docker.sock", "/cache"]`, 就修复了上述问题.
+第二是 `volumes = ["/cache"]`改成了`volumes = ["/var/run/docker.sock:/var/run/docker.sock", "/cache"]`, 把 Docker 外的 socket 映射到 Docker 内, 这样我们在 Docker 内 `docker ps` 的时候才能看到外面的 Docker.
 
 ### 项目 CI/CD 配置
 

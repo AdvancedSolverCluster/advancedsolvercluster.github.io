@@ -1,5 +1,7 @@
 ---
-title: "Install new system"
+title: Install new system
+nav_order: 2
+parent: CentOS Cluster (legacy)
 ---
 
 # "Install new system"

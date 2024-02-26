@@ -1,6 +1,9 @@
 ---
-title: "GitLab log"
+title: GitLab Log
+nav_order: 1
+parent: Web0
 ---
+
 
 # "GitLab log"
 

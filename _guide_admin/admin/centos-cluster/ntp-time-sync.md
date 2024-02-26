@@ -1,5 +1,7 @@
 ---
-title: "NTP时钟同步"
+title: NTP时钟同步
+nav_order: 4
+parent: CentOS Cluster (legacy)
 ---
 
 # "NTP时钟同步"

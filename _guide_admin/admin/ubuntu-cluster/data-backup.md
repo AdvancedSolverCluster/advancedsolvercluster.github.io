@@ -1,8 +1,10 @@
 ---
-title: "数据备份"
+title: 数据备份
+nav_order: 6
+parent: Ubuntu Cluster
 ---
 
-# "数据备份"
+# 数据备份
 
 用户信息搬迁的参考链接: https://www.cyberciti.biz/faq/howto-move-migrate-user-accounts-old-to-new-server/
 
