@@ -5,9 +5,14 @@ grand_parent: 软件教程
 nav_order: 2
 ---
 
-# Python Tensorflow / PyTorch 安装教程
+# Python Tensorflow / PyTorch 手动安装教程
 
-*March 21, 2022, [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn)*
+*Created: March 21, 2022*
+
+*Last Updated: February, 29, 2024*
+
+*Author: [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn), [Xiang Li](mailto:646873166@qq.com)*
+
 
 Step 1: 选择你想要的Python版本，建议使用 Python 3.8（通过 `module load Python/3.8` 加载）或 Python 3.10（通过 `module load Python/3.10` 加载）。
 
@@ -26,11 +31,15 @@ Step 3: 在虚拟环境中升级 pip.
 pip install --upgrade pip
 ~~~
 
+如需要使用 GPU 版本的 Tensorflow / PyTorch, 先需要确认想要跑的机器上是否有
+
 通过以下步骤安装 Tensorflow.
 
 ~~~ bash
 pip install --upgrade tensorflow
 ~~~
+
+参照 [PyTorch 网站](https://pytorch.org/get-started/locally/)上的建议选择正确的 PyTorch 版本.
 
 通过以下步骤安装 PyTorch.
 
