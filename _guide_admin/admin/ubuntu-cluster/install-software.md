@@ -64,7 +64,7 @@ sudo make install
 ```bash
 wget https://www.mpich.org/static/downloads/4.2.0/mpich-4.2.0.tar.gz
 
-tar -xfzv mpich-4.2.0.tar.gz
+tar -xvzf mpich-4.2.0.tar.gz
 
 sudo mkdir -p /opt/MPICH/4.2.0
 mkdir -p ./tmp_build/mpich-4.2.0
@@ -75,6 +75,33 @@ cd ./tmp_build/mpich-4.2.0
 make 2>&1 | tee m.txt
 
 sudo make install 2>&1 | tee mi.txt
+
+content="#include<stdio.h>
+#include\"mpi.h\"
+
+int main(int argc, char *argv[]){
+        int totalTaskNum, rankID;
+
+        int rt = MPI_Init(&argc, &argv);
+        if(rt != MPI_SUCCESS){
+                printf(\"Error starting MPI.\\n\");
+                MPI_Abort(MPI_COMM_WORLD, rt);
+        }
+
+        MPI_Comm_size(MPI_COMM_WORLD, &totalTaskNum);
+        MPI_Comm_rank(MPI_COMM_WORLD, &rankID);
+
+        printf(\"Hello, world! %dth of totalTaskNum = %d\\n\", rankID, totalTaskNum);
+
+        MPI_Finalize();
+
+        return 0;
+}"
+
+echo "$content" > test_mpi.cpp
+
+mpic++ test_mpi.cpp -o test_mpi.x
+mpiexec -n 4 ./test_mpi.x
 
 rm -r mpich-4.0.2/
 rm -r ./tmp_build/
