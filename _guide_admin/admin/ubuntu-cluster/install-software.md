@@ -59,5 +59,27 @@ make -j
 sudo make install
 ```
 
+## MPICH
+
+```bash
+wget https://www.mpich.org/static/downloads/4.2.0/mpich-4.2.0.tar.gz
+
+tar -xfzv mpich-4.2.0.tar.gz
+
+sudo mkdir -p /opt/MPICH/4.2.0
+mkdir -p ./tmp_build/mpich-4.2.0
+
+cd ./tmp_build/mpich-4.2.0
+../../mpich-4.2.0/configure --prefix=/opt/MPICH/4.2.0 2>&1 | tee c.txt
+
+make 2>&1 | tee m.txt
+
+sudo make install 2>&1 | tee mi.txt
+
+rm -r mpich-4.0.2/
+rm -r ./tmp_build/
+rm mpich-4.2.0.tar.gz
+```
+
 ---
 持续更新中
