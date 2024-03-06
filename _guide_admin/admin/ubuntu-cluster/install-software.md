@@ -59,6 +59,16 @@ make -j
 sudo make install
 ```
 
+## Intel OneAPI (以2024版为例)
+
+```bash
+sudo apt-get install libnotify4 libatspi2.0-0 xdg-utils libgbm1 libgtk-3-0 -y
+wget https://registrationcenter-download.intel.com/akdlm/IRC_NAS/163da6e4-56eb-4948-aba3-debcec61c064/l_BaseKit_p_2024.0.1.46.sh
+sudo sh ./l_BaseKit_p_2024.0.1.46.sh -a --silent --eula accept
+wget https://registrationcenter-download.intel.com/akdlm/IRC_NAS/67c08c98-f311-4068-8b85-15d79c4f277a/l_HPCKit_p_2024.0.1.38.sh
+sudo sh ./l_HPCKit_p_2024.0.1.38.sh -a --silent --eula accept
+```
+
 ## MPICH
 
 ```bash
