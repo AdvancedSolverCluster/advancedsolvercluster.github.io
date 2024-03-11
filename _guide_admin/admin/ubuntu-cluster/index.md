@@ -14,3 +14,4 @@ Since Feb 26, 2024
 - [IPMI备忘](ipmi)
 - [设置quota](quota)
 - [数据备份](data-backup)
+- [设置cluster-status log](sysstat)
