@@ -3,7 +3,7 @@ title: Admin reference page
 nav_order: 1
 ---
 
-# "Admin reference page"
+# Admin reference page
 
 - [集群网络结构](network-topology)
 

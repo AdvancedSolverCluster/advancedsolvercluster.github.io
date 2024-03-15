@@ -9,5 +9,3 @@ has_children: true
 
 https://github.com/haiibo/OpenWrt
 
-
-- [install openclash on R4S router](router-openwrt-luci-install-openclash)

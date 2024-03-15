@@ -49,3 +49,4 @@ nav_order: 1
 - [集群中各服务器的配置与性能](reference/index)
 
 ## ❓[FAQ](faq)
+## 📰[Changelog](changelog)
