@@ -4,7 +4,7 @@ nav_order: 1
 parent: GitLab Log
 ---
 
-# 更新 gitlab
+# Update GitLab
 
 这篇 markdown 记录如何更新 gitlab. 我们的 gitlab 版本是 `14.6.0` (可以在 gitlab 的 `help` 界面看到当前的版本), 我们打算将其更新到 `16.10.1`. 我们主要参考 gitlab 的官方文档 <https://docs.gitlab.com/ee/update/>.
 
