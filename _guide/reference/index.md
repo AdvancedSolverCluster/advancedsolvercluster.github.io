@@ -5,7 +5,40 @@ nav_order: 6
 
 # 集群中各服务器的配置与性能
 
-*August 16, 2023, [Xiang Li](mailto:646873166@qq.com), [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn)*
+*Last Update: April 15, 2024 ,Created: August 16, 2023*
+
+*[Xiang Li](mailto:646873166@qq.com), [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn)*
+
+## MATLAB Benchmark
+
+MATLAB benchmark times 6 different MATLAB tasks and compares the execution speed.
+
+Version: MATLAB/R2023b
+
+Code: `bench(1);mean(bench(5),1)`
+
+Test description:
+
+
+| #Test  | Name   |  Full Name                       |   Description | 
+| -- | -- | -- | -- |
+| Test 1 | LU     |  LAPACK.                         |   Floating point, regular memory access.    |
+| Test 2 | FFT    |  Fast Fourier Transform.         |   Floating point, irregular memory access.    |
+| Test 3 | ODE    |  Ordinary diff. eqn.             |   Data structures and functions.    |
+| Test 4 | Sparse |  Solve sparse system.            |   Sparse linear algebra.    |
+| Test 5 | 2-D    |  2-D Lissajous plot.             |   Animating line plot.    |
+| Test 6 | 3-D    |  3-D SURF(PEAKS)and HGTransform. |   3-D surface animation.    |
+
+
+**Time cost (shorter is better):**
+
+| **Machine** | Test 1 | Test 2 | Test 3 | Test 4 | Test 5 | Test 6 | Comment |
+|--|--|--|--|--|--|--|--|
+| `loginNode` | 0.3772 | 0.3905 | 0.2724 | 0.7500 | 0.3720 | 0.2420 |
+| `bigMem0`   |
+| `bigMem1`   | 0.2753 | 0.2144 | 0.1702 | 0.5301 | 0.2807 | 0.2087 |
+| `bigMem2`   | 0.8111 | 0.2552 | 0.3379 | 3.3274 | 0.3673 | 0.2565 | R2023a |
+| `bigMem3`   | 0.2142 | 0.1399 | 0.1398 | 5.3001 | 0.2313 | 0.1309 |
 
 ## CPU / Memory
 评测程序 Source: [PassMark Performance Testing Linux](https://www.passmark.com/products/pt_linux/)
