@@ -4,43 +4,51 @@ nav_order: 2
 parent: 入门教程
 ---
 
+*Last Modified: April 20, 2024*
+
+
 # 管理员已经帮我开好了服务器账号，我该怎么连接服务器？
 
-## 必做任务: 从公网连接
+## 必做任务: 从内网连接
 
-打开一个终端窗口, 输入`ssh <username>@cluster.advancedsolver.com -p 20001`.
+打开一个终端窗口, 输入`ssh <username>@10.88.3.90 -p 20001`.
 
 你会看到如下提示:
 
 ~~~ text
-The authenticity of host '[cluster.advancedsolver.com]:20001 ([*.*.*.*]:20001)' can't be established
+The authenticity of host '[10.88.3.90]:20001' can't be established
 ...
 Are you sure you want to continue connecting (yes/no)?"
 ~~~
 
-(*.*.*.*是某个ip地址, 省略号处的内容可以忽略)
+(省略号处的内容可以忽略)
 
 这是因为这是你第一次连接. 请输入 `yes`, 然后敲击 `Enter`. 以后就不会再出现这个提示了.
 
 ~~~ text
-> ssh <username>@cluster.advancedsolver.com -p 20001
+> ssh <username>@10.88.3.90 -p 20001
+Welcome to ...(服务器操作系统的名字)
+
+... 其他系统信息 ...
+
+ ************************************************************
+ *            ... 管理员提示的集群维护信息 ...                *
+ *             ...........................                  *
+ ************************************************************
+
 Last login: Fri May 27 01:11:35 2022 from xx.xx.xx.xx
-Loading GCC/9.4.0
-Loading CUDA/11.6
-Loading MATLAB/R2022b
-Loading texlive/2022
 [<username>@loginNode ~]$
 ~~~
 
 当你看到这个提示, 就说明你已经连接成功了, 恭喜!
 
-### 可选任务1: 提高访问速度, 从内网连接
+### 可选任务1: 从公网连接
 
-上述 `cluster.advancedsolver.com` 是服务器的公网地址. 你会发现, 在公网下命令行中输入经常存在延迟, 令人很不爽.
+上述 `10.88.3.90` 是校园网地址. **强烈推荐仅从校园网地址登录服务器.** 在少数情况下, 你需要使用 `cluster.advancedsolver.com` (服务器的公网地址)来登录. 你会发现, 在公网下命令行中输入经常存在延迟, 令人很不爽.
 
-如果你在复旦校园网内, 或者, 你可以通过 VPN 连接进入校园网环境, 建议**使用内网地址** `10.88.3.90`. 即, 通过输入`ssh <username>@10.88.3.90 -p 20001`, 连接服务器.
+**建议在复旦校园网内, 或者, 通过 VPN 连接进入校园网环境, 使用内网地址** `10.88.3.90`. 即, 通过输入`ssh <username>@10.88.3.90 -p 20001`, 连接服务器.
 
-### 可选任务2: 避免每次都输入公网地址或ip地址, 修改本地 SSH 配置
+### 可选任务2: 避免每次都输入公网地址或内网ip地址, 修改本地 SSH 配置
 
 无论是`ssh <username>@cluster.advancedsolver.com -p 20001`, 还是 `ssh <username>@10.88.3.90 -p 20001`, 都很冗长, 让人头大.
 
