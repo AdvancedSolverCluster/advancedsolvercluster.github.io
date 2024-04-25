@@ -51,7 +51,7 @@ Enter same passphrase again:
 
 ## Step 2: 将 Public key 发送给我们
 
-将生成的 Public key `id_ecdsa.pub` 的内容**复制到正文中**发送至[管理员邮箱](mailto:cash_admin@163.com).
+将生成的 Public key `id_ecdsa.pub` 的内容**复制到正文中**发送至[管理员邮箱](mailto:cash_admin@163.com)`cash_admin@163.com`.
 
 既然你已经复制到邮件正文里了, 那不妨检查一下它的格式是否正确吧. 这一串字符应该以 `ecdsa-sha2-nistp521` 开头, 然后是一个空格, 然后是一串乱七八糟的字符混合体, 里面几乎什么都有但是**没有空格也没有换行**. 然后又是一个空格, 最后是你在你自己电脑上的名字 @ 你自己电脑的名字.
 
