@@ -23,6 +23,15 @@ A paragraph
 >
 > The last paragraph
 
+
+{: .tip }
+> A paragraph
+>
+> Another paragraph
+>
+> The last paragraph
+
+
 > {: .new }
 > > A paragraph
 > >

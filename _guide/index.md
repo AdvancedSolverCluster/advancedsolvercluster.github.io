@@ -8,6 +8,13 @@ nav_order: 1
 
 # Advanced Solver 集群使用指南
 
+{: .tip }
+> 集群的高效、有序使用离不开每位用户的支持与协作! 
+>
+> 关于集群和本教程网页的意见和建议欢迎发送至[管理员邮箱](mailto:cash_admin@163.com)
+
+
+
 ## 🆕入门教程
 
 第一次接触高性能集群？对Linux一窍不通？就从这里开始吧！
@@ -49,4 +56,5 @@ nav_order: 1
 - [集群中各服务器的配置与性能](reference/index)
 
 ## ❓[FAQ](faq)
+
 ## 📰[Changelog](changelog)

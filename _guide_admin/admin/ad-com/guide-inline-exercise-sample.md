@@ -8,7 +8,21 @@ parent: AdvancedSolver.com
 
 照抄下面这段代码, 可以复制粘贴任意个question line来增加行数; 一定要注意name, id不应该与其他问题重名!
 
-单选题
+
+```html
+{: .tip }
+> 以下哪个说法是正确的？
+> <ul class="example-question">
+>    <li><input type="radio" name="question1" id="q1opt1" /><label for="q1opt1" markdown="1">用 `srun -w bigMem0 nvidia-smi` 可以查看 `bigMem0` 上全部 GPU 的使用情况</label></li>
+>    <li><input type="radio" name="question1" id="q1opt2" /><label for="q1opt2" markdown="1">没有申请过资源，也可以直接 `ssh bigMem0` 或 `ssh bigMem1`</label></li>
+> </ul>
+> <button onclick="window.alert(document.getElementById('q1opt1').checked ? 'text for opt1' : document.getElementById('q1opt2').checked ? 'text for opt2' : 'text for opt3 (if there is)')">提交</button>
+
+```
+
+旧版本
+
+选择
 
 ~~~ html
 <div style="background-color: #008080; color: white; ">
@@ -26,7 +40,7 @@ parent: AdvancedSolver.com
 </div>
 ~~~
 
-填空题
+填空
 
 ~~~ html
 <div style="background-color: #008080; color: white; ">
