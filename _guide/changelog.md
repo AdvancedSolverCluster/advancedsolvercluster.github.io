@@ -3,7 +3,7 @@ title: Changelog
 nav_order: 8
 ---
 
-Last updated Mar 15, 2024
+*Last update: April 27, 2024*
 
 # AdvancedSolver Cluster Changelog
 

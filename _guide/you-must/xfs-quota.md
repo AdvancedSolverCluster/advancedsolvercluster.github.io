@@ -6,7 +6,7 @@ parent: 使用须知
 
 # 关于服务器各用户储存空间的 Quota
 
-*Updated: February 26, 2024*
+*Last update: April 27, 2024*
 
 *Created: February 28, 2022*
 
@@ -83,5 +83,3 @@ xfs_quota> q
 <!-- - `-f <file>` 将输出写入到文件file. -->
 
 <!-- `free` 报告文件系统使用情况. 下面是一些参数: `-b`; `-i`; `-r`; `-h`; `-N`; `-f <file>`. -->
-
-我们这里只给出用户端的 `xfs_quota` 教程, 如果你想了解面向管理员的 `xfs_quota`, 请速与我们联系! (管理员招募中 ~ 事实上, 你还会学到更多东西)

@@ -11,7 +11,7 @@ nav_order: 1
 {: .tip }
 > 集群的高效、有序使用离不开每位用户的支持与协作! 
 >
-> 关于集群和本教程网页的意见和建议欢迎发送至[管理员邮箱](mailto:cash_admin@163.com)
+> 关于集群和本教程网页的意见和建议欢迎发送至[管理员邮箱](mailto:cash_admin@163.com) `cash_admin@163.com`.
 
 
 
@@ -23,7 +23,6 @@ nav_order: 1
 - [管理员已经帮我开好了服务器账号，我该怎么连接服务器？](new-user/how-can-i-connect)
 - [我已经学会连接服务器了，我能在服务器上做些什么？比如，如何运行程序？](new-user/how-can-i-run-program)
 - [我换了电脑, 怎么在新电脑上连接服务器? (如何自己给现有的账号里添加一个key)](new-user/add-key)
-- [新功能：usage](new-user/index#usage)
 
 ## ⚠️使用须知（必读！）
 

@@ -4,6 +4,8 @@ nav_order: 3
 parent: 入门教程
 ---
 
+*Last update: April 27, 2024*
+
 # 我已经学会连接服务器了，我能在服务器上做些什么？比如，如何运行程序？
 
 ## Step 1: 四处看看
@@ -13,7 +15,7 @@ parent: 入门教程
 当用户 aduser 登陆服务器的 loginNode 端口后, 你会看到下面的界面
 
 ~~~ text
-[aduser@loginNode ~]$
+aduser@loginNode:~$
 ~~~
 
 这里 `~` 表示 home 目录, 也称为家目录. 它是你的出生点, 是你存放自己东西的地方, 只有你自己可以访问. 而 `aduser@loginNode` 表示一个叫 `aduser` 的用户在 loginNode 上.
@@ -83,7 +85,7 @@ hostname
 srun hostname
 ~~~
 
-输出结果可能是 `bigMem0`, `bigMem1` 或 `bigMem2`, 但绝不会是 `loginNode`. 发生了什么? `srun` 是 slurm 提供的功能之一, 它将后面的内容放到计算节点上运行. 因此, `srun hostname` 相当于在某一个计算节点上运行了 `hostname`, 就会返回那一个计算节点的主机名.
+输出结果可能是 `bigMem0`, `bigMem1` 或 `bigMem2` 等, 但绝不会是 `loginNode`. 发生了什么? `srun` 是 slurm 提供的功能之一, 它将后面的内容放到计算节点上运行. 因此, `srun hostname` 相当于在某一个计算节点上运行了 `hostname`, 就会返回那一个计算节点的主机名.
 
 你一定想到了我们刚才的 `dothis.sh`, 也可以被放到计算节点上运行.
 
