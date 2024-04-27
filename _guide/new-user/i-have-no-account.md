@@ -46,7 +46,8 @@ Enter same passphrase again:
 
 你会发现公钥和私钥实际上在同一个位置下. 对于 Windows 用户, 这个位置是 `C:\Users\<username>\.ssh\`. 对于 macOS/Linux 用户, 这个位置是 `/home/<username>/.ssh/`.
 
-> Tips: `.ssh` 对于 macOS/Linux 在 `~/.ssh/`, `~` 是用户的home的简写. 对于 Windows 是 `C:\Users\<username>\.ssh\`, `C:\Users\<username>` 实际上是用户的home.
+{: .tip }
+> `.ssh` 对于 macOS/Linux 在 `~/.ssh/`, `~` 是用户的home的简写. 对于 Windows 是 `C:\Users\<username>\.ssh\`, `C:\Users\<username>` 实际上是用户的home.
 
 {: .important }
 > 请注意, 私钥相当于你的身份证明: **任何获取了你私钥的人都可以以你的身份登录你的账户! 私钥在任何时候都不能被泄露! 也不应该作为网盘同步的一部分等被上传到任何其他地方!**

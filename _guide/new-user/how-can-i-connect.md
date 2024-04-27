@@ -23,7 +23,7 @@ Are you sure you want to continue connecting (yes/no)?"
 
 (省略号处的内容可以忽略)
 
-这是因为这是你第一次连接. 请输入 `yes`, 然后敲击 `Enter`. 以后就不会再出现这个提示了.
+这是因为这是你第一次连接, 你的电脑并不认识这台服务器. 请输入 `yes`, 然后敲击 `Enter`. 以后就不会再出现这个提示了.
 
 ~~~ text
 > ssh <username>@10.88.3.90 -p 20001
@@ -42,19 +42,13 @@ Last login: Fri May 27 01:11:35 2022 from xx.xx.xx.xx
 
 当你看到这个提示, 就说明你已经连接成功了, 恭喜!
 
-### 可选: 从公网连接
+### 必做: 避免每次都输入地址, 修改本地 SSH 配置
 
-上述 `10.88.3.90` 是校园网地址. **强烈推荐仅从校园网地址登录服务器.** 在少数情况下, 你需要使用 `cluster.advancedsolver.com` (服务器的公网地址)来登录. 你会发现, 在公网下命令行中输入经常存在延迟, 令人很不爽.
-
-**建议在复旦校园网内, 或者, 通过 VPN 连接进入校园网环境, 使用内网地址** `10.88.3.90`. 即, 通过输入`ssh <username>@10.88.3.90 -p 20001`, 连接服务器.
-
-### 可选任务2: 避免每次都输入公网地址或内网ip地址, 修改本地 SSH 配置
-
-无论是`ssh <username>@cluster.advancedsolver.com -p 20001`, 还是 `ssh <username>@10.88.3.90 -p 20001`, 都很冗长, 让人头大.
+每次登录都需输入 `ssh <username>@10.88.3.90 -p 20001`, 很冗长, 让人头大.
 
 做以下的事情, 则可以避免每次输入这么长的命令, 只要输入 `ssh loginNode` 就能连接了.
 
-具体做法是: 找到本地的 `.ssh` 目录 (在你的 home 目录下, 详见[生成 Key](i-have-no-account)), 创建/修改 `config` 文件, 增加四行:
+具体做法是: 找到本地的 `.ssh` 目录 (在你的 home 目录下, 详见[生成 Key](i-have-no-account)), 创建/修改一个名为 `config` 的文件(小心Windows系统会给你添加一个隐藏的后缀! 这个文件不应该有任何后缀名, 否则无法识别), 增加四行:
 
 ~~~ text
 Host loginNode
@@ -67,6 +61,23 @@ Host loginNode
 > `.ssh` 文件夹在首次[生成 Key](i-have-no-account) 的时候会被自动生成, 如果没有在该机器上生成过 Key 文件夹则可能不存在. **切勿**手动新建这个文件夹! 可能会导致权限不对从而在这个文件夹下的 Key 失效. 安全的创建文件夹的方式是在本机再次[生成 Key](i-have-no-account)(即使这个 Key 你不会使用).
 
 这里 `<username>` 是管理员指定的你的用户名. 另外还要注意的是, 除第一行外的下面几行均应有行首的 4 空格.
+
+### 可选: 从公网连接
+
+上述 `10.88.3.90` 是校园网地址. **强烈推荐仅从校园网地址登录服务器.** 在少数情况下, 你需要使用 `cluster.advancedsolver.com` (服务器的公网地址)来登录, 即 `ssh <username>@cluster.advancedsolver.com -p 20001`. 你会发现, 在公网下命令行中输入经常存在延迟, 令人很不爽.
+
+**建议在复旦校园网内, 或者, 通过 VPN 连接进入校园网环境, 使用内网地址** `10.88.3.90`. 即, 通过输入`ssh <username>@10.88.3.90 -p 20001`, 连接服务器.
+
+类似的, 你可以向 `config` 文件加入以下记录
+
+~~~ text
+Host loginNode-slow
+    HostName cluster.advancedsolver.com
+    Port 20001
+    User <username>
+~~~
+
+并使用 `ssh loginNode-slow` 登录.
 
 ## 接下来干嘛?
 
