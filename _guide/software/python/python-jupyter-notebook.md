@@ -11,19 +11,22 @@ nav_order: 1
 
 *Created: April 20, 2023, [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn)*
 
-## 在登录节点使用还是在计算节点使用?
+## 在登录节点使用还是在计算节点使用 Notebook?
 
 {: .important }
 > 登录节点只适合极小规模的测试, 如果你预期你的程序需要大量计算资源 (参照[SLURM教程](../../you-must/slurm)), 请申请计算节点的计算资源.
 
-首先你需要确保 VS Code 安装了 `Python` 和 `Jupyter` 等相关插件. 这两个插件是必须的.
+
+首先**连接上登录节点**, 无论最后的计算是在登录节点还是计算节点执行的, 你使用的VS Code发出的计算指令都是在登录节点上完成的. 
+
+然后, 确保 VS Code 安装了 `Python` 和 `Jupyter` 等相关插件. 这两个插件是必须的.
 
 
 ## Step 1: 创建一个 notebook 文件
 
 ![step1](/guide/figure/python-jupyter-notebook/step1.png)
 
-如图所示, 我们创建了一个名为 `test.ipynb` 的 notebook 文件. 请注意文件的后缀名必须是 `ipynb`.
+打开你的工作文件夹, 如图所示, 我们创建了一个名为 `test.ipynb` 的 notebook 文件. 请注意文件的后缀名必须是 `ipynb`.
 
 ## Step 2: 确认你想要的 Python 版本已安装 Jupyter Notebook
 
@@ -65,21 +68,33 @@ VS Code 本身并不知道 Python 在服务器的哪里! 你需要手动告诉�
 
 ## Step 3.2: (计算节点使用的情况) 申请计算节点资源并登陆计算节点
 
-使用 `salloc` 申请计算节点资源. 如果你需要用 GPU 卡或者对 CPU 数量有要求, 请参见 [如何利用SLURM在集群上运行程序](../run-program#如何利用slurm在集群上运行程序).
+使用 `salloc` 申请计算节点资源. 如果你需要用 GPU 卡或者对 CPU 数量有要求, 请参见 [如何利用SLURM在集群上运行程序](../you-must/slurm).
 
 命令行会提示你为你分配的主机名 (如: `bigMem1`).
 
-在终端运行以下命令:
+例如, 在终端运行以下命令:
 
 ~~~ bash
-ssh -L 127.0.0.1:55555:127.0.0.1:55555 bigMem1
+aduser@loginNode:~$ salloc -w bigMem1 -c 4 --gres=gpu:1 -t 0:15:00
+salloc: Granted job allocation 1884
+salloc: Nodes bigMem1 are ready for job
+salloc: Usage: ssh bigMem1 -p 10888
+aduser@loginNode:~$ ssh -L 127.0.0.1:55555:127.0.0.1:55555 bigMem1
+Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-97-generic x86_64)
+...
+aduser@bigMem1:~$
 ~~~
 
-其中, 55555 可以换成一个任意的 50000 到 60000 之间的数字. 如果报错提示端口占用, 就更换一个数字. `bigMem1` 是你被分配的主机名.
+其中, 55555 允许且应该换成一个任意的 50000 到 60000 之间的数字, 这个端口就会被你占用, 其他人就无法使用(直到你退出). 
 
-运行完这行命令后, 你就登上了计算节点.
+如果报错提示端口占用(`bind [127.0.0.1]:55555: Address already in use`), 就更换一个数字. 
 
-## Step 4: (登录节点使用的情况) 在计算节点上启动 Jupyter Notebook
+在例子中, `bigMem1` 是你被分配的主机名. 运行完这行命令后, 你就登上了计算节点. 
+
+这个窗口不能关闭, 因为你使用这个窗口打开了一个 SSH 隧道, 你需要这个窗口开着来维持这个隧道 (供你的 Jupyter 通信).
+
+
+## Step 4: (计算节点使用的情况) 在计算节点上启动 Jupyter Notebook
 
 加载你选择的 Python 版本.
 
@@ -97,7 +112,7 @@ jupyter notebook --port=55555 --ip=127.0.0.1
 
 出现红框内的提示表示成功启动.
 
-## Step 5: (登录节点使用的情况) 在 VSCode 里打开 Notebook 并选择所使用的 Python
+## Step 5: (计算节点使用的情况) 在 VSCode 里打开 Notebook 并选择所使用的 Python
 
 ![step5-1](/guide/figure/python-jupyter-notebook/step5-1.png)
 
