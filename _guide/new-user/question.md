@@ -1,6 +1,6 @@
 ---
 title: 如何科学地向管理员提问
-nav_order: 1
+nav_order: 6
 parent: 入门教程
 ---
 

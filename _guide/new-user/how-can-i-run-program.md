@@ -109,6 +109,22 @@ cat slurm-1234.out
 
 和刚才用 `srun` 输出的结果一样, 只不过被写到了一个文件里. 这样一来, 你就不用守在屏幕前等着程序的输出结果了, 想什么时候看这个文件, 就可以什么时候看.
 
+## Step 4: 上传/下载文件
+使用 scp 工具进行文件的上下传. scp 就是 secure copy, 是用来进行远程拷贝文件的命令.
+
+- 如何将文件上传到服务器
+  - 用 `scp -P <port> <local_file> <hostname>:~/<dest_file>` 复制文件到服务器指定路径 (还记得我们说过 `~` 是 home 目录).
+  - 用 `scp -P <port> -r <local_dir> <hostname>:~/dest_file` 复制文件夹.
+- 如何将文件下载到本地
+  - 用 `scp -P <port> <hostname>:~/<src_file local_file>` 复制文件.
+  - 用 `scp -P <port> -r <hostname>:~/<src_dir> <local_file>` 复制文件夹.
+
+> **注:**
+>
+> (1) 以上 4 个命令都是在本地运行的, 请不要在服务器上运行. 你可以多开多个命令行窗口.
+>
+> (2) `-P` 必须放在最前面, 且 P 必须是大写.
+
 ## 接下来干嘛?
 
 在这个入门教程中, 我们只简单地接触一下 SLURM 的用法, 当你明白 SLURM 在做什么了的时候, 请继续阅读下一篇教程: [使用 slurm 运行程序及提交作业](../you-must/slurm)
