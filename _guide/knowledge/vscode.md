@@ -44,30 +44,34 @@ VS Code 有丰富而强大的插件 (Extensions)，这些优秀的插件使得VS
 
 ## 重启服务器上的 vscode-server
 
-*August 10, 2023, [Xiang Li](mailto:646873166@qq.com)*
+*Last update: May 8, 2024, [Xiang Li](mailto:646873166@qq.com)*
 
-在一些特殊的情况下你可能不得不通过尝试重启 VS Code 来排除某个未知问题.
+当你更改了你的 `.bashrc` 并希望在 VS Code 中的 terminal 也生效时, 需要重启 VS Code (vscode-server).
 
-在使用服务器上的vscode-server时, 完整重启 VS Code 需要首先关闭所有连接到服务器的 VS Code 客户端, 其次打开一个终端, 使用命令行连接上服务器, 并执行命令:
+或者, 在一些特殊的情况下你可能不得不通过尝试重启 VS Code 来排除某个未知问题.
+
+这是因为, VS Code 分为客户端部分和服务器端部分, 客户端几乎只负责展示服务器端传来的数据, 而服务器端才是正真读取数据, 执行 shell 命令, 进行计算的那部分.
+
+在使用服务器上的vscode-server时, 完整重启 VS Code 需要使用服务器的命令行(可以在 VS Code 的terminal内), 并执行命令:
 
 ```ps -aux | grep USERNAME | grep vscode-server```
 
-其中USERNAME是你的用户名, 例如 `ps -aux | grep xli | grep vscode-server`
+其中USERNAME是你的用户名, 
 来找到所有由你启动的vscode-server进程.
 
 例如其中一条进程记录如下
 
-```xli      38247  4.1  0.0 11436184 108152 ?     Sl   20:44   0:11 /home/xli/.vscode-server/bin/6445d93......```
+```USERNAME      38247  4.1  0.0 11436184 108152 ?     Sl   20:44   0:11 /home/USERNAME/.vscode-server/bin/6445d93......```
 
 使用 `kill PID` 来关闭这些进程, 其中PID是进程号, 为每一行中出现在用户名后的第一个数字, 例如 `kill 38247`.
 
-当有大量进程存在的时候, 使用 `pgrep` `pkill` 可以批量关闭 (但需要小心避免意外关闭不想关闭的进程)
+当有大量进程存在的时候, 使用 `pgrep` `pkill` 可以批量关闭
 
-使用 `pgrep -f USERNAME/.vscode-server` 来列出所有计划关闭的进程, 和之前 `ps -aux` 的结果进行对比, 无误后,
+使用 `pgrep -f USERNAME/.vscode-server` 利用字符串匹配找到所有vscode-server相关的进程, 准备关闭, 简单检查一下进程名称无误后,
 
 使用 `pkill -f USERNAME/.vscode-server` 关闭它们.
 
-关闭进程有时需要几秒钟, 稍作等待后再重复 `ps -aux | grep USERNAME | grep vscode-server` 来检查是否全部关闭了. 成功后再启动本地的 VS Code 连接服务器即可.
+关闭进程大约需要几秒钟, 稍作等待后本地也会断开 VS Code 之前的服务器连接. 重启本地的 VS Code 连接服务器即可.
 
 
 ## 使用Live Share合作完成代码
