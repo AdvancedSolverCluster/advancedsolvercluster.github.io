@@ -14,11 +14,14 @@ parent: Ubuntu Cluster
 sudo apt update
 sudo apt install rng-tools
 sudo rngd -r /dev/urandom
+
+sudo mkdir -p /etc/munge
 sudo sh -c  "dd if=/dev/urandom bs=1 count=1024 > /etc/munge/munge.key"
 sudo chown munge: /etc/munge/munge.key
 sudo chmod 400 /etc/munge/munge.key
 sudo cp /etc/munge/munge.key /etc/share
 
+sudo mkdir -p /var/spool/slurmctld/
 sudo dd if=/dev/random of=/var/spool/slurmctld/jwt_hs256.key bs=32 count=1
 sudo chown slurm:slurm /var/spool/slurmctld/jwt_hs256.key
 sudo chmod 0600 /var/spool/slurmctld/jwt_hs256.key
@@ -107,22 +110,22 @@ cd ..
 
 ```bash
 # install_slurm_2_mysql_lnnode.sh
-sudo apt install mysql-server
+sudo apt install mysql-server -y
 sudo mysql_secure_installation # interactive
 sudo systemctl start mysql
 sudo systemctl enable mysql
 sudo systemctl status mysql
-sudo grep "password" /var/log/mysqld.log # 查看初始密码
+# sudo grep "password" /var/log/mysqld.log # 查看初始密码, 暂时没用了
 sudo mysql -u root -p # 空白密码
 ```
 
 进入MySQL.
 
 ```sql
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY <PASSWD>;
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '<PASSWD>';
 FLUSH PRIVILEGES;
 
-CREATE USER 'slurm'@'%' IDENTIFIED WITH mysql_native_password BY <PASSWD>;
+CREATE USER 'slurm'@'%' IDENTIFIED WITH mysql_native_password BY 'da4jia1deTeXshi4ti3yu4lao3shi1jiao1de?';
 GRANT ALL ON slurm_acct_db.* TO 'slurm'@'%';
 CREATE DATABASE slurm_acct_db;
 GRANT ALL ON job_comp_db.* TO 'slurm'@'%';
@@ -138,19 +141,32 @@ exit;
 sudo systemctl restart mysql
 ```
 
+确认 MySQL 能通过 3306 端口连接:
+```bash
+telnet loginNode 3306
+```
+
+如果遇到 connection refused error, 需要修改 MySQL 的配置. 在 `/etc/mysql/mysql.conf.d/mysqld.cnf`, 修改 `bind-address = 0.0.0.0`. 最后 `sudo systemctl restart mysql`.
+
+确认 MySQL 在 3306 上 listen:
+
+```bash
+sudo apt install net-tools
+sudo netstat -plunt | grep mysqld
+```
+
 ## 第三步
 
 ```bash
 # install_slurm_2.sh
 # 安装slurm
 slurmversion=23.11.4
-wget https://download.schedmd.com/slurm/slurm-${slurmversion}.tar.bz2
-tar --bzip -x -f slurm-${slurmversion}.tar.bz2
+git clone -b slurm-23.11 https://github.com/ninotreve/slurm.git slurm-${slurmversion}
 cd slurm-${slurmversion}
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/:$PKG_CONFIG_PATH
 sudo mkdir -p /lib/slurm/pam
 sudo mkdir -p /etc/slurm/
-sudo chown slurm: /etc/slurm/
+sudo chown -R slurm: /etc/slurm/
 ./configure --prefix=/usr --sysconfdir=/etc/slurm --with-munge=/usr --enable-debug --enable-pam --with-pam_dir=/lib/slurm/pam --with-http-parser=/usr/local/ --with-yaml=/usr/local/  --with-jwt=/usr/local/ --enable-slurmrestd
 make -j
 sudo make install
@@ -221,3 +237,7 @@ sudo ln -s /lib/slurm/pam/pam_slurm_adopt.la /lib/security/pam_slurm_adopt.la
 sudo systemctl stop systemd-logind
 sudo systemctl mask systemd-logind
 ~~~
+
+## 其它
+
+`squeue` 等命令的格式都在 `/usr/share/modules/init/bash` 中定义.

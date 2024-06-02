@@ -10,7 +10,13 @@ parent: Ubuntu Cluster
 
 ```bash
 sudo apt-get install environment-modules -y
-sudo cp -r /etc/share/modules /etc/environment-modules/
+```
+
+修改 `/etc/environment-modules/modulespath`:
+
+```text
+/etc/environment-modules/modules
+/software/modulefiles
 ```
 
 ## CUDA
