@@ -5,17 +5,19 @@ nav_order: 6
 
 # 集群中各服务器的配置与性能
 
-*Last Update: April 15, 2024 ,Created: August 16, 2023*
+*Last Update: June 2, 2024 ,Created: August 16, 2023*
 
 *[Xiang Li](mailto:646873166@qq.com), [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn)*
 
 ## MATLAB Benchmark
 
-MATLAB benchmark times 6 different MATLAB tasks and compares the execution speed.
+MATLAB benchmark times 6 different MATLAB tasks and compares the execution speed. We take the mean time of 50 repeats of the test.
 
 Version: MATLAB/R2023b
 
-Code: `bench(1);mean(bench(5),1)`
+Args: `matlab -nodisplay -nodesktop`
+
+Code: `bench(1);mean(bench(50),1)`
 
 Test description:
 
@@ -35,10 +37,10 @@ Test description:
 | **Machine** | Test 1 | Test 2 | Test 3 | Test 4 | Test 5 | Test 6 | Comment |
 |--|--|--|--|--|--|--|--|
 | `loginNode` | 0.3772 | 0.3905 | 0.2724 | 0.7500 | 0.3720 | 0.2420 |
-| `bigMem0`   | 0.3281 | 0.2174 | 0.1654 | 0.5331 | 0.3128 | 0.2228 |
-| `bigMem1`   | 0.2753 | 0.2144 | 0.1702 | 0.5301 | 0.2807 | 0.2087 |
+| `bigMem0`   | 0.2605 | 0.1994 | 0.1661 | 0.5254 | 0.2846 | 0.2059 |
+| `bigMem1`   | 0.2681 | 0.2196 | 0.1649 | 0.5679 | 0.2761 | 0.1972 |
 | `bigMem2`   | 0.8111 | 0.2552 | 0.3379 | 3.3274 | 0.3673 | 0.2565 | R2023a |
-| `bigMem3`   | 0.2142 | 0.1399 | 0.1398 | 5.3001 | 0.2313 | 0.1309 |
+| `bigMem3`   | 0.2042 | 0.1165 | 0.1392 | 4.8798 | 0.2142 | 0.1321 |
 
 ## CPU / Memory
 评测程序 Source: [PassMark Performance Testing Linux](https://www.passmark.com/products/pt_linux/)
@@ -55,31 +57,67 @@ Test description:
 |Num of CPUs on Board                                     | 2  | 2  | 2  | 2 | 2 |
 |Total Threads                                           | 24 | 64 | 64 | 128 | 512 |
 |Base Clock Speed (GHz)                                  | 2.30 | 2.90 | 2.90 | 2.00 | 2.25 |
-|Boost Clock Speed (GHz)                                 | 2.30 | 3.90 | 3.90 | 3.00(?) | 3.10 |
+|Boost Clock Speed (GHz)                                 | 2.30 | 3.90 | 3.90 | 2.50(?) | 3.10 |
 |CPU Cache (MiB/CPU)                                     | 30 | 22 | 22 | 64 | 256 |
 |Lithography (Nanometer)                                 | 22 | 14 | 14 | 14(?) | 5 |
 |**CPU Speed** |`loginNode`|`bigMem0`|`bigMem1`|`bigMem2`|`bigMem3`|
-|Integer Math (Million Operations/s)                     |62,275 |206,066 |209,673 |328,027 |2,054,471 |
-|Floating Point Math (Million Operations/s)              |48,122 |129,819 |130,277 |146,501 |1,149,133 |
-|Prime Numbers (Million Primes/s)                        |188 |209 |230 |289 |1,728 |
-|Sorting (Thousand Strings/s)                            |41,063 |90,967|106,039 |172,684 |783,396 |
-|Encryption (MB/s)                                       |5,959 |25,616 |27,013 |99,718 |492,442 |
-|Compression (MB/s)                                      |315 |817 |865 |1,330 |6,933 |
-|CPU Single Threaded (Million Operations/s)              |1,414 |2,421 |2,407 |1,478 |2,444 |
-|Physics (Frames/s)                                      |1,229 |2,336 |3,002 |7,420 |22,446 |
-|Extended Instructions (SSE) (Million Matrices/s)        |21,430 |46,552 |47,889 |45,259 |428,652 |
-|**CPU Final Mark**                                      |19,471 | 42,705 | 46,047 |53,223 |138,716 |
+|Integer Math (Million Operations/s)                     |62,275 |206,926 |210,833 |326,869 |2,054,471 |
+|Floating Point Math (Million Operations/s)              |48,122 |113,990 |114,338 |146,645 |1,149,133 |
+|Prime Numbers (Million Primes/s)                        |188    |224     |223     |271     |1,728 |
+|Sorting (Thousand Strings/s)                            |41,063 |104,601 |116,809 |164,992 |783,396 |
+|Encryption (MB/s)                                       |5,959  |25,528  |26,793  |100,666 |492,442 |
+|Compression (MB/s)                                      |315    |804     |840     |1,358   |6,933 |
+|CPU Single Threaded (Million Operations/s)              |1,414  |2,334   |2,312   |1,479   |2,444 |
+|Physics (Frames/s)                                      |1,229  |4,047   |4,205   |5,643   |22,446 |
+|Extended Instructions (SSE) (Million Matrices/s)        |21,430 |46,341  |48,944  |45,151  |428,652 |
+|**CPU Final Mark**                                      |19,471 |47,282  |48,524  |52,494 |138,716 |
 | **Memory Info** |`loginNode`|`bigMem0`|`bigMem1`|`bigMem2`|`bigMem3`|
-|Total Available RAM (GiB)                   |125.5 |1,006.4 |1,006.3 |485.6 |1007.0 |
-|Memory Frequency (MHz)                      |2,133 | 2,666 | 2,933 | 3200 | 4800 |
+|Total Available RAM (GiB)                   |125.5  |1,006.6 |1,006.6 |503.8  |1,511.5 |
+|Memory Frequency (MHz)                      |2,133  |2,933   |2,933   |2,666  |4,800   |
 | **Memory Speed** |`loginNode`|`bigMem0`|`bigMem1`|`bigMem2`|`bigMem3`|
-|Memory Latency (Nanoseconds)                |50 |53 |52 |62 |70 |
-|Memory Read Cached (MB/s)                   |17,005 |27,710  |27,698  |18,298 |23,561 |
-|Memory Read Uncached (MB/s)                 |8,187  |12,093  |11,800  |8700  |23,334 |
-|Memory Write (MB/s)                         |7,665  |10,100  |8,890  |7338  |23,305 |
-|Memory Threaded (MB/s)                      |71,989  |100,377  |169,758  |259,208 |726,276 |
-|Database Operations (Thousand Operations/s) |10,649 |18,742 |19,791 |16,254 |29,555 |
-|**Memory Final Mark**                       |2,277 | 2,827 | 2,799 | 2,321 | 2,876 |
+|Memory Latency (Nanoseconds)                |50     |54      |57      |61      |70     |
+|Memory Read Cached (MB/s)                   |17,005 |27,648  |26,946  |18,461  |23,561 |
+|Memory Read Uncached (MB/s)                 |8,187  |8,923   |7,479   |12,863  |23,334 |
+|Memory Write (MB/s)                         |7,665  |8,109   |7,177   |7,647   |23,305 |
+|Memory Threaded (MB/s)                      |71,989 |194,455 |186,943 |226,623 |726,276|
+|Database Operations (Thousand Operations/s) |10,649 |20,466  |21,388  |15,415  |29,555 |
+|**Memory Final Mark**                       |2,277  |2,562   |2,334   |2,217   |2,876 |
+
+
+评测程序: [tinymembench v0.4](https://github.com/ssvb/tinymembench)
+
+| tinymembench-v0.4  (result in MB/s)              | lnnode  | bm0     | bm1     | bm2     | bm3     |
+|--------------------------------------------------|---------|---------|---------|---------|---------|
+| C copy backwards                                 | 6126    | 6508.9  | 5813.7  | 6879.5  | 18378.2 |
+| C copy backwards (32 byte blocks)                | 6120.3  | 6494.9  | 5780.3  | 6891.5  | 16917.2 |
+| C copy backwards (64 byte blocks)                | 6124.1  | 6505.7  | 5772.2  | 6890.6  | 16935.1 |
+| C copy                                           | 5994.4  | 6671.2  | 5938.8  | 6888.2  | 18383   |
+| C copy prefetched (32 bytes step)                | 5829.5  | 4753.6  | 4232.2  | 7126.9  | 16105.5 |
+| C copy prefetched (64 bytes step)                | 5817.1  | 4784.1  | 4252.4  | 7096.3  | 16373.7 |
+| C 2-pass copy                                    | 5185.8  | 5646.7  | 5101.5  | 5827.4  | 13985   |
+| C 2-pass copy prefetched (32 bytes step)         | 5415.8  | 3387.9  | 3090.4  | 6242.2  | 10197   |
+| C 2-pass copy prefetched (64 bytes step)         | 5413.5  | 3409    | 3106.7  | 6322.3  | 10401.7 |
+| C fill                                           | 11580   | 13888   | 12338.1 | 8745.6  | 39944.5 |
+| C fill (shuffle within 16 byte blocks)           | 11583.2 | 13938.1 | 12391.8 | 8736.9  | 39729.9 |
+| C fill (shuffle within 32 byte blocks)           | 11585.6 | 13949.6 | 12454.8 | 8740.6  | 39756   |
+| C fill (shuffle within 64 byte blocks)           | 11575.1 | 13939.8 | 12433.3 | 8751.9  | 35720.2 |
+| standard memcpy                                  | 12389.5 | 5708.8  | 5589.3  | 11175.3 | 18968.3 |
+| standard memset                                  | 11536.2 | 8114.5  | 8134.6  | 10633.1 | 29393.4 |
+| MOVSB copy                                       | 5215.3  | 5519.7  | 5330.9  | 7462.8  | 26351.4 |
+| MOVSD copy                                       | 5221.1  | 5510.3  | 5303.5  | 7461.4  | 26375.4 |
+| SSE2 copy                                        | 6004    | 6793    | 6107.3  | 7767.1  | 22674.3 |
+| SSE2 nontemporal copy                            | 11791.9 | 5174.2  | 5025    | 12468   | 24251.6 |
+| SSE2 copy prefetched (32 bytes step)             | 5843    | 5250.8  | 4671.7  | 7804.7  | 22168.2 |
+| SSE2 copy prefetched (64 bytes step)             | 5839.4  | 5357.1  | 4787.2  | 7787.7  | 22943.9 |
+| SSE2 nontemporal copy prefetched (32 bytes step) | 11431.3 | 3295.4  | 3184.5  | 13364.1 | 25204.1 |
+| SSE2 nontemporal copy prefetched (64 bytes step) | 11528.3 | 3455.2  | 3347.3  | 13285.6 | 25874.4 |
+| SSE2 2-pass copy                                 | 5443.6  | 6119.2  | 5460.1  | 6518.2  | 23069.5 |
+| SSE2 2-pass copy prefetched (32 bytes step)      | 5270.8  | 3962.9  | 3597.6  | 7044.2  | 15304.2 |
+| SSE2 2-pass copy prefetched (64 bytes step)      | 5254.1  | 4062.2  | 3734.7  | 7080.1  | 15882.8 |
+| SSE2 2-pass nontemporal copy                     | 3749.2  | 2587.7  | 2592.5  | 4019.2  | 3313.2  |
+| SSE2 fill                                        | 11614.5 | 13636.6 | 12031.1 | 10619.9 | 41563.1 |
+| SSE2 nontemporal fill                            | 17945.7 | 7462.3  | 7294.9  | 32769.2 | 28722.6 |
+
 
 Reference:
 
