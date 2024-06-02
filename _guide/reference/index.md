@@ -22,7 +22,7 @@ Code: `bench(1);mean(bench(50),1)`
 Test description:
 
 
-| #Test  | Name   |  Full Name                       |   Description | 
+| #Test  | Name   |  Full Name                       |   Description |
 | -- | -- | -- | -- |
 | Test 1 | LU     |  LAPACK.                         |   Floating point, regular memory access.    |
 | Test 2 | FFT    |  Fast Fourier Transform.         |   Floating point, irregular memory access.    |
@@ -55,33 +55,33 @@ Test description:
 |--|--:|--:|--:|--:|--:|
 |CPU Brand|Intel Xeon CPU E5-2670 v3 @ 2.30GHz|Intel Xeon Gold 6226R CPU @ 2.90GHz|Intel Xeon Gold 6226R CPU @ 2.90GHz|Hygon C86 7285 32-core Processor|AMD EPYC 9754 128-Core Processor|
 |Num of CPUs on Board                                     | 2  | 2  | 2  | 2 | 2 |
-|Total Threads                                           | 24 | 64 | 64 | 128 | 512 |
+|Total Threads                                           | 48 | 64 | 64 | 128 | 512 |
 |Base Clock Speed (GHz)                                  | 2.30 | 2.90 | 2.90 | 2.00 | 2.25 |
-|Boost Clock Speed (GHz)                                 | 2.30 | 3.90 | 3.90 | 2.50(?) | 3.10 |
+|Boost Clock Speed (GHz)                                 | 3.10 | 3.90 | 3.90 | 2.50(?) | 3.10 |
 |CPU Cache (MiB/CPU)                                     | 30 | 22 | 22 | 64 | 256 |
 |Lithography (Nanometer)                                 | 22 | 14 | 14 | 14(?) | 5 |
 |**CPU Speed** |`loginNode`|`bigMem0`|`bigMem1`|`bigMem2`|`bigMem3`|
-|Integer Math (Million Operations/s)                     |62,275 |206,926 |210,833 |326,869 |2,054,471 |
-|Floating Point Math (Million Operations/s)              |48,122 |113,990 |114,338 |146,645 |1,149,133 |
-|Prime Numbers (Million Primes/s)                        |188    |224     |223     |271     |1,728 |
-|Sorting (Thousand Strings/s)                            |41,063 |104,601 |116,809 |164,992 |783,396 |
-|Encryption (MB/s)                                       |5,959  |25,528  |26,793  |100,666 |492,442 |
-|Compression (MB/s)                                      |315    |804     |840     |1,358   |6,933 |
-|CPU Single Threaded (Million Operations/s)              |1,414  |2,334   |2,312   |1,479   |2,444 |
-|Physics (Frames/s)                                      |1,229  |4,047   |4,205   |5,643   |22,446 |
-|Extended Instructions (SSE) (Million Matrices/s)        |21,430 |46,341  |48,944  |45,151  |428,652 |
-|**CPU Final Mark**                                      |19,471 |47,282  |48,524  |52,494 |138,716 |
+|Integer Math (Million Operations/s)                     |113,171 |206,926 |210,833 |326,869 |2,054,471 |
+|Floating Point Math (Million Operations/s)              |56,058 |113,990 |114,338 |146,645 |1,149,133 |
+|Prime Numbers (Million Primes/s)                        |168    |224     |223     |271     |1,728 |
+|Sorting (Thousand Strings/s)                            |73,125 |104,601 |116,809 |164,992 |783,396 |
+|Encryption (MB/s)                                       |10,892 |25,528  |26,793  |100,666 |492,442 |
+|Compression (MB/s)                                      |484    |804     |840     |1,358   |6,933 |
+|CPU Single Threaded (Million Operations/s)              |1,845  |2,334   |2,312   |1,479   |2,444 |
+|Physics (Frames/s)                                      |2,281  |4,047   |4,205   |5,643   |22,446 |
+|Extended Instructions (SSE) (Million Matrices/s)        |26,481 |46,341  |48,944  |45,151  |428,652 |
+|**CPU Final Mark**                                      |28,093 |47,282  |48,524  |52,494 |138,716 |
 | **Memory Info** |`loginNode`|`bigMem0`|`bigMem1`|`bigMem2`|`bigMem3`|
-|Total Available RAM (GiB)                   |125.5  |1,006.6 |1,006.6 |503.8  |1,511.5 |
+|Total Available RAM (GiB)                   |983.1  |1,006.6 |1,006.6 |503.8  |1,511.5 |
 |Memory Frequency (MHz)                      |2,133  |2,933   |2,933   |2,666  |4,800   |
 | **Memory Speed** |`loginNode`|`bigMem0`|`bigMem1`|`bigMem2`|`bigMem3`|
-|Memory Latency (Nanoseconds)                |50     |54      |57      |61      |70     |
-|Memory Read Cached (MB/s)                   |17,005 |27,648  |26,946  |18,461  |23,561 |
-|Memory Read Uncached (MB/s)                 |8,187  |8,923   |7,479   |12,863  |23,334 |
-|Memory Write (MB/s)                         |7,665  |8,109   |7,177   |7,647   |23,305 |
-|Memory Threaded (MB/s)                      |71,989 |194,455 |186,943 |226,623 |726,276|
-|Database Operations (Thousand Operations/s) |10,649 |20,466  |21,388  |15,415  |29,555 |
-|**Memory Final Mark**                       |2,277  |2,562   |2,334   |2,217   |2,876 |
+|Memory Latency (Nanoseconds)                |51     |54      |57      |61      |70     |
+|Memory Read Cached (MB/s)                   |22,296 |27,648  |26,946  |18,461  |23,561 |
+|Memory Read Uncached (MB/s)                 |9,206  |8,923   |7,479   |12,863  |23,334 |
+|Memory Write (MB/s)                         |8,766  |8,109   |7,177   |7,647   |23,305 |
+|Memory Threaded (MB/s)                      |107,696 |194,455 |186,943 |226,623 |726,276|
+|Database Operations (Thousand Operations/s) |14,320 |20,466  |21,388  |15,415  |29,555 |
+|**Memory Final Mark**                       |2,524  |2,562   |2,334   |2,217   |2,876 |
 
 
 评测程序: [tinymembench v0.4](https://github.com/ssvb/tinymembench)
@@ -119,6 +119,7 @@ Test description:
 | SSE2 nontemporal fill                            | 17945.7 | 7462.3  | 7294.9  | 32769.2 | 28722.6 |
 
 
+
 Reference:
 
 [E5 2670 v3 Specs](https://ark.intel.com/content/www/us/en/ark/products/81709/intel-xeon-processor-e52670-v3-30m-cache-2-30-ghz.html)
@@ -128,6 +129,7 @@ Reference:
 [Hygon IPO Specs](http://static.sse.com.cn/stock/information/c/202203/8c31407852094a259d388fbb535942ca.pdf) pp.124-126
 
 [EPYC 9754 Specs(AMD)](https://www.amd.com/en/products/cpu/amd-epyc-9754)
+
 [EPYC 9754 Specs(TechPowerUp)](https://www.techpowerup.com/cpu-specs/epyc-9754.c3257)
 
 ## GPU / DCU 计算加速卡

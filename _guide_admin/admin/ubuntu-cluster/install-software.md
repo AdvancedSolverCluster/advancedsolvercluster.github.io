@@ -46,6 +46,29 @@ sudo apt-get install python3-pip
 sudo apt-get install python3-dateutil
 ```
 
+### OpenSSL
+
+```bash
+export OPSSL_VER=3.0.8
+
+wget https://www.openssl.org/source/openssl-$OPSSL_VER.tar.gz
+wget https://www.openssl.org/source/openssl-$OPSSL_VER.tar.gz.sha256
+sha256sum openssl-$OPSSL_VER.tar.gz
+cat openssl-$OPSSL_VER.tar.gz.sha256
+rm openssl-$OPSSL_VER.tar.gz.sha256
+
+tar -xzvf openssl-$OPSSL_VER.tar.gz
+cd openssl-$OPSSL_VER/
+./config --prefix=/opt/OpenSSL/$OPSSL_VER --openssldir=/opt/OpenSSL/$OPSSL_VER shared zlib
+make -j
+make test
+
+sudo make install
+```
+
+### Python ...
+...
+
 ## OpenBLAS & LAPACK
 
 ```bash
