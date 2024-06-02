@@ -13,3 +13,7 @@ This page includes updates for AdvancedSolver Cluster. Use this page to keep tra
 ## Mar 3, 2024
 
 Installed CUDA 11.8.
+
+## June 2, 2024
+
+Replace hard disks and reinstall the ubuntu system on loginNode.
