@@ -45,6 +45,16 @@ sudo bash /home/admin/sync-script/syncusers_bmnode.sh
 # 功成名就，可以退号了
 ```
 
+防火墙的设置
+``` bash
+sudo firewall-cmd --add-port=10888/tcp --permanent
+sudo firewall-cmd --zone=trusted --add-source=192.168.2.0/24 --permanent
+sudo firewall-cmd --add-port=123/udp --permanent
+sudo firewall-cmd --reload
+
+sudo firewall-cmd  --list-all
+sudo firewall-cmd --zone=trusted --list-all
+```
 ## 第二步
 
 Modify `/etc/fstab` and `crontab -e` manually.
