@@ -177,13 +177,24 @@ Reference:
 | rw, 100% write               | write | 536 MiB/s   |
 |------------------------------|-------|-------------|
 | 16 GiB file (out-of-cache)   |       |             |
-| randrw, 75% read + 25% write |       |             |
-| loginNode:/home, /scratch    | read  | 11.6 MiB/s  |
-| (data disk)                  |       | 2209 IOPS   |
+| loginNode:/home, /scratch    |       |             |
+| (data disk)                  |       |             |
+| randrw, 75% read + 25% write | read  | 11.6 MiB/s  |
+|                              |       | 2209 IOPS   |
 |                              | write |  2.9 MiB/s  |
 |                              |       |  732 IOPS   |
-| loginNode:/                  | read  |  1.6 MiB/s  |
-| (software disk)              |       |  413 IOPS   |
+| randrw, 100% read            | read  | 11.1 MiB/s  |
+|                              |       | 3060 IOPS   |
+| randrw, 100% write           | write | 61.9 MiB/s  |
+|                              |       |15800 IOPS   |
+|                              |       |             |
+| loginNode:/                  |       |             |
+| (software disk)              |       |             |
+| randrw, 75% read + 25% write | read  |  1.6 MiB/s  |
+|                              |       |  413 IOPS   |
 |                              | write |  0.5 MiB/s  |
 |                              |       |  132 IOPS   |
-
+| randrw, 100% read            | read  |  1.1 MiB/s  |
+|                              |       |  274 IOPS   |
+| randrw, 100% write           | write |  7.4 MiB/s  |
+|                              |       | 1817 IOPS   |
