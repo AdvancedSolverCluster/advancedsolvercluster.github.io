@@ -164,13 +164,26 @@ Reference:
 
 其中 `method=randrw | rw`, `rwrate=0 | 75 | 100`, `filename` 指定为对应硬盘下的位置.
 
-| Spec                         | r/w   | loginNode:/ | loginNode:/home, /scratch |
-|------------------------------|-------|------------:|--------------------------:|
-| randrw, 75% read + 25% write | read  | 1.5 MiB/s   | 3.4 MiB/s                 |
-|                              | write | 0.5 MiB/s   | 1.1 MiB/s                 |
-| randrw, 100% read            | read  | 4.1 MiB/s   | 12.5 MiB/s                |
-| randrw, 100% write           | write | 1.4 MiB/s   | 1.6 MiB/s                 |
-| rw, 75% read + 25% write     | read  | 21.8 MiB/s  | 27.5 MiB/s                |
-|                              | write | 7.6 MiB/s   | 9.4 MiB/s                 |
-| rw, 100% read                | read  | 176.0 MiB/s | 407.0 MiB/s               |
-| rw, 100% write               | write | 161.0 MiB/s | 14.0 MiB/s                |
+| Spec                         | r/w   | loginNode   |
+|------------------------------|-------|------------:|
+| 400 MiB file (in-cache)      |       |             |
+| randrw, 75% read + 25% write | read  | 332 MiB/s   |
+|                              | write | 111 MiB/s   |
+| randrw, 100% read            | read  | 510 MiB/s   |
+| randrw, 100% write           | write | 494 MiB/s   |
+| rw, 75% read + 25% write     | read  | 392 MiB/s   |
+|                              | write | 130 MiB/s   |
+| rw, 100% read                | read  | 516 MiB/s   |
+| rw, 100% write               | write | 536 MiB/s   |
+|------------------------------|-------|-------------|
+| 16 GiB file (out-of-cache)   |       |             |
+| randrw, 75% read + 25% write |       |             |
+| loginNode:/home, /scratch    | read  | 11.6 MiB/s  |
+| (data disk)                  |       | 2209 IOPS   |
+|                              | write |  2.9 MiB/s  |
+|                              |       |  732 IOPS   |
+| loginNode:/                  | read  |  1.6 MiB/s  |
+| (software disk)              |       |  413 IOPS   |
+|                              | write |  0.5 MiB/s  |
+|                              |       |  132 IOPS   |
+
