@@ -5,7 +5,7 @@ nav_order: 6
 
 # 集群中各服务器的配置与性能
 
-*Last Update: June 2, 2024 ,Created: August 16, 2023*
+*Last Update: June 3, 2024 ,Created: August 16, 2023*
 
 *[Xiang Li](mailto:646873166@qq.com), [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn)*
 
@@ -36,7 +36,7 @@ Test description:
 
 | **Machine** | Test 1 | Test 2 | Test 3 | Test 4 | Test 5 | Test 6 | Comment |
 |--|--|--|--|--|--|--|--|
-| `loginNode` | 0.3772 | 0.3905 | 0.2724 | 0.7500 | 0.3720 | 0.2420 |
+| `loginNode` | 0.3732 | 0.3605 | 0.2424 | 0.7200 | 0.3520 | 0.2220 |
 | `bigMem0`   | 0.2605 | 0.1994 | 0.1661 | 0.5254 | 0.2846 | 0.2059 |
 | `bigMem1`   | 0.2681 | 0.2196 | 0.1649 | 0.5679 | 0.2761 | 0.1972 |
 | `bigMem2`   | 0.8111 | 0.2552 | 0.3379 | 3.3274 | 0.3673 | 0.2565 | R2023a |
