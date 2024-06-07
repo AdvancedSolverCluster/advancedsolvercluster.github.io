@@ -6,7 +6,7 @@ parent: 使用须知
 
 # 关于服务器各用户储存空间的 Quota
 
-*Last update: April 27, 2024*
+*Last update: June 7, 2024*
 
 *Created: February 28, 2022*
 
@@ -16,7 +16,7 @@ parent: 使用须知
 
 实际上, 在我们的服务器里, 每个用户拥有的私有空间是 (以用户名 `aduser` 为例)
 
-1. `/home/aduser/` (quota=100G limit=500G 每日备份)
+1. `/home/aduser/` (quota=100G limit=150G 每日备份)
 2. `/scratch/aduser/` (quota=limit=1000G 无备份)
 
 `home` 目录用于存放常用的文档代码等; `scratch` 目录用于存放临时使用的数据等大文件.
@@ -59,16 +59,16 @@ Filesystem   Blocks  Quota  Limit Warn/Time    Mounted on
 /dev/mapper/centos-scratch
              794.9M  1000G  1000G  00 [------] /scratch
 /dev/mapper/centos-home
-              64.6G   100G   500G  00 [------] /home
+              64.6G   100G   150G  00 [------] /home
 xfs_quota> q
 ~~~
 
 查询所用 quota 的命令可以看到如上的示例结果. 其含义为
 
 - 对于当前用户 aduser, 总共有3个文件夹下有quota限制: `/scratch, /home`.
-- 以 `/home` 为例, 所有在这个文件夹下属于 aduser 的文件大小总计为 `64.6G`. aduser 在 `/home` 下的Quota为 `100G`, Limit为 `500G`.
-- 即, aduser **最多可以在 `/home` 里使用 `500G` 的空间**, 且一旦**超过 `100G` (Quota), 就必须在7天之内恢复到 `100G` 以下**.
-- 一旦超出 `500G`, 或是连续7天超出 `100G`, aduser 将无法在 `/home` 下保存(写入)任何数据. 会导致各种程序无法正常运行.
+- 以 `/home` 为例, 所有在这个文件夹下属于 aduser 的文件大小总计为 `64.6G`. aduser 在 `/home` 下的Quota为 `100G`, Limit为 `150G`.
+- 即, aduser **最多可以在 `/home` 里使用 `150G` 的空间**, 且一旦**超过 `100G` (Quota), 就必须在7天之内恢复到 `100G` 以下**.
+- 一旦超出 `150G`, 或是连续7天超出 `100G`, aduser 将无法在 `/home` 下保存(写入)任何数据. 会导致各种程序无法正常运行.
 - 在计时状态下(超出Quota而未超出Limit)时, 示例中的 `Warn/Time` 对应列会显示剩余时间.
 - 按 `q` (`quit`) 退出.
 
