@@ -24,3 +24,5 @@ Since Feb 26, 2024
 - [在教程文档中插入小测验](ad-com/guide-inline-exercise-sample)
 - [Just The Docs Examples](ad-com/just-the-docs-example)
 
+[Changelog](changelog-admin)
+

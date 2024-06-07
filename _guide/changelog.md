@@ -10,18 +10,26 @@ nav_order: 8
 {: .highlight }
 This page includes updates for AdvancedSolver Cluster. Use this page to keep track of upcoming changes, deprecation notices, new features, and feature updates from AdvancedSolver Cluster.
 
+## June 7, 2024
+1. 磁盘配额调整
+
+我们对系统磁盘配额进行了调整。具体变更如下：
+
+    原配额：quota = 100G，limit = 500G
+    新配额：quota = 100G，limit = 150G
+
+2. 新增登录界面
+
+3. 安装 CUDA 工具包和驱动
+
+我们已经安装了最新的 CUDA 工具包和驱动，具体版本如下：
+
+    CUDA Toolkit：11.8 和 12.2
+    CUDA Driver：12.5
+
 ## June 2, 2024
+1. 硬件升级
 
-Replace hard disks and reinstall the ubuntu system on loginNode.
-
-具体来说, 我们更换了 loginNode 上的硬盘, 由于这个操作的危险性. 我们提前把 loginNode 的 `/home`, `/scratch`, `/etc`, `/opt` 和 `/software` 备份到了 web0 (`/home/backup`) 和 bigMem2 (`/gg/backup`) 上.
-
-在更换完硬盘后, 我们重装了系统并恢复了数据, 值得注意的是, 我们只完全恢复了 `/home`, `/scratch` 和 `/software`. 其他目录我们只把需要的内容 copy 了过来, 因此之后如果有需要, 得去备份的目录查看相应的文件.
-
-新硬盘的参数可以查看我们的腾讯文档
-<https://docs.qq.com/sheet/DT2RyR1NZT3BGUFRt?tab=seeeu8>.
-
-
-## Mar 3, 2024
-
-Installed CUDA 11.8.
+    loginNode 增加内存到 1TB，并增加了新磁盘。
+    bigMem0 更换了更高速度的内存。
+    bigMem3 增加内存到 1.5TB。

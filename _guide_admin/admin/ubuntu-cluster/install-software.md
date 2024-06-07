@@ -33,10 +33,18 @@ sudo update-initramfs -u
 sudo reboot
 
 # install CUDA
+# first go to https://developer.nvidia.com/cuda-downloads to download the newest version of cuda, for example
+wget https://developer.download.nvidia.com/compute/cuda/12.5.0/local_installers/cuda_12.5.0_555.42.02_linux.run
+sudo sh cuda_12.5.0_555.42.02_linux.run
+
+# then install the old toolkits
 wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_520.61.05_linux.run
-sudo sh cuda_11.8.0_520.61.05_linux.run --silent --toolkitpath=/opt/cuda/11.8
+sudo sh cuda_11.8.0_520.61.05_linux.run --silent --toolkit --toolkitpath=/opt/cuda/11.8
 wget https://developer.download.nvidia.com/compute/cuda/12.3.2/local_installers/cuda_12.3.2_545.23.08_linux.run
-sudo sh cuda_12.3.2_545.23.08_linux.run --silent --toolkitpath=/opt/cuda/12.3
+sudo sh cuda_12.3.2_545.23.08_linux.run --silent --toolkit --toolkitpath=/opt/cuda/12.3
+
+# finally uninstall the newest toolkit
+sudo /usr/local/cuda-12.5/bin/cuda-uninstaller
 ```
 
 ## Python
