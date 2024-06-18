@@ -17,10 +17,9 @@ nav_order: 1
 > 登录节点只适合极小规模的测试, 如果你预期你的程序需要大量计算资源 (参照[SLURM教程](../../you-must/slurm)), 请申请计算节点的计算资源.
 
 
-首先**连接上登录节点**, 无论最后的计算是在登录节点还是计算节点执行的, 你使用的VS Code发出的计算指令都是在登录节点上完成的. 
+首先**连接上登录节点**, 无论最后的计算是在登录节点还是计算节点执行的, 你使用的VS Code发出的计算指令都是在登录节点上完成的.
 
 然后, 确保 VS Code 安装了 `Python` 和 `Jupyter` 等相关插件. 这两个插件是必须的.
-
 
 ## Step 1: 创建一个 notebook 文件
 
@@ -30,14 +29,14 @@ nav_order: 1
 
 ## Step 2: 确认你想要的 Python 版本已安装 Jupyter Notebook
 
-可以选择服务器上已有的 Python 版本 或 anaconda 版本.
+可以选择服务器上已有的 Python 版本 或 anaconda 版本, 并确认 jupyter notebook 已经安装.
 
 ~~~ bash
 module load Python/3.8.12
 pip install jupyter notebook
 ~~~
 
-并输入 
+并输入
 
 ```bash
 which python3
@@ -54,13 +53,13 @@ VS Code 本身并不知道 Python 在服务器的哪里! 你需要手动告诉�
 服务器的 Python 安装在 `/opt/Python/<version>/bin/python`. 选中后你就告知了 VS Code 服务器里 Python 的所在位置.
 服务器的 anaconda 安装在 `/opt/anaconda3/bin/python`. 选中后你就告知了 VS Code 服务器里 anaconda's Python 的所在位置.
 
-打开你的 notebook 文件, 在右上角会出现 `Select Kernel` 的选项. 
+打开你的 notebook 文件, 在右上角会出现 `Select Kernel` 的选项.
 
 选择这个选项之后, 可以从 `Python Environments` 和 `Existing Jupyter Server` 中选择. 在登录节点上运行只需要选择 `Python Environments` 并根据你刚刚添加的 Python 位置使用即可.
 
 {: .important }
 > 你可能会发现, 服务器系统自带了 Python: `/usr/bin/python3`, `/bin/python3`.
-> 
+>
 > 它们是系统自带的, 不受我们的版本管理. 尽量不要使用它们.
 
 选择后你会看到你选择的 Python 版本号出现在界面中, 你已经可以在登录节点使用 Jupyter Notebook 进行简单的测试了.
@@ -85,11 +84,11 @@ Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-97-generic x86_64)
 aduser@bigMem1:~$
 ~~~
 
-其中, 55555 允许且应该换成一个任意的 50000 到 60000 之间的数字, 这个端口就会被你占用, 其他人就无法使用(直到你退出). 
+其中, 55555 允许且应该换成一个任意的 50000 到 60000 之间的数字, 这个端口就会被你占用, 其他人就无法使用(直到你退出).
 
-如果报错提示端口占用(`bind [127.0.0.1]:55555: Address already in use`), 就更换一个数字. 
+如果报错提示端口占用(`bind [127.0.0.1]:55555: Address already in use`), 就更换一个数字.
 
-在例子中, `bigMem1` 是你被分配的主机名. 运行完这行命令后, 你就登上了计算节点. 
+在例子中, `bigMem1` 是你被分配的主机名. 运行完这行命令后, 你就登上了计算节点.
 
 这个窗口不能关闭, 因为你使用这个窗口打开了一个 SSH 隧道, 你需要这个窗口开着来维持这个隧道 (供你的 Jupyter 通信).
 
