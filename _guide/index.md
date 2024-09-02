@@ -47,7 +47,7 @@ nav_order: 1
 - [vi/vim 编辑器教程](knowledge/vim)
 - [Markdown 教程](knowledge/markdown)
 - [Git 教程](knowledge/git)
-- [Element 聊天软件](software/element)
+- [Element 聊天软件](knowledge/element)
 
 ## 📚参考
 
