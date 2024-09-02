@@ -1,6 +1,6 @@
 ---
 title: Python
-parent: 软件教程
+parent: 软件环境
 nav_order: 2
 has_children: true
 ---

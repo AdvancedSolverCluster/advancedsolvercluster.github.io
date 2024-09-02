@@ -1,7 +1,7 @@
 ---
 title: Python Tensorflow / PyTorch 安装教程
 parent: Python
-grand_parent: 软件教程
+grand_parent: 软件环境
 nav_order: 2
 ---
 

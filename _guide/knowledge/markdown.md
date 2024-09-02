@@ -1,7 +1,7 @@
 ---
 title: Markdown教程
 nav_order: 5
-parent: 常用教程
+parent: 其他知识
 ---
 
 # Markdown 教程

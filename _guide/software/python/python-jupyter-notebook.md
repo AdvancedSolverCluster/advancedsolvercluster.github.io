@@ -1,7 +1,7 @@
 ---
 title: 在 VSCode 里连接Python Jupyter Notebook
 parent: Python
-grand_parent: 软件教程
+grand_parent: 软件环境
 nav_order: 1
 ---
 

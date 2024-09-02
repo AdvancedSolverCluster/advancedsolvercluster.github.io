@@ -1,7 +1,7 @@
 ---
 title: 我还没有服务器账号, 我该怎么做?
 nav_order: 1
-parent: 入门教程
+parent: 快速开始
 ---
 
 *Last update: April 27, 2024*

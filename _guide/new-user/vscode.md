@@ -1,7 +1,7 @@
 ---
 title: 如何使用 VSCode 连接到服务器, 以提高我的开发效率?
 nav_order: 5
-parent: 入门教程
+parent: 快速开始
 ---
 
 # 如何使用 VSCode 连接到服务器, 以提高我的开发效率?

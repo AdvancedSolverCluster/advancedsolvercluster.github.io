@@ -1,7 +1,7 @@
 ---
 title: 我得到了我的服务器账号, 我该怎么连接服务器?
 nav_order: 2
-parent: 入门教程
+parent: 快速开始
 ---
 
 *Last update: April 27, 2024*

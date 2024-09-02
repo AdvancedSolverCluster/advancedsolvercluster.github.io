@@ -1,7 +1,7 @@
 ---
 title: 在连接上服务器后, 我能做些什么? 比如，如何上传/下载文件? 如何运行程序?
 nav_order: 3
-parent: 入门教程
+parent: 快速开始
 ---
 
 *Last update: April 27, 2024*

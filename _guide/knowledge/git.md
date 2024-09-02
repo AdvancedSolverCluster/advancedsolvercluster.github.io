@@ -1,7 +1,7 @@
 ---
 title: Git教程
 nav_order: 6
-parent: 常用教程
+parent: 其他知识
 ---
 
 # Git 教程

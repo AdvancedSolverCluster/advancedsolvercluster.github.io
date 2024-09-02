@@ -1,7 +1,7 @@
 ---
 title: 服务器的基本操作? - Linux 服务器的基本知识
 nav_order: 1
-parent: 常用教程
+parent: 其他知识
 ---
 
 # 服务器的基本操作? - Linux 服务器的基本知识
