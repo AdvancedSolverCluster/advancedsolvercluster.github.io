@@ -1,6 +1,6 @@
 ---
-title: 软件教程
-nav_order: 5
+title: 软件环境
+nav_order: 4
 has_children: true
 has_toc: false
 ---
@@ -30,10 +30,10 @@ loaded  modulepath
 ~~~
 
 {: .tip }
-> 这里列出的都是可以加载的软件环境, 在你的命令行中你可以看到 已被加载的软件背景有阴影. 
+> 这里列出的都是可以加载的软件环境, 在你的命令行中你可以看到 已被加载的软件背景有阴影.
 >
-> 上下两部分的区别在于, `/etc/environment-modules/modules` 底下的 modules 仅对本节点适用, 而 `/software/modulefiles` 底下的 modules 对所有计算节点通用. 
-> 
+> 上下两部分的区别在于, `/etc/environment-modules/modules` 底下的 modules 仅对本节点适用, 而 `/software/modulefiles` 底下的 modules 对所有计算节点通用.
+>
 > 因此, 如果你需要用 slurm 提交任务, 我们建议加载 `/software/modulefiles` 底下的 modules, 或者根据你要提交任务的机器拥有的本地 modules 在 sbatch 脚本中加载对应的 module.
 
 可以通过 `module load <name>` 加载要用的 module, 例如用 `module load LAPACK/3.11.0` 加载 LAPACK. 如果 module 已加载, 不会重新加载.
@@ -42,7 +42,7 @@ loaded  modulepath
 
 `module list` 列出当前所用 module.
 
-## 当前服务器上提供的软件（持续更新）
+## 当前服务器上提供的软件环境（持续更新）
 - Python
   - [Tensorflow + Pytorch](python/python-tensorflow-pytorch)
   - [Jupyter Notebook](python/python-jupyter-notebook)
@@ -50,8 +50,6 @@ loaded  modulepath
 - [MATLAB](MATLAB)
 - [R](R)
 - [Intel OneAPI Toolkit](intel)
-- [Element 聊天软件](element)
-
 
 {: .tip }
 > 我想用的软件机器上没有或者版本过低, 怎么办？
