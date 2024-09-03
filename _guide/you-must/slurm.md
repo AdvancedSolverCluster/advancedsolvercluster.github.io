@@ -99,6 +99,10 @@ salloc: Job allocation 2984 has been revoked.
 > 在不添加任何参数的情况下, 创建的计算资源仅仅只有1-2核, 并且 **不会使用GPU**. 对于会默认并行的程序来说 (例如Python, MATLAB), 你可能会反而觉得速度不如在登录节点上测试的时候快. 这是因为申请的资源太少了. 你需要指定额外的参数来确定你所需要的核数.
 >
 > `salloc` 会创建一个新的 bash 环境, 因此你在登陆节点上加载的模块和设置的环境变量都需要重新加载和设置.
+>
+
+{: .note }
+> 一些集群会禁止使用 `ssh xx` 的形式登录计算节点. 此时可以尝试 `srun --jobid=xx --pty /bin/bash` 来登录计算节点.
 
 另可参考: SLURM 官方文档对 `salloc` 的介绍 <https://slurm.schedmd.com/salloc.html>
 
