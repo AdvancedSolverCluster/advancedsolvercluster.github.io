@@ -4,12 +4,34 @@ title: Changelog for admin
 
 # AdvancedSolver Cluster Changelog for Admin
 
+## Sep 6, 2024
+
+1. **修改 `/etc/slurm/slurm.conf` 并重启 Slurm 服务**：
+   - 修改了 Slurm 配置中的 `StateSaveLocation` （`/var/spool/slurmctld`   ->   `/etc/share/slurmctld`）。
+   - 重启了 `slurmctld` 服务以使更改生效。
+   - 确认重启 `slurmctld` 不会中断正在运行的作业。（只要 `StateSaveLocation` 里面保存了State）
+
+2. **NFS 挂载权限问题与 Slurm 权限**：
+   - 发现 `/etc/share` 目录通过 NFS 挂载为只读状态，导致 `bigMem` 节点上的 `slurm` 用户无法写入。
+   - 修改 `LoginNode` 上的 `/etc/exports`，将其权限更改为读写（`rw,no_root_squash`）。
+   - 重新导出 NFS 目录并在 `bigMem` 节点上以读写模式重新挂载。
+
+3. **在 `loginNode` 上安装 NVIDIA 驱动：**
+    ```bash
+    sudo add-apt-repository ppa:graphics-drivers/ppa
+    sudo apt update
+    sudo apt install nvidia-driver-535
+    sudo reboot
+    ```
+    现在所有机器上的驱动版本都是535 (CUDA 12.2).
+
+
 ## June 7, 2024
 1. 新登录界面
 
 我们已经上线了新的登录界面，相关脚本位于：
 
-    脚本位置：/home/admin/scripts/banner_v4.sh，并已链接到 /etc/profile.d/
+    脚本位置：`/home/admin/scripts/banner_v4.sh`，并在 `/etc/profile.d/` 里有一个运行这个脚本的脚本.
 
 2. 磁盘配额调整
 

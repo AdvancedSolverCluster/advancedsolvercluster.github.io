@@ -174,7 +174,7 @@ slurmd -V
 sudo cp /etc/share/slurm.conf /etc/slurm/
 sudo cp /etc/share/cgroup.conf /etc/slurm/
 sudo cp /etc/share/gres.$(hostname).conf /etc/slurm/gres.conf
-for dir in /var/spool/slurm /var/spool/slurmd /var/spool/slurmctld /var/spool/slurm/slurmctld /etc/slurm
+for dir in /var/spool/slurm /var/spool/slurmd /var/spool/slurmctld /var/spool/slurm/slurmctld /etc/slurm # /etc/share/slurmctld
 do
     sudo mkdir -p $dir
     sudo chown slurm: $dir
