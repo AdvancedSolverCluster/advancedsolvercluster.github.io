@@ -5,32 +5,30 @@ has_children: true
 has_toc: false
 ---
 
-*Last update: April 27, 2024*
+*Last update: Sep 9, 2024*
 
 # 如何查看服务器上有哪些软件？
 
-我们在服务器上提供了很多软件和软件包供使用. 这里核心的命令是 `module`.
+服务器在默认情况下会为你提供一个基础的软件环境，其中包括 GCC 11.4.0 编译器和 Python 3.10。但是，服务器并不会自动加载额外的软件或不同版本的工具。如果你需要使用其他的软件包或不同版本的编译器、库等，你可以使用核心命令 `module` 来加载和管理这些软件环境。
 
-{: .tip }
-> 当你登录服务器时, 服务器不会为你预先加载任何软件, 你需要自己指定要加载哪些软件.
->
-> 用 `module avail` 查看服务器上已安装的软件. (缩写 `module av`)
+用 `module avail` 查看服务器上已安装的软件. (缩写 `module av`)
 
-~~~  bash
+~~~ text
 aduser@loginNode:~$ module avail
-------------------------------------------- /etc/environment-modules/modules -------------------------------------------
+---------------------------- /etc/environment-modules/modules ----------------------------
 CUDA/11.8  CUDA/12.3
 
------------------------------------------------- /software/modulefiles -------------------------------------------------
-anaconda3      LAPACK/3.11.0  MPICH/4.2.0      Python/3.8.12   Python/3.12.2  texlive/2023
-Intel-toolset  MATLAB/R2023b  OpenBLAS/0.3.26  Python/3.10.13  R/4.2.2
+--------------------------------- /software/modulefiles ----------------------------------
+anaconda3      LAPACK/3.11.0  OpenBLAS/0.3.26  Python/3.10.13  ScaLAPACK/2.2.0
+hdf5/1.14.4.2  MATLAB/R2023b  petsc/3.21.2     Python/3.12.2   texlive/2023
+Intel-toolset  MPICH/4.2.0    Python/3.8.12    R/4.2.2         vasp/6.4.3
 
 Key:
-loaded  modulepath
+modulepath
 ~~~
 
 {: .tip }
-> 这里列出的都是可以加载的软件环境, 在你的命令行中你可以看到 已被加载的软件背景有阴影.
+> 这里列出的都是可以加载的软件环境, 在你的命令行中你可以看到已被加载的软件背景有阴影.
 >
 > 上下两部分的区别在于, `/etc/environment-modules/modules` 底下的 modules 仅对本节点适用, 而 `/software/modulefiles` 底下的 modules 对所有计算节点通用.
 >
@@ -52,7 +50,7 @@ loaded  modulepath
 - [Intel OneAPI Toolkit](intel)
 
 {: .tip }
-> 我想用的软件机器上没有或者版本过低, 怎么办？
+> **我想用的软件机器上没有或者版本过低, 怎么办？**
 >
 > 一般软件的主页里会提供 Installation Guide. 请根据安装指南将软件安装到自己的用户目录下(提示: 通过make或cmake编译安装的软件可以在第一步指明安装路径, 这时只要将安装路径指定为自己的用户目录, 就无需管理员权限).
 >

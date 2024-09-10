@@ -6,71 +6,71 @@ parent: 其他知识
 
 # Git 教程
 
-*August 9, 2022, [Xiang Li](mailto:646873166@qq.com), [Jingyu Liu](mailto:381258337@qq.com)*
+Created: *August 9, 2022, [Xiang Li](mailto:646873166@qq.com), [Jingyu Liu](mailto:381258337@qq.com)*
+
+Last update: *Sept 9, 2024*
 
 ## 介绍
 
 ### What is Git?
 
-Git 是一个**非常受欢迎的**分布式版本控制系统. 它主要用于
+Git 是一个**非常受欢迎的**分布式版本控制系统。它主要用于：
 
 - 跟踪代码修改
-- 跟踪是谁改了代码
+- 记录是谁改了代码
 - 帮助多人进行代码合作
 
 ### Why Git?
 
-No why, you should. (at least use version control)
+无论你是否已经了解版本控制，我们**强烈推荐**使用 Git 来管理你的代码。Git 可以高效地帮助你管理代码的修改记录，并且是团队合作的首选工具。这里主要使用我们自有的 GitLab 安装版（即数据所在的服务器是自有的）。如果你之前听说过或使用过 GitHub / Gitee / GitLab，那是很好的开始。
 
-我们**强烈推荐**使用 Git 来管理你的代码, 这里主要的工具是我们自有的 GitLab 安装版(即数据所在的服务器是自有的). 在此之前, 你或许已经听过或使用过 GitHub / Gitee / GitLab, 这是个好事情.
+### Git 的主要功能
 
-### Git的主要功能
+- 以代码仓库（**Repositories**, repo）为单位进行代码管理
+- **Clone**：复制远程仓库到本地进行自己的修改
+- 通过 **Stage** 和 **Commit** 跟踪和记录对代码的修改
+- 使用 **Branch** 和 **Merge** 来允许同时开发一个项目的不同版本或部分
+- 使用 **Pull** 和 **Push** 同步远程仓库（GitHub/Gitee/GitLab）保存的代码
 
-- 以代码仓库(**Repositories**, repo)为单位进行代码管理
-- **Clone**其他人的仓库到本地进行自己的修改
-- 通过**Stage**和**Commit**跟踪和记录对代码的修改
-- 使用**Branch**和**Merge**来允许同时开发一个项目的不同版本或不同部分
-- 使用**Pull**和**Push**同步远程仓库(GitHub/Gitee/GitLab)保存的代码
+### GitHub/Gitee/GitLab 的主要功能
 
-### GitHub/Gitee/GitLab的主要功能
+- 这些平台用于存储、协作开发和管理代码，它们允许你托管代码仓库，跟踪项目进度，并与他人共享和协作
+- 它们提供了如 Issues、Pull Request (Merge Request)、Wiki 等功能，帮助你与他人更好地合作
 
-- 类似于百度云, DropBox, 它们允许你把代码仓库放在上面, 且与他人共享
-- 可以(也应该)使用Git作为工具上下传代码仓库
-- 提供Issues/Pull Request(Merge Request)/Wiki等功能帮助你与其他人更好的合作
+## 在命令行里使用 Git
 
-## 在命令行里使用Git
+首先你需要确保 Git 已经安装好。在 Linux 上通常已经安装了 Git，而在 Windows 上通常需要手动安装。
 
-首先你应该装好Git. Linux上一般会有已装好的Git, 而Windows上通常需要手动安装.
+当你在命令行里输入 `git --version` 并得到正确的回应时，Git 就装好了。
 
-当你在命令行里输入 `git --version` 并得到正确的回应时, Git就装好了.
+Git 的指令通常以 `git command subcommand --args` 的形式出现。遇到不确定的命令时，可以使用 `git command --help` 或 `man git command` （Linux）查看帮助。
 
-Git的指令通常以 `git command subcommand --args` 的形式出现, 在对某个命令疑惑的时候可以加上 `--help` 或者 `man git command` (Linux)来查看帮助.
+### 配置 Git
 
-### 配置Git
-
-Git的一大基本功能就是记录代码是由谁编辑的.
+Git 的基本功能之一是记录代码是由谁编辑的，因此需要设置身份信息。Git 会使用你的邮箱地址和名字来标识你是谁。
 
 ![](/guide/figure/Git-setup1.webp)
 
-所以首先需要设置一下自己的身份信息. Git用邮箱地址和名字来标识你是谁.
-
-~~~ bash
+```bash
 git config --global user.name "my-awesome-name"
 git config --global user.email "one.of.my@email.com"
-~~~
+```
 
-> **Note.** 在为某个repo编辑的时候, 你可以不加 `--global` 选项从而只配置当前repo.
+{: .note }
+> 如果你希望只在某个项目中使用不同的身份信息，可以不加 `--global` 选项，从而只为当前项目配置。
+
 
 ### 创建一个Git文件夹
 
-开始创建一个由Git进行版本控制的project文件夹吧~
+现在开始创建一个由 Git 进行版本控制的项目文件夹吧！
 
 ~~~ bash
 mkdir myproject
 cd myproject
 ~~~
 
-> **Note.** 如果你已经有一个文件夹, 你可以直接进那个文件夹. 在Windows里如果你装了Git可以在对应文件夹右键并选择 `Git Bash here`.
+{: .note }
+> 如果你已经有了一个项目文件夹，可以直接进入那个文件夹。在 Windows 上，如果你安装了 Git，可以在对应文件夹右键并选择 `Git Bash here`.
 
 选好了文件夹, 在文件夹里初始化
 
@@ -79,9 +79,10 @@ $ git init
 Initialized empty Git repository in /sample/myproject
 ~~~
 
-就创建成功了!
+这就成功创建了一个 Git 仓库！
 
-> Git会在这个文件夹里创建一个 `.git` 的隐藏文件夹保存所有它需要的东西, 删了Git的本地记录就**没了**.
+{: .important }
+> Git 会在该文件夹中创建一个 `.git` 的隐藏文件夹，用来保存所有版本控制的信息。删除这个 `.git` 文件夹后，Git 的本地记录就丢失了。
 
 
 
@@ -94,9 +95,19 @@ Initialized empty Git repository in /sample/myproject
  </div>
 </div>
 
+## Git 的一些基本命令
 
+以下是一些常用的 Git 命令示例，帮助你开始管理代码：
 
-我们这里给出 Git 的简单介绍, 更详细的说明可以查看下面推荐的学习资源.
+- `git status`：查看仓库的当前状态，包括修改、暂存等信息。
+- `git add <filename>`：将文件添加到暂存区（staging area）。
+- `git commit -m "message"`：提交暂存区的更改，并添加一条描述性信息。
+- `git pull`：从远程仓库获取最新代码，并合并到当前分支。
+- `git push`：将本地提交推送到远程仓库。
+
+你可以通过这些命令轻松管理和同步代码。
+
+更详细的说明可以查看下面推荐的学习资源.
 
 **可以参考的学习资源:**
 
@@ -104,55 +115,65 @@ Initialized empty Git repository in /sample/myproject
 
 <https://www.liaoxuefeng.com/wiki/896043488029600>.
 
-## git clone到服务器
+## 其他常见问题
 
-请先确保你会使用 Git, 你可以查看我们的相关教程进行学习.
+### 连接 GitLab 的问题
 
-### 检查 SSH
+当你试图连接到我们的 GitLab 服务器 (`gitlab.advancedsolver.com`) 时，如果你没有正确配置 SSH 的 `config` 文件，可能会遇到端口问题。在 clone 或者设置远程地址时，需要确保使用正确的地址格式。例如：
 
-进入 `.ssh`, 如果没有这个目录, 说明之前没有使用过 SSH 密钥, 但是由于我们连接服务器的方法为 SSH, 所以不会有这种问题.
-
-如果没有 SSH key, 在服务器生成 SSH key, 具体方法参见 <a class="one" href="public-key"> 教程 </a>.
-
-### NEXT?
-
-剩下的步骤与 Git 的常规使用方法相同, 即为:
-
-- 用 `git config` 配置用户名与邮箱.
-
-- 将公钥辅助到远程库.
-
-- `git clone`.
-
-## 其他问题
-
-### 连接 Gitlab 的问题
-
-连接到我们的 gitlab.advancedsolver.com 时, 如果你之前没有写过 config 文件, 请注意, 在clone或者设置地址时要对应的地址(`git@gitlab.advancedsolver.com/name/repo.git`)改成形如
-
-~~~ bash
+```bash
 ssh://git@gitlab.advancedsolver.com:10888/name/repo.git
-~~~
+```
 
-的地址. 例如添加一个地址时使用的命令应为
+如需添加远程地址，可以使用以下命令：
 
-~~~ bash
+```bash
 git remote add origin ssh://git@gitlab.advancedsolver.com:10888/name/repo.git
-~~~
+```
 
-当然, 更方便的方法是写一个 config 文件(类似于配置 SSH 时使用的配置, 即在 `.ssh` 文件夹下的 `config` 文件), 添加一条记录
+#### 使用 SSH 配置文件简化连接
 
-~~~ text
+更方便的方法是创建一个 SSH 配置文件（通常位于 `~/.ssh/config` 中），来自动指定服务器的端口和密钥文件。配置文件内容如下：
+
+```text
 Host gitlab.advancedsolver.com
     HostName gitlab.advancedsolver.com
     User git
     Port 10888
     PreferredAuthentications publickey
     IdentityFile ~/.ssh/id_rsa
-~~~
+```
 
-如此, 在使用默认的repo地址时, 系统会匹配到这一条记录并读取相应的端口和身份文件.
+并把相应的公钥上传到 `https://gitlab.advancedsolver.com/-/profile/keys`.
 
-### Windows 下 git 不区分大小写
+这样，每次使用 Git 时系统会自动匹配到这条记录并使用相应的端口和身份验证文件。之后，你可以使用更简短的 Git 地址，如：
 
-当你创建一个文件 `readme.md`, 写入内容后提交到线上代码仓库, 然后你在本地修改文件名为 `Readme.md`. 接着去提交, 发现代码没有变化, 控制台输入 `git status` 也不显示任何信息.
+```bash
+git clone git@gitlab.advancedsolver.com:name/repo.git
+```
+
+系统会根据配置文件自动处理端口和身份验证信息。
+
+### Windows 下 Git 不区分大小写问题
+
+在 Windows 系统下，Git 默认不区分文件名的大小写。例如，如果你创建了一个 `readme.md` 文件并提交到远程仓库，然后在本地修改文件名为 `Readme.md`，再提交时，Git 可能不会察觉到文件名的变化。即使使用 `git status` 查看，也可能不会显示任何修改。
+
+解决方法：
+
+1. 强制 Git 识别大小写变化：
+
+```bash
+git mv readme.md temp.md
+git mv temp.md Readme.md
+git commit -m "Rename readme.md to Readme.md"
+```
+
+通过将文件名暂时修改为另一个名字，再改回你希望的大小写形式，可以强制 Git 识别这次更改。
+
+2. 修改 Git 的配置，强制 Git 区分大小写：
+
+```bash
+git config core.ignorecase false
+```
+
+这样设置后，Git 会区分文件名的大小写，但要注意，这可能会影响现有项目中的文件名管理，因此应谨慎使用。

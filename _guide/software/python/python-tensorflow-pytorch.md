@@ -14,7 +14,7 @@ nav_order: 2
 *Author(s): [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn), [Xiang Li](mailto:646873166@qq.com)*
 
 
-Step 1: 选择你想要的Python版本，建议使用 Python 3.10（通过 `module load Python/3.10` 加载）.
+Step 1: 选择你想要的Python版本，默认环境是Python 3.10.12，也可以通过 `module load` 加载其他版本的 `Python`.
 
 Step 2: (可选)创建一个新的虚拟环境并激活。
 
@@ -44,8 +44,8 @@ pip install --upgrade tensorflow
 例如: 通过以下步骤安装 PyTorch. (注意正确的版本号!)
 
 ~~~ bash
-pip3 install torch torchvision torchaudio
-pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip install torch torchvision torchaudio
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 ~~~
 
 Step 4: 开始使用 Tensorflow ：在Python中，
