@@ -62,14 +62,14 @@ srun python3 helloworld.py
 >
 
 {: .note }
-> 在不添加任何参数的情况下, `srun` 的计算资源仅仅只有1-2核, 并且 **不会使用GPU**. 对于会默认并行的程序来说 (例如Python, MATLAB), 你可能会反而觉得速度不如在登录节点上测试的时候快. 这是因为申请的资源太少了. 你需要指定额外的参数来确定你所需要的核数.
+> 在不添加任何参数的情况下, `srun`, `salloc`, `sbatch` 的计算资源仅仅只有单核, 并且 **不会使用GPU**. 对于会默认并行的程序来说 (例如Python, MATLAB), 你可能会反而觉得速度不如在登录节点上测试的时候快. 这是因为申请的资源太少了. 你需要指定额外的参数来确定你所需要的核数.
 
 
 ### `salloc`
 
 编写自己的程序, 在跑大规模的测试例子之前通常需要经历在小规模例子上的 debug 环节. 这时候, 为了验证自己的程序能正常运行, 你往往会需要在可以交互的环境下尝试运行程序 -> 观察错误 -> 修改程序 -> 再次运行.
 
-虽然, 非常小的例子(例如：运行市场仅仅几秒钟的程序)可以在登录节点上临时测试, 但更多的时候, 你需要在计算节点上测试你的程序.
+虽然, 非常小的例子 (例如：运行时长仅仅几秒钟的程序) 可以在登录节点上临时测试, 但更多的时候, 你需要在计算节点上测试你的程序.
 
 使用 `salloc` 可以向 SLURM 申请计算资源, 然后你可以登录到计算节点上进行你的测试 (在命令行里你可以看到你现在在哪台机器上).
 
@@ -78,7 +78,8 @@ aduser@loginNode:~$ salloc
 salloc: Granted job allocation 2984
 salloc: Waiting for resource configuration
 salloc: Nodes bigMem1 are ready for job
-aduser@loginNode:~$ ssh bigMem1
+aduser@loginNode:~$ ssh bigMem1 -p 10888
+... after some time ...
 aduser@bigMem1:~$ exit
 logout
 Connection to 192.168.2.11 closed.
@@ -88,7 +89,14 @@ salloc: Relinquishing job allocation 2984
 salloc: Job allocation 2984 has been revoked.
 ~~~
 
-首先, 用 `salloc` 申请资源, 然后通过 `ssh` 登录到分配的计算节点上. 输入一次 `exit` 回退到登陆节点, 再输入一次 `exit` 将任务结束.
+首先, 用 `salloc` 申请资源, 然后通过 `ssh` 加端口 `-p 10888` 登录到分配的计算节点上. 例如: `ssh bigMem1 -p 10888`.
+
+{: .important }
+> **不要忘记加上端口号.** 不加端口号的 `ssh bigMem1` 会收到报错提示: `ssh: connect to host bigmem1 port 22: Connection refused`.
+
+输入一次 `exit` 便可回退到登陆节点. 通过 `ssh bigMem1 -p 10888` 重新进入计算节点.
+
+如果不再需要计算资源了, 再输入一次 `exit` 将任务结束.
 
 
 {: .important }
@@ -96,8 +104,6 @@ salloc: Job allocation 2984 has been revoked.
 
 
 {: .note }
-> 在不添加任何参数的情况下, 创建的计算资源仅仅只有1-2核, 并且 **不会使用GPU**. 对于会默认并行的程序来说 (例如Python, MATLAB), 你可能会反而觉得速度不如在登录节点上测试的时候快. 这是因为申请的资源太少了. 你需要指定额外的参数来确定你所需要的核数.
->
 > `salloc` 会创建一个新的 bash 环境, 因此你在登陆节点上加载的模块和设置的环境变量都需要重新加载和设置.
 >
 
@@ -122,8 +128,6 @@ matlab -batch "testMatlab"
 接下来, 用 `sbatch job.sh` 提交作业. 屏幕上会打印 `Submitted batch job ###`, 其中 `###` 是你的作业 id. 当作业结束后, 结果会输出到当前目录下的 `slurm-###.out`, 如果作业产生了错误信息, 会输出到 `slurm-###.err`.
 
 {: .note }
-> 在不添加任何参数的情况下, 创建的计算资源仅仅只有1-2核, 并且 **不会使用GPU**. 对于会默认并行的程序来说 (例如Python, MATLAB), 你可能会反而觉得速度不如在登录节点上测试的时候快. 这是因为申请的资源太少了. 你需要指定额外的参数来确定你所需要的核数.
->
 > 和 `salloc` 不同的是, `sbatch` 会继承你在登陆节点上加载的模块和设置的环境变量.
 
 另可参考: SLURM 官方文档对 `sbatch` 的介绍 <https://slurm.schedmd.com/sbatch.html>
@@ -178,24 +182,11 @@ python3 helloworld.py
 >
 > 你不可以只申请 GPU 而不申请任何 CPU 的使用.
 
-<!-- <div style="background-color: #008080; color: white; ">
- <p style="margin: 10px">小练习</p>
- <div style="background-color: #BFDFDF; color: black">
-  <p style="margin: 10px">以下哪个说法是正确的？</p>
-  <table>
-    <td><input type="radio" name="slurmquestion1" id="slurmq1opt1" /><label for="slurmq1opt1">用`srun -w bigMem0 nvidia-smi`可以查看`bigMem0`上的GPU情况</label></td>
-    <td><input type="radio" name="slurmquestion1" id="slurmq1opt2" /><label for="slurmq1opt2">没有申请过资源，也可以直接`ssh bigMem0`或`ssh bigMem1`</label></td>
-    <td><input type="radio" name="slurmquestion1" id="slurmq1opt3" /><label for="slurmq1opt3">可以在登陆节点编译完后再到计算节点上运行</label></td>
-  </table>
-  <p style="margin: 10px"><button onclick="window.alert(document.getElementById('slurmq1opt3').checked ? '正确, 因为我们的集群软件环境是一样的' : document.getElementById('slurmq1opt1').checked ? '错误, 必须加上`--gres`选项' : '错误, 你试试就知道了')">提交</button></p>
- </div>
-</div> -->
-
 {: .tip }
 > 以下哪个说法是正确的？
 > <ul class="example-question">
 >    <li><input type="radio" name="slurmquestion1" id="slurmq1opt1" /><label for="slurmq1opt1" markdown="1">用 `srun -w bigMem0 nvidia-smi` 可以查看 `bigMem0` 上全部 GPU 的使用情况</label></li>
->    <li><input type="radio" name="slurmquestion1" id="slurmq1opt2" /><label for="slurmq1opt2" markdown="1">没有申请过资源，也可以直接 `ssh bigMem0` 或 `ssh bigMem1`</label></li>
+>    <li><input type="radio" name="slurmquestion1" id="slurmq1opt2" /><label for="slurmq1opt2" markdown="1">没有申请过资源，也可以直接 `ssh bigMem0 -p 10888`</label></li>
 >    <li><input type="radio" name="slurmquestion1" id="slurmq1opt3" /><label for="slurmq1opt3" markdown="1">可以在登陆节点编译完后再到计算节点上运行</label></li>
 > </ul>
 > <button onclick="window.alert(document.getElementById('slurmq1opt3').checked ? '正确, 因为我们的集群软件环境是一样的' : document.getElementById('slurmq1opt1').checked ? '错误, 必须加上`--gres`选项' : '错误, 你试试就知道了')">提交</button>
@@ -263,10 +254,9 @@ scancel <jobid>
 ~~~
 
 {: .note }
-> 取消正在运行的作业需要一分钟左右的时间 (根据系统已经分配的资源大小), 此时作业会进入 CG 状态.
+> 有时, 取消正在运行的作业需要较长的时间 (尤其是 I/O 密集型作业), 此时作业会进入 CG 状态.
 
 ### `scontrol`
-
 
 提交作业后你会得到一个作业号, 以下用 `<jobid>` 表示. 如果忘了你的作业号, 且你的作业还没有运行结束, 可以通过 `squeue` 命令查看你的作业编号.
 
@@ -284,7 +274,7 @@ scontrol show node <nodename>
 
 例如
 
-~~~  bash
+~~~  text
 $ scontrol show node bigMem0
 NodeName=bigMem0 Arch=x86_64 CoresPerSocket=16
    CPUAlloc=28 CPUEfctv=64 CPUTot=64 CPULoad=3.78
