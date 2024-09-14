@@ -17,6 +17,7 @@ Since Feb 26, 2024
 - [IPMI备忘](ubuntu-cluster/ipmi)
 - [设置quota](ubuntu-cluster/quota)
 - [数据备份](ubuntu-cluster/data-backup)
+- [重启后的检查](ubuntu-cluster/checklist)
 
 ## AdvancedSolver.com
 
@@ -25,4 +26,3 @@ Since Feb 26, 2024
 - [Just The Docs Examples](ad-com/just-the-docs-example)
 
 [Changelog](changelog-admin)
-
