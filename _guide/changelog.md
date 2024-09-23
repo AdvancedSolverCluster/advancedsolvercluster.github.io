@@ -10,6 +10,10 @@ nav_order: 8
 {: .highlight }
 This page includes updates for AdvancedSolver Cluster. Use this page to keep track of upcoming changes, deprecation notices, new features, and feature updates from AdvancedSolver Cluster.
 
+## Sep 23, 2024
+1. 将 slurm 更新到 24.05.
+2. 新增核时限制.
+
 ## Sep 10, 2024
 更新了用户教程.
 

@@ -4,6 +4,18 @@ title: Changelog for admin
 
 # AdvancedSolver Cluster Changelog for Admin
 
+## Sep 23, 2024
+1. 将 slurm 版本更新到 24.05. 启用 slurm account management. 暂定的限制是 48核\*24小时=48核\*1440分钟=69120核分钟.
+    ```bash
+    sudo sacctmgr modify qos normal set MaxTRESRunMinsPerUser=cpu=69120
+    sudo sacctmgr modify qos normal set MaxTRESMinsPerJob=cpu=69120
+    ```
+
+2. 新增管理员.
+    ```bash
+    sudo useradd -m -d /opt/home-admin/zjteng -u 1505 -g 1105 -s /bin/bash zjteng-admin
+    ```
+
 ## Sep 6, 2024
 
 1. **修改 `/etc/slurm/slurm.conf` 并重启 Slurm 服务**：
@@ -65,7 +77,7 @@ title: Changelog for admin
     CUDA Toolkit：11.8 和 12.2
     CUDA Driver：12.5
 
-
+7. 在 `/etc/bash.bashrc` 中 source `/etc/profile.d/color.sh`, `/etc/profile.d/modules.sh`, `/home/admin/script/setvars.sh`.
 
 ## June 2, 2024
 

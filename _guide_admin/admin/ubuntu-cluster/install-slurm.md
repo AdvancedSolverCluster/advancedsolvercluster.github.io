@@ -1,5 +1,5 @@
 ---
-title: 安装SLURM
+title: SLURM
 nav_order: 2
 parent: Ubuntu Cluster
 ---
@@ -238,6 +238,166 @@ sudo systemctl stop systemd-logind
 sudo systemctl mask systemd-logind
 ~~~
 
-## 其它
+# 更新 SLURM 版本
 
-`squeue` 等命令的格式都在 `/usr/share/modules/init/bash` 中定义.
+~~~bash
+cd slurm
+git fetch origin
+git checkout -b slurm-24.05 origin/slurm-24.05
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/:$PKG_CONFIG_PATH
+./configure --prefix=/usr --sysconfdir=/etc/slurm --with-munge=/usr --enable-debug --enable-pam --with-pam_dir=/lib/slurm/pam --with-http-parser=/usr/local/ --with-yaml=/usr/local/  --with-jwt=/usr/local/ --enable-slurmrestd
+make -j
+sudo make install
+slurmd -V
+sudo cp etc/*.service /etc/systemd/system
+sudo systemctl daemon-reload
+# sudo systemctl restart slurmdbd
+# sudo systemctl restart slurmctld
+sudo systemctl restart slurmd
+
+cd ./contribs/pam_slurm_adopt/
+make
+sudo make install
+sudo mkdir -p /lib/security
+sudo rm -f /lib/security/pam_slurm_adopt.*
+sudo ln -s /lib/slurm/pam/pam_slurm_adopt.so /lib/security/pam_slurm_adopt.so
+sudo ln -s /lib/slurm/pam/pam_slurm_adopt.a /lib/security/pam_slurm_adopt.a
+sudo ln -s /lib/slurm/pam/pam_slurm_adopt.la /lib/security/pam_slurm_adopt.la
+~~~
+
+# SLURM 配置
+
+## `slurm.conf` (持续更新)
+
+```text
+ClusterName=clusterHPC
+SlurmctldHost=loginNode
+SlurmctldHost=bigMem0
+GresTypes=gpu
+MpiDefault=none
+ProctrackType=proctrack/cgroup
+ReturnToService=1
+SlurmctldPidFile=/var/run/slurmctld.pid
+SlurmctldPort=6817
+SlurmdPidFile=/var/run/slurmd.pid
+SlurmdPort=6818
+SlurmdSpoolDir=/var/spool/slurmd
+SlurmUser=slurm
+StateSaveLocation=/etc/share/slurmctld
+SwitchType=switch/none
+
+# TIMERS
+InactiveLimit=300
+KillWait=300
+MinJobAge=300
+SlurmctldTimeout=300
+SlurmdTimeout=300
+UnkillableStepTimeout=120
+Waittime=300
+
+# SCHEDULING
+SchedulerType=sched/backfill
+SelectType=select/cons_tres
+SelectTypeParameters=CR_Core
+
+# LOGGING AND ACCOUNTING
+AccountingStorageEnforce=limits
+AccountingStorageHost=loginNode
+AccountingStoragePass=/var/run/munge/munge.socket.2
+AccountingStoragePort=6819
+AccountingStorageType=accounting_storage/slurmdbd
+AccountingStorageUser=slurm
+# AccountingStoreFlags=job_comment
+JobCompHost=loginNode
+JobCompLoc=job_comp_db
+JobCompPass=da4jia1deTeXshi4ti3yu4lao3shi1jiao1de?
+JobCompPort=3306
+JobCompType=jobcomp/mysql
+JobCompUser=slurm
+#JobContainerType=job_container/none
+JobAcctGatherFrequency=30
+JobAcctGatherType=jobacct_gather/cgroup
+SlurmctldDebug=debug
+SlurmctldLogFile=/var/log/slurmctld.log
+SlurmdDebug=debug
+SlurmdLogFile=/var/log/slurmd.log
+
+# COMPUTE NODES
+NodeName=loginNode CPUs=24 RealMemory=128543 Sockets=2 CoresPerSocket=12 ThreadsPerCore=1 State=UNKNOWN Gres=gpu:nvidia_geforce_gtx_1080_ti:2
+NodeName=bigMem0 CPUs=64 RealMemory=1030499 Sockets=2 CoresPerSocket=16 ThreadsPerCore=2 State=UNKNOWN Gres=gpu:tesla_t4:4
+NodeName=bigMem1 CPUs=64 RealMemory=1030499 Sockets=2 CoresPerSocket=16 ThreadsPerCore=2 State=UNKNOWN Gres=gpu:nvidia_a30:4
+NodeName=bigMem2 CPUs=128 RealMemory=515855 Sockets=2 CoresPerSocket=32 ThreadsPerCore=2 State=UNKNOWN
+NodeName=bigMem3 CPUs=512 RealMemory=1031678 Sockets=2 CoresPerSocket=128 ThreadsPerCore=2 State=UNKNOWN
+PartitionName=partition Nodes=bigMem[0-3] MaxTime=7-0 DefaultTime=06:00:00 Default=YES State=UP
+```
+
+## `squeue` 等命令的格式
+
+在 `/home/admin/script/setvars.sh` 中定义.
+
+```bash
+export SQUEUE_FORMAT2="JobID:5 ,UserName:7 ,Name:11 ,StateCompact:2 ,NumCPUs:4 ,tres-per-node:4 ,EndTime:16 ,NodeList:11 ,ReqNodes:11"
+export SQUEUE_SORT="N,n,-e"
+export SINFO_SORT="P"
+alias sinfo="sinfo -O NodeHost:11,Available:7,StateCompact:7,CPUsState:19,GresUsed:30 -S P"
+```
+
+## `sacctmgr` 相关命令
+
+要限制用户, 参考: https://slurm.schedmd.com/sacctmgr.html#SECTION_GENERAL-SPECIFICATIONS-FOR-ASSOCIATION-BASED-ENTITIES
+
+要修改qos, 参考: https://slurm.schedmd.com/sacctmgr.html#SECTION_SPECIFICATIONS-FOR-QOS
+
+新增账户和用户:
+
+```bash
+# 获取系统用户列表
+USER_LIST=$(cat /etc/passwd | grep '/home' | cut -d: -f1)
+
+# 为每个用户添加到 SLURM
+for user in $USER_LIST; do
+    USER_EXISTS=$(sacctmgr show user $user format=User%30 -n)
+
+    if [ -z "$USER_EXISTS" ]; then
+        echo "Adding user $user to SLURM and associating with account $ACCOUNT"
+
+        sudo sacctmgr add account $user
+        sudo sacctmgr add user $user account=$user
+    else
+        echo "User $user already exists in SLURM, skipping."
+    fi
+done
+```
+
+修改用户的核时限制:
+
+```bash
+sudo sacctmgr modify user yjzhang set GrpTRESRunMins=cpu=64
+sudo sacctmgr modify user yjzhang set MaxTRESMinsPerJob=cpu=64
+sudo sacctmgr modify user yjzhang set GrpTRESRunMins=cpu=-1 # 恢复到不受限制
+sudo sacctmgr modify user yjzhang set MaxTRESMinsPerJob=cpu=-1
+```
+
+查看用户的核时限制:
+
+```bash
+sacctmgr show assoc where user=yjzhang format=User,Account,GrpTRESRunMins,MaxTRESMinsPerJob
+```
+
+修改 QOS 的核时限制:
+
+```bash
+sudo sacctmgr modify qos normal set MaxTRESRunMinsPerUser=cpu=69120
+sudo sacctmgr modify qos normal set MaxTRESMinsPerJob=cpu=69120
+```
+
+查看 QOS 的核时限制:
+
+```bash
+sacctmgr show qos normal format=Name,MaxTRESRunMinsPerUser,MaxTRESMinsPerJob
+```
+
+## 预约资源
+
+```bash
+```
