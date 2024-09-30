@@ -13,16 +13,16 @@ nav_order: 2
 
 *Author(s): [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn), [Xiang Li](mailto:646873166@qq.com), [Jingyu Liu](mailto:jyliu22@m.fudan.edu.cn)*
 
-我们在服务器的 `bigMem[0-2]` 上为用户预装了 `torch-2.3`. 注意, 使用前请先申请 gpu, 例如 `salloc -w bigMem1 --gres=gpu:1`.
+我们在服务器的 `bigMem[0-2]` 上为用户预装了 `torch-2.3`.
 
-- `bigMem[0-1]` 使用 `module load Python/3.10.13` 即可使用. 运行 `python3 -c "import torch;print('pytorch version:',torch.__version__);print('GPU is',torch.cuda.is_available())"`, 输出应当为
+- `bigMem[0-1]`: 注意, 使用前请先申请 gpu, 例如 `salloc -w bigMem1 --gres=gpu:1`. 使用 `module load Python/3.10.13` 即可使用. 运行 `python3 -c "import torch;print('pytorch version:',torch.__version__);print('GPU is',torch.cuda.is_available())"`, 输出应当为
 
 ``` text
 pytorch version: 2.3.0+cu118
 GPU is True
 ```
 
-- `bigMem2`: 首先 `module load Python/3.10.13 DTK/24.04.2`. 运行 `python3 -c "import torch;print('pytorch version:',torch.__version__);print('DCU is',torch.cuda.is_available())"`, 输出应当
+- `bigMem2`: 不需要申请 gpu. 首先 `module load Python/3.10.13 DTK/24.04.2`. 运行 `python3 -c "import torch;print('pytorch version:',torch.__version__);print('DCU is',torch.cuda.is_available())"`, 输出应当
 
 ``` text
 pytorch version: 2.3.0
