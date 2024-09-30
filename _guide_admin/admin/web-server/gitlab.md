@@ -2,7 +2,6 @@
 title: GitLab Log
 nav_order: 1
 parent: Web0
-has_children: true
 ---
 
 

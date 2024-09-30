@@ -1,7 +1,7 @@
 ---
 title: Update GitLab
-nav_order: 1
-parent: GitLab Log
+nav_order: 2
+parent: Web0
 ---
 
 # Update GitLab
