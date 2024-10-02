@@ -1,15 +1,28 @@
+---
+title: Admin reference page
+nav_order: 1
+---
+
 # Admin reference page
 
-- [NTP时钟同步](ntp-time-sync.md)
-- [关闭turbo boost](disable-turbo-boost.md)
-- [配置CI/CD](setting-up-cicd.md)
-- [挂载文件夹](mount-directory.md)
-- [数据备份](data-backup.md)
-- [集群网络结构](network-topology.md)
-- [制作CentOS启动盘](make-centos-boost-stick.md)
+- [集群网络结构](network-topology)
 
+## Ubuntu Cluster
 
-## Web Server
+Since Feb 26, 2024
 
-- [GitLab](web-server/gitlab.md)
-- [Overleaf](web-server/overleaf.md)
+- [安装新机](ubuntu-cluster/install-new-server)
+- [安装SLURM](ubuntu-cluster/install-slurm)
+- [安装软件](ubuntu-cluster/install-software)
+- [IPMI备忘](ubuntu-cluster/ipmi)
+- [设置quota](ubuntu-cluster/quota)
+- [数据备份](ubuntu-cluster/data-backup)
+- [重启后的检查](ubuntu-cluster/checklist)
+
+## AdvancedSolver.com
+
+- [CI/CD部署服务器网页](ad-com/setting-up-cicd)
+- [在教程文档中插入小测验](ad-com/guide-inline-exercise-sample)
+- [Just The Docs Examples](ad-com/just-the-docs-example)
+
+[Changelog](changelog-admin)
