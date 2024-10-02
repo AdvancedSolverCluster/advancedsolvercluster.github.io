@@ -1,4 +1,11 @@
-# GitLab log
+---
+title: GitLab Log
+nav_order: 1
+parent: Web0
+---
+
+
+# "GitLab log"
 
 我们安装的是Omnibus版Gitlab (installed from linux package manager)
 
