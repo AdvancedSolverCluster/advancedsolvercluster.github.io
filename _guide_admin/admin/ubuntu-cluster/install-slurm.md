@@ -307,6 +307,7 @@ AccountingStoragePass=/var/run/munge/munge.socket.2
 AccountingStoragePort=6819
 AccountingStorageType=accounting_storage/slurmdbd
 AccountingStorageUser=slurm
+AccountingStorageTRES=gres/gpu
 # AccountingStoreFlags=job_comment
 JobCompHost=loginNode
 JobCompLoc=job_comp_db
@@ -400,4 +401,6 @@ sacctmgr show qos normal format=Name,MaxTRESRunMinsPerUser,MaxTRESMinsPerJob
 ## 预约资源
 
 ```bash
+sudo scontrol create reservation starttime=2024-02-01T00:00:00 duration=1-00:00:00 user=yqliu nodes=bigMem1 flags=ignore_jobs
+sudo scontrol create reservation starttime=2024-03-03T00:00:00 duration=06:00:00 user=root flags=maint,ignore_jobs nodes=ALL
 ```
