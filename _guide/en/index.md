@@ -1,8 +1,3 @@
----
-title: Welcome to the Advanced Solver HPC Guide Page!
-nav_exclude: true
----
-
 # Welcome to the Advanced Solver HPC Guide Page!
 
 ## Tutorial
