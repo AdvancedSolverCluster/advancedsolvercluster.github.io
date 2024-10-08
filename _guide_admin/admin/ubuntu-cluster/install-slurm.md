@@ -398,6 +398,20 @@ sudo sacctmgr modify qos normal set MaxTRESMinsPerJob=cpu=69120
 sacctmgr show qos normal format=Name,MaxTRESRunMinsPerUser,MaxTRESMinsPerJob
 ```
 
+### 添加新的 QOS
+
+有时候, 用户需要的核时可能更多, 这个时候我们要对用户创建新的 QOS. 步骤如下:
+
+1. 检查用户要使用的 node 有没有一个单独的 partition, 如果没有, 使用 `scontrol create PartitionName=<partition_name> Nodes=<node_list> MaxTime=<time_limit> DefaultTime=<default_time> Default=<YES> State=<UP>` 新建一个 partition. 具体配置可以参考 `/etc/slurm/slurm.conf` 文件.
+2. 用 `sacctmgr show qos format=name,priority,MaxTRESRunMinsPerUser,MaxTRESMinsPerJob` 查看已有的 QOS 和配置.
+3. 用 `sudo sacctmgr add qos <qos_name>` 创建新的 QOS.
+4. 用 `sudo scontrol update partition=<partition_name> qos=<qos_name>` 把这个 QOS 分配给对应的分区, 可以用 `scontrol show partition <partition_name>`  查看. 如果要移除这个, 可以用 `sudo scontrol update partition=<partition_name> qos=`.
+5. 用 `sudo sacctmgr modify qos <qos_name> set priority=<num>` 配置优先级.
+6. 用 `sudo sacctmgr modify qos <qos_name> set MaxTRESRunMinsPerUser=cpu=<time>` 和 `sudo sacctmgr modify qos <qos_name> set MaxTRESMinsPerJob=cpu=<time>` 设置新 QOS 的核时限制.
+7. 用 `sudo sacctmgr modify user <user_name> set qos+=<qos_name>` 给用户添加新的 QOS. 现在, 用户可以在提交任务时用 `--qos=<qos_name>` 使用不用的 QOS.
+8. 用 `sacctmgr show assoc where user=<user_name> format=User,Account,QOS%50` 查看某一用户有的 QOS, 这里 `%50` 是为了防止长度不够.
+9. 用户使用完成后, 用 `sudo sacctmgr modify user <user_name> set qos-=<qos_name>` 和 `sudo sacctmgr delete qos <qos_name>` 删除对应的 QOS.
+
 ## 预约资源
 
 ```bash

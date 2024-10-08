@@ -1,6 +1,6 @@
 ---
 title: Update GitLab
-nav_order: 2
+nav_order: 1
 parent: Web0
 ---
 

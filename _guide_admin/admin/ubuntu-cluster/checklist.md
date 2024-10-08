@@ -37,7 +37,7 @@ rtt min/avg/max/mdev = 0.202/0.212/0.231/0.013 ms
 
 ## loginNode 是否正常挂载
 
-在除了 loginNode 的其他节点上输入 `mount | grep loginNode`, 如果得到的输出形如
+在每个 bigMem 上输入 `mount | grep loginNode`, 如果得到的输出形如
 
 ``` text
 loginNode:/software on /software type nfs4 (rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,soft,proto=tcp,timeo=100,retrans=2,sec=sys,clientaddr=192.168.2.10,local_lock=none,addr=192.168.2.1,_netdev)
@@ -56,6 +56,14 @@ sudo mount -t nfs loginNode:/etc/share /etc/share --verbose
 ```
 
 重新挂载 loginNode 到相应的节点.
+
+在 web0 上, 输入 `mount | grep loginNode`, 如果得到的输出形如
+
+``` text
+loginNode:/home on /mnt/loginNode/home type nfs4 (rw,relatime,vers=4.1,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=192.168.2.100,local_lock=none,addr=192.168.2.1)
+```
+
+则表示正常. 我们只需要挂载 loginNode 的 `/home` 即可. 否则, 请用 `sudo mount -t nfs loginNode:/home /mnt/loginNode/home --verbose` 进行挂载.
 
 ## 防火墙
 
