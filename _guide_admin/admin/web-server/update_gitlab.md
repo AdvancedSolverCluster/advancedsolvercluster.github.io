@@ -64,7 +64,7 @@ sudo touch /etc/gitlab/skip-auto-backup
 sudo gitlab-backup create
 ```
 
-备份.
+备份. 一般来说, 生成的备份文件在 `/var/opt/gitlab/backups` 目录下.
 
 - 手动备份配置文件. 配置文件通常位于 `/etc/gitlab/` 目录下, 我们用
 
@@ -77,6 +77,10 @@ sudo cp -R /etc/gitlab /path/to/backup/directory
 ### 检查后台迁移的状态
 
 参考 <https://docs.gitlab.com/ee/update/background_migrations.html>.
+
+- 进入 gitlab UI, 点击 `Admin`.
+- 选择 `Select Monitoring > Background migrations.`
+- Select Queued or Finalizing to see incomplete migrations, and Failed for failed migrations.
 
 ## 开始升级
 
@@ -127,3 +131,24 @@ sudo rm -f /var/opt/gitlab/postgresql-version.old
 ```
 
 执行相应的命令即可.
+
+## 更新记录
+
+### 2024.10.14
+
+从 `16.10.1` 更新到 `17.4.2`.
+
+在确定升级路线时, 版本选择 CentOS, 升级路线为 `16.11.10 => 17.3.5 => 17.4.2`. 有如下两个 warning:
+
+``` markdown
+# Expiring Access Tokens
+With [GitLab 16.0](https://docs.gitlab.com/ee/update/deprecations.html#non-expiring-access-tokens) all access tokens have a [forced expiry date](https://about.gitlab.com/blog/2023/10/25/access-token-lifetime-limits/).
+
+After deploying 16.0 (or a later release) any non-expiring access tokens will expire 1 year from your first 16.x or above deployment date. [Guide to Identify](https://docs.gitlab.com/ee/security/tokens/index.html)
+```
+
+``` markdown
+# Potential PostgreSQL index corruption when upgrading OS - glibc locale data compatibility
+If you upgrade the operating system on which PostgreSQL runs, an upgrade of locale data changes in glibc 2.28 and later might corrupt your database indexes.
+See [upgrading operating systems for PostgreSQL guide for options to avoid this issue](https://docs.gitlab.com/ee/administration/postgresql/upgrading_os.html)
+```
