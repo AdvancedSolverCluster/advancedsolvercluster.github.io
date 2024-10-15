@@ -4,6 +4,14 @@ title: Changelog for admin
 
 # AdvancedSolver Cluster Changelog for Admin
 
+## Oct 14, 2024
+
+更新了 Gitlab, 从 `16.10.1` 更新到 `17.4.2`.
+
+## Oct 8, 2024
+
+安装了 PyTorch, 现在我们可以在 bigMem 0~2 上使用 GPU / DCU 了.
+
 ## Sep 23, 2024
 1. 将 slurm 版本更新到 24.05. 启用 slurm account management. 暂定的限制是 48核\*24小时=48核\*1440分钟=69120核分钟.
     ```bash
