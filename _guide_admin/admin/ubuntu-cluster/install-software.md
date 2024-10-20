@@ -203,5 +203,27 @@ rm -r ./tmp_build/
 rm mpich-4.2.0.tar.gz
 ```
 
+## Ruby
+
+使用 [ruby-build](https://github.com/rbenv/ruby-build) 安装:
+
+打开网页, 依照 (Install manually as a standalone program) 下载最新版本的 tarball
+
+```bash
+wget https://github.com/rbenv/ruby-build/archive/refs/tags/v20241017.tar.gz
+tar -xzvf v20241017.tar.gz
+cd ruby-build-20241017/
+
+export PREFIX=/opt/Ruby/ruby-build/20241017
+sudo ./install.sh
+
+cd /opt/Ruby/ruby-build/20241017/bin
+./ruby-build --list
+
+sudo ./ruby-build 3.3.5 /opt/Ruby/3.3.5
+
+```
+
+
 ---
 持续更新中
