@@ -1,5 +1,6 @@
 # FROM ruby:3.1
 FROM my-jekyll-app:latest
+# FROM python:latest
 WORKDIR /app
 COPY . /app
 RUN bundle install
