@@ -1,6 +1,11 @@
-# Using official Ruby image as the base
-FROM ruby:3.1
-# FROM my-jekyll-app:latest
+# Using official Ruby image as the base or our local pre-built one
+# FROM ruby:3.1
+# FROM my-jekyll-app:v1.0
+
+# default arg
+ARG BASE_IMAGE=ruby:3.1
+
+FROM $BASE_IMAGE
 
 # Set the working directory inside the container
 WORKDIR /app
