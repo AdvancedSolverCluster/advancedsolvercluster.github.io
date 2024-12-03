@@ -51,7 +51,7 @@ parent: 使用须知
 > 当前 limit: (48 * 24) 核时
 >
 > 计算方法: 对该用户所有运行中任务的 核数乘以预计完成所剩余的时间 求和, 得到当前预计剩余所需核时.
-> 
+>
 > 1. 当你提交的新任务设定的完成时间和核数超过了 limit, 则该任务无法运行. 此时需要减少核数或者设定的时间上限.
 > 2. 新提交的任务所预期的核时如果会使当前运行任务总核时超过 limit, 则该任务会被强制排队, 直到你已经运行的任务完成, 或占用的核时足以让新任务开始运行.
 >
@@ -185,6 +185,37 @@ python3 helloworld.py
 |`--ntasks=<number> (-n <number>)`| 1 | 启动的任务数量, 几乎只有当你运行 MPI 程序时需要修改这个选项. |
 |`--nodelist=<node_name_list> (-w <node_name_list>)` |  | 指定在哪台机器上运行, 可能的值为 `bigMem{0-3}`.|
 
+以下是一个典型的 sbatch 脚本示例，假设需要运行一个 Python 脚本并使用 GPU：
+
+~~~ bash
+#!/bin/bash
+#SBATCH -J my_python_job        # 作业名称
+#SBATCH -o logs/job-%j.out      # 标准输出文件路径
+#SBATCH -e logs/job-%j.err      # 错误输出文件路径
+#SBATCH -t 01:30:00             # 运行时间限制 (1小时30分钟)
+#SBATCH -N 1                    # 所需节点数
+#SBATCH -n 1                    # 启动的任务数量
+#SBATCH -c 4                    # 每个任务所使用的线程数
+#SBATCH --gres=gpu:1            # 分配1块GPU
+#SBATCH --mail-type=END,FAIL    # 作业结束或失败时发送邮件
+#SBATCH --mail-user=your_email@example.com  # 接收邮件的地址
+
+# 显示一些作业信息
+echo "Job ID: $SLURM_JOB_ID"
+echo "Node List: $SLURM_JOB_NODELIST"
+echo "Allocated GPUs: $CUDA_VISIBLE_DEVICES"
+echo "Start Time: $(date)"
+
+# 激活 Python 环境 (如果需要)
+source ~/my_python_env/bin/activate
+
+# 运行 Python 脚本
+python3 helloworld.py
+
+# 打印结束时间
+echo "End Time: $(date)"
+
+~~~
 
 {: .important }
 > 资源调度系统不限制各个程序内存的使用量. 但请合理的使用有限的内存资源.
