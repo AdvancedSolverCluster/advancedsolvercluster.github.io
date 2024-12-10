@@ -5,6 +5,7 @@ parent: Ubuntu Cluster
 ---
 
 # IPMI备忘
+*Last modified: February 26, 2024*
 
 ## bigMem0上IPMI的修改工具
 

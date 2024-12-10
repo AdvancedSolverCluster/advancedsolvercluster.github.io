@@ -6,6 +6,7 @@ grand_parent: 使用须知
 ---
 
 # 常用 SLURM 命令
+*Last modified: December 03, 2024*
 
 - `sinfo`: 查看节点空余状态，显示可用分区和节点信息。
 - `squeue`: 查看作业队列，显示当前作业状态。

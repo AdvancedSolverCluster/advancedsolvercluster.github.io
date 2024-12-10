@@ -5,6 +5,7 @@ parent: CentOS Cluster (legacy)
 ---
 
 # 挂载某个文件夹到其他机器上
+*Last modified: February 26, 2024*
 
 首先确保server和client都有安装`nfs-utils`: `sudo yum install nfs-utils`, 以下以loginNode挂载到bigMem上为例
 

@@ -4,6 +4,7 @@ nav_order: 7
 ---
 
 # FAQ
+*Last modified: September 10, 2024*
 
 ## 无法连接服务器
 

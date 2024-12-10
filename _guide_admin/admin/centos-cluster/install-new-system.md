@@ -5,6 +5,7 @@ parent: CentOS Cluster (legacy)
 ---
 
 # "Install new system"
+*Last modified: February 26, 2024*
 
 ### 重装系统
 

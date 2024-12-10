@@ -5,6 +5,7 @@ parent: CentOS Cluster (legacy)
 ---
 
 # "Set up GPU on slurm"
+*Last modified: February 26, 2024*
 
 by Yuejia Zhang, April 11, 2022
 

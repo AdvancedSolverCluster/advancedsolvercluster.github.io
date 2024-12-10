@@ -5,6 +5,7 @@ parent: 快速开始
 ---
 
 # 我换了电脑, 怎么在新电脑上连接服务器?
+*Last modified: September 10, 2024*
 
 - Step 1 在新电脑上生成 key
 

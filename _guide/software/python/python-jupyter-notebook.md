@@ -6,6 +6,7 @@ nav_order: 1
 ---
 
 # 在 VSCode 里连接 Python Jupyter Notebook
+*Last modified: December 10, 2024*
 
 
 *Created: April 20, 2023, [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn)*

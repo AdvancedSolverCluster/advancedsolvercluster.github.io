@@ -5,6 +5,7 @@ parent: CentOS Cluster (legacy)
 ---
 
 # "SLURM Admin Guide"
+*Last modified: February 26, 2024*
 
 如何做一个优秀的SLURM管理员
 

@@ -5,6 +5,7 @@ parent: 其他知识
 ---
 
 # Git 教程
+*Last modified: December 10, 2024*
 
 Created: *August 9, 2022, [Xiang Li](mailto:646873166@qq.com), [Jingyu Liu](mailto:381258337@qq.com)*
 

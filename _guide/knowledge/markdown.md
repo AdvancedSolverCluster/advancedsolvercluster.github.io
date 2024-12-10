@@ -5,6 +5,7 @@ parent: 其他知识
 ---
 
 # Markdown 教程
+*Last modified: December 10, 2024*
 
 Created: *March 4, 2022, [Jingyu Liu](mailto:381258337@qq.com)*
 

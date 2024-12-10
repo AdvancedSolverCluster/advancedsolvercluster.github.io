@@ -5,6 +5,7 @@ parent: CentOS Cluster (legacy)
 ---
 
 # "How to start an HPC cluster on centos 7 Linux servers"
+*Last modified: February 26, 2024*
 
 考虑到书写的方便性，直接在markdown里记录下来了配置的几乎全过程。 不过似乎知乎的配色方案不太好看，原本在mdnice里写的还挺漂亮。经过Grammarly查错，不知道会不会把本来的命令给改了...按说是没有的。**未经许可，请勿翻译/转载。**
 

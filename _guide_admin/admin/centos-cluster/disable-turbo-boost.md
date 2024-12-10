@@ -5,6 +5,7 @@ parent: CentOS Cluster (legacy)
 ---
 
 # Manage Intel Turbo Boost with systemd
+*Last modified: February 26, 2024*
 
 source: https://blog.christophersmart.com/2017/02/08/manage-intel-turbo-boost-with-systemd/
 

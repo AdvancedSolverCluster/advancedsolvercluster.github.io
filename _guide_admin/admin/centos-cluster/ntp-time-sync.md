@@ -5,6 +5,7 @@ parent: CentOS Cluster (legacy)
 ---
 
 # "NTP时钟同步"
+*Last modified: February 26, 2024*
 
 复旦提供网络时钟同步服务
 

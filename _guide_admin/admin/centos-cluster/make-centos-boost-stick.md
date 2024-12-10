@@ -5,6 +5,7 @@ parent: CentOS Cluster (legacy)
 ---
 
 # Making Installation USB Media on Windows
+*Last modified: February 26, 2024*
 
 [Making Installation USB Media on Windows](https://docs.centos.org/en-US/centos/install-guide/Making_Media_USB_Windows/)
 

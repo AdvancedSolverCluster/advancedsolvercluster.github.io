@@ -5,6 +5,7 @@ parent: AdvancedSolver.com
 ---
 
 # 在教程中写入小测试
+*Last modified: April 27, 2024*
 
 照抄下面这段代码, 可以复制粘贴任意个question line来增加行数; 一定要注意name, id不应该与其他问题重名!
 

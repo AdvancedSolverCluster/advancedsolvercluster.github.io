@@ -5,6 +5,7 @@ nav_order: 8
 
 
 # AdvancedSolver Cluster Changelog
+*Last modified: December 10, 2024*
 
 {: .highlight }
 This page includes updates for AdvancedSolver Cluster. Use this page to keep track of upcoming changes, deprecation notices, new features, and feature updates from AdvancedSolver Cluster.
