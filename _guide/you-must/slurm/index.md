@@ -3,6 +3,7 @@ title: 如何利用SLURM在集群上运行程序
 nav_order: 1
 parent: 使用须知
 has_children: true
+has_toc: false
 ---
 
 {: .important }
