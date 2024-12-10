@@ -8,7 +8,6 @@ parent: 其他知识
 
 Created: *May 8, 2023, [Jingyu Liu](mailto:381258337@qq.com), [Xiang Li](mailto:646873166@qq.com), [Ming Li](mailto:19300180127@fudan.edu.cn)*
 
-Last update: *Sept 9, 2024*
 
 ## 理解服务器的基本结构
 

@@ -6,7 +6,6 @@ parent: 快速开始
 
 # 如何使用 VSCode 连接到服务器, 以提高我的开发效率?
 
-*Created: June 28, 2022; Last update: May 8, 2024; Author(s): [Ming Li](mailto:19300180127@fudan.edu.cn), [Xiang Li](mailto:646873166@qq.com)*
 
 VS Code 全称 Visual Studio Code, 是微软出的一款轻量级代码编辑器, 免费、开源而且功能强大。它支持几乎所有主流的程序语言的语法高亮、智能代码补全、自定义热键、括号匹配、代码片段、代码对比 Diff、GIT 等特性，并支持插件扩展，针对网页开发和云端应用开发做了优化。软件跨平台支持 Win、Mac 以及 Linux。
 

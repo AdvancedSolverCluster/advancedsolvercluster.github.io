@@ -5,8 +5,6 @@ nav_order: 6
 
 # 集群中各服务器的配置与性能
 
-*Last Update: June 3, 2024 ,Created: August 16, 2023*
-
 *[Xiang Li](mailto:646873166@qq.com), [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn)*
 
 ## MATLAB Benchmark

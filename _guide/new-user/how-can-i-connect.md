@@ -4,7 +4,6 @@ nav_order: 2
 parent: 快速开始
 ---
 
-*Last update: Sep 9, 2024*
 
 
 # 我得到了我的服务器账号, 我该怎么连接服务器?

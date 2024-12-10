@@ -4,7 +4,6 @@ nav_order: 1
 parent: 快速开始
 ---
 
-*Last update: Sept 9, 2024*
 
 # 我还没有服务器账号, 我该怎么做?
 

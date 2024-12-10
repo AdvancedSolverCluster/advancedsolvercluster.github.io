@@ -6,7 +6,6 @@ parent: 使用须知
 
 # 关于服务器各用户储存空间的 Quota
 
-*Last update: June 7, 2024*
 
 *Created: February 28, 2022*
 

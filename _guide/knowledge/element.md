@@ -8,7 +8,6 @@ parent: 其他知识
 
 Created: *September 5, 2022, [Xiang Li](mailto:646873166@qq.com)*
 
-Last update: *September 3, 2024, [Xiang Li](mailto:646873166@qq.com)*
 
 
 Element is a decentralized, encrypted chat & collaboration app designed for secure and independent communication.

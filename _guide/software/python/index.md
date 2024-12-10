@@ -5,7 +5,6 @@ nav_order: 2
 has_children: true
 ---
 
-*Last update: December 3, 2024*
 
 *Created: December 3, 2024, [Xiang Li](mailto:646873166@qq.com)*
 

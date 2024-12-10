@@ -5,7 +5,6 @@ has_children: true
 has_toc: false
 ---
 
-*Last update: Sep 9, 2024*
 
 # 如何查看服务器上有哪些软件？
 

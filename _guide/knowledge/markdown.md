@@ -8,7 +8,6 @@ parent: 其他知识
 
 Created: *March 4, 2022, [Jingyu Liu](mailto:381258337@qq.com)*
 
-Last update: *Sept 9, 2024*
 
 Markdown 是一种轻量级的标记语言，可用于在纯文本文档中添加格式化元素。事实上，本篇教程就是用 Markdown 写成的。我们推荐使用 VS Code 写 Markdown，请注意，Markdown 文件的后缀是 `.md`。
 

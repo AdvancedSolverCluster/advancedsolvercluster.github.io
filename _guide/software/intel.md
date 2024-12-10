@@ -4,7 +4,6 @@ parent: 软件环境
 nav_order: 6
 ---
 
-*Last update: Sep 9, 2024*
 
 # Intel OneAPI Toolkit
 
