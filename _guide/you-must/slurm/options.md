@@ -5,7 +5,7 @@ parent: slurm
 grand_parent: 使用须知
 ---
 # 申请资源选项
-*Last modified: December 03, 2024*
+*Last modified: December 17, 2024*
 
 在上述案例中, 无论是 `srun`, `salloc` 还是 `sbatch` 都默认你申请一个计算节点, 启动一个进程, 不使用GPU, 并有默认的运行时长上限. 如果你想要申请更多资源 (**比如你需要使用GPU, 就必须加上GPU选项!**), 或者指定一些运行设定, 都可以添加选项.
 
@@ -84,7 +84,12 @@ python3 helloworld.py
 echo "End Time: $(date)"
 ~~~
 
-在上面这个示例中, `#SBATCH -o logs/job-%j.out` 中的 `%j` 是一个 **占位符**，表示 **当前作业的作业 ID (Job ID)**。
+在上面这个示例中,
+
+- `#SBATCH -o logs/job-%j.out` 中的 `%j` 是一个 **占位符**, 表示 **当前作业的作业 ID (Job ID)**. 其他占位符的介绍,参见[SLURM官方文档 - Filename Pattern](https://slurm.schedmd.com/sbatch.html#SECTION_FILENAME-PATTERN).
+- `$SLURM_JOB_ID`, `$SLURM_JOB_NODELIST` 和 `$CUDA_VISIBLE_DEVICES` 是 sbatch 里可用的**环境变量**. 其它可用的环境变量, 参见[SLURM官方文档 - Input Environment Variables](https://slurm.schedmd.com/sbatch.html#SECTION_INPUT-ENVIRONMENT-VARIABLES).
+
+
 
 ### 详细解释：
 - **`-o` 选项**: 指定标准输出文件的保存路径和文件名。
