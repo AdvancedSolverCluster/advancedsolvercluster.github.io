@@ -7,21 +7,32 @@ has_toc: false
 
 
 # 如何查看服务器上有哪些软件？
-*Last modified: December 10, 2024*
+*Last modified: December 20, 2024*
 
 服务器在默认情况下会为你提供一个基础的软件环境，其中包括 GCC 11.4.0 编译器和 Python 3.10。但是，服务器并不会自动加载额外的软件或不同版本的工具。如果你需要使用其他的软件包或不同版本的编译器、库等，你可以使用核心命令 `module` 来加载和管理这些软件环境。
+
+| 命令                   | 作用                               |
+|------------------------|------------------------------------|
+| `module av`              | 查看系统中可用的软件               |
+| `module help`            | 查看具体软件的信息                 |
+| `module add` / `load`    | 加载环境变量                       |
+| `module rm` / `unload`   | 卸载环境变量                      |
+| `module list`            | 显示用户已加载的环境变量            |
+| `module swap` / `switch` | 替换环境变量                   |
+| `module purge`           | 卸载当前 shell 环境下的所有环境变量 |
+
 
 用 `module avail` 查看服务器上已安装的软件. (缩写 `module av`)
 
 ~~~ text
 aduser@loginNode:~$ module avail
 ---------------------------- /etc/environment-modules/modules ----------------------------
-CUDA/11.8  CUDA/12.3
+CUDA/11.8  CUDA/12.3  Elan/3.1.1  graphviz/12.2.0  hpctoolkit  Ruby/3.3.5  Rust/1.82.0
 
 --------------------------------- /software/modulefiles ----------------------------------
-anaconda3      LAPACK/3.11.0  OpenBLAS/0.3.26  Python/3.10.13  ScaLAPACK/2.2.0
-hdf5/1.14.4.2  MATLAB/R2023b  petsc/3.21.2     Python/3.12.2   texlive/2023
-Intel-toolset  MPICH/4.2.0    Python/3.8.12    R/4.2.2         vasp/6.4.3
+anaconda3     hdf5/1.14.4.2  MATLAB/R2023b    petsc/3.21.2    Python/3.12.2    texlive/2023
+CMake/3.31.0  Intel-toolset  MPICH/4.2.0      Python/3.8.12   R/4.2.2          vasp/6.4.3
+fftw/3.3.10   LAPACK/3.11.0  OpenBLAS/0.3.26  Python/3.10.13  ScaLAPACK/2.2.0
 
 Key:
 modulepath
