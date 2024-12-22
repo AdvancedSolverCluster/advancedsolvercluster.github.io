@@ -5,7 +5,7 @@ parent: Ubuntu Cluster
 ---
 
 # 安装软件
-*Last modified: October 20, 2024*
+*Last modified: December 22, 2024*
 
 ## Modules
 
@@ -225,6 +225,41 @@ sudo ./ruby-build 3.3.5 /opt/Ruby/3.3.5
 
 ```
 
+
+### AMD AOCL
+
+download [binary package from AMD](https://www.amd.com/en/developer/aocl.html)
+
+AOCL 5.0 binary packages compiled with GCC 13.2.1
+
+unpack the file and install:
+
+`sudo ./install.sh -t /opt/aocl -i lp64`
+
+copy modulefile:
+
+`sudo ln -s  /opt/aocl/5.0.0/gcc/aocl-linux-gcc-5.0.0_module /software/modulefiles/AMD-AOCL`
+
+
+### Open MPI
+
+5.0.6: 此版本不支持 PMI1/2. 必须要slurm升级到PMIx.
+
+```bash
+
+wget https://download.open-mpi.org/release/open-mpi/v5.0/openmpi-5.0.6.tar.gz
+
+tar -xzvf openmpi-5.0.6.tar.gz
+cd openmpi-5.0.6
+
+mkdir build
+cd build
+
+../configure --prefix=/opt/openmpi/5.0.6 --with-slurm --with-valgrind --enable-mpi-fortran --with-tests-examples
+
+make -j all
+sudo make install
+```
 
 ---
 持续更新中

@@ -5,10 +5,15 @@ nav_order: 8
 
 
 # AdvancedSolver Cluster Changelog
-*Last modified: December 10, 2024*
+*Last modified: December 22, 2024*
 
 {: .highlight }
 This page includes updates for AdvancedSolver Cluster. Use this page to keep track of upcoming changes, deprecation notices, new features, and feature updates from AdvancedSolver Cluster.
+
+## Dec 22, 2024
+安装了 OpenMPI 5.0.6 但不支持 slurm 跨机器的调用. 重命名 MPICH/4.2.0 的 modulefiles 为 MPI/MPICH/4.2.0. 未来将删除 MPICH/4.2.0 这一条.
+
+在 bigMem3 上安装了 AOCL.
 
 ## Oct 2, 2024
 Debug GitLab CI/CD: GitLab 自带的 `submodule update` 经常会遇到 Access Denied 认证失败, 需要 rerun 的 bug, 索性去掉 submodule, 直接 git clone, 认证方式用 `CI_JOB_TOKEN`.

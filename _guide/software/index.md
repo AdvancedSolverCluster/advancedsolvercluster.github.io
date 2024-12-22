@@ -7,7 +7,7 @@ has_toc: false
 
 
 # 如何查看服务器上有哪些软件？
-*Last modified: December 20, 2024*
+*Last modified: December 22, 2024*
 
 服务器在默认情况下会为你提供一个基础的软件环境，其中包括 GCC 11.4.0 编译器和 Python 3.10。但是，服务器并不会自动加载额外的软件或不同版本的工具。如果你需要使用其他的软件包或不同版本的编译器、库等，你可以使用核心命令 `module` 来加载和管理这些软件环境。
 
@@ -30,9 +30,9 @@ aduser@loginNode:~$ module avail
 CUDA/11.8  CUDA/12.3  Elan/3.1.1  graphviz/12.2.0  hpctoolkit  Ruby/3.3.5  Rust/1.82.0
 
 --------------------------------- /software/modulefiles ----------------------------------
-anaconda3     hdf5/1.14.4.2  MATLAB/R2023b    petsc/3.21.2    Python/3.12.2    texlive/2023
-CMake/3.31.0  Intel-toolset  MPICH/4.2.0      Python/3.8.12   R/4.2.2          vasp/6.4.3
-fftw/3.3.10   LAPACK/3.11.0  OpenBLAS/0.3.26  Python/3.10.13  ScaLAPACK/2.2.0
+AMD-AOCL      fftw/3.3.10-gcc11.4.0-mpich4.2.0-double  LAPACK/3.11.0    MPI/OpenMPI/5.0.6  petsc/3.21.2    Python/3.12.2    texlive/2023
+anaconda3     hdf5/1.14.4.2                            MATLAB/R2023b    MPICH/4.2.0        Python/3.8.12   R/4.2.2          vasp/6.4.3
+CMake/3.31.0  Intel-toolset                            MPI/MPICH/4.2.0  OpenBLAS/0.3.26    Python/3.10.13  ScaLAPACK/2.2.0
 
 Key:
 modulepath
@@ -44,6 +44,14 @@ modulepath
 > 上下两部分的区别在于, `/etc/environment-modules/modules` 底下的 modules 仅对本节点适用, 而 `/software/modulefiles` 底下的 modules 对所有计算节点通用.
 >
 > 因此, 如果你需要用 slurm 提交任务, 我们建议加载 `/software/modulefiles` 底下的 modules, 或者根据你要提交任务的机器拥有的本地 modules 在 sbatch 脚本中加载对应的 module.
+
+{: .warning }
+> Intel-toolset 仅可用于使用了Intel芯片的服务器, AMD-AOCL 仅可用于使用了AMD芯片的服务器.
+> 
+
+{: .warning }
+> 使用 MPI/MPICH/4.2.0 而不要使用 MPICH/4.2.0. 我们将会在某个时候删除 MPICH/4.2.0 这一条.
+> 
 
 可以通过 `module load <name>` 加载要用的 module, 例如用 `module load LAPACK/3.11.0` 加载 LAPACK. 如果 module 已加载, 不会重新加载.
 
