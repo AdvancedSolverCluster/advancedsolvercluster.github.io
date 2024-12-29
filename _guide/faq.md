@@ -4,9 +4,11 @@ nav_order: 7
 ---
 
 # FAQ
-*Last modified: December 20, 2024*
+*Last modified: December 29, 2024*
 
 ## 无法连接服务器
+
+1. 如果请你输入密码, 那么说明你的 公钥 或者 ssh配置 不正确. 此时应先排查是否为配置问题. 输入 `ssh <username>@10.88.3.90 -p 20001 -i C:/path/to/your/public/key/id_ed25519.pub` 检查能否连通, 如果能则说明可能是配置不正确, 应检查 [SSH 配置文件](new-user/how-can-i-connect).
 
 1. 如果报错信息是：Connection timed out/Connection refused/No route to host, 请查看服务器公告, 看看服务器是否在下线状态 (比如维护或其他原因).
 
@@ -61,7 +63,7 @@ Linux 中的 `sudo` 命令代表 "SuperUser DO". 这是一个功能强大的命�
 
 ## 安装软件相关
 
-- 先参考 [软件环境](software/index.md) 查看服务器上有没有安装你要的软件.
+- 先参考 [软件环境](software/index) 查看服务器上有没有安装你要的软件.
 - 如果我们的服务器上没有安装, 先看看可不可以不用 `sudo` 安装在自己的 HOME 下, 一般来说都可以安装在自己的目录下. 你可以在它的官网找到安装指南.
 - 如果的确需要 `sudo` 权限, 可以在我们的微信群里提出需求, 或者发邮件联系管理员. 请注明需要的版本.
 

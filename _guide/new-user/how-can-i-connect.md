@@ -7,7 +7,7 @@ parent: 快速开始
 
 
 # 我得到了我的服务器账号, 我该怎么连接服务器?
-*Last modified: December 10, 2024*
+*Last modified: December 29, 2024*
 
 ## 必做: 从内网连接
 
@@ -58,6 +58,8 @@ Host loginNode
 
 {: .important }
 > `.ssh` 文件夹在首次[生成 Key](i-have-no-account) 的时候会被自动生成, 如果没有在该机器上生成过 Key 文件夹则可能不存在. **切勿**手动新建这个文件夹! 可能会导致权限不对从而在这个文件夹下的 Key 失效. 安全的创建文件夹的方式是在本机再次[生成 Key](i-have-no-account)(即使这个 Key 你不会使用).
+>
+> 如果在生成了配置文件后 `ssh loginNode` 失败, 但上一步使用  `ssh <username>@10.88.3.90 -p 20001` 是成功的, 一般来说这意味着配置文件设置的有问题.
 
 这里 `<username>` 是管理员指定的你的用户名. 另外还要注意的是, 除第一行外的下面几行均应有行首的 4 空格.
 
