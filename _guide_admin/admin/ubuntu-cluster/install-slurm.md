@@ -5,7 +5,7 @@ parent: Ubuntu Cluster
 ---
 
 # 安装SLURM
-*Last modified: October 08, 2024*
+*Last modified: January 07, 2025*
 
 ## 第一步
 
@@ -370,6 +370,8 @@ for user in $USER_LIST; do
     fi
 done
 ```
+
+**请记得再添加新帐户后设置其 slurm 账号, 并用 `scontrol reconfigure` 更新设置**.
 
 修改用户的核时限制:
 
