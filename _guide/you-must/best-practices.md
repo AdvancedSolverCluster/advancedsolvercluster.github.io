@@ -4,8 +4,6 @@ nav_order: 3
 parent: 使用须知
 ---
 
-*Last Update: January 27, 2025*
-
 # 集群使用最佳实践
 *Last modified: January 27, 2025*
 

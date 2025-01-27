@@ -8,7 +8,7 @@ nav_order: 3
 # 使用 Python 的虚拟环境 venv 的推荐方法
 *Last modified: January 27, 2025*
 
-*Created: January 27, 2025, [Xiang Li](mailto:646873166@qq.com)*
+*Author: [Xiang Li](mailto:646873166@qq.com)*
 
 在使用 Python 的项目中创建虚拟环境是一个好习惯. 
 通常我们会把项目创建在 `/home` 目录下, 并利用服务器的每日备份来备份代码. 相比之下, 虚拟环境所创建的 Python 环境易于重新下载创建, 会占用大量磁盘空间且不需要备份. 结合服务器备份功能的特点, 我们建议按照以下方式创建虚拟环境:
