@@ -1,10 +1,12 @@
 ---
-title: 使用 Python 的虚拟环境 venv
+title: 使用 Python 的虚拟环境 venv 的推荐方法
 parent: Python
 grand_parent: 软件环境
 nav_order: 3
 ---
 
+# 使用 Python 的虚拟环境 venv 的推荐方法
+*Last modified: January 27, 2025*
 
 *Created: January 27, 2025, [Xiang Li](mailto:646873166@qq.com)*
 
@@ -14,7 +16,6 @@ nav_order: 3
 ```bash
 
 # load the correct Python version
-*Last modified: January 27, 2025*
 module load Python/3.10
 
 # create your venv inside /scratch
