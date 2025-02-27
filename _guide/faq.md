@@ -4,7 +4,7 @@ nav_order: 7
 ---
 
 # FAQ
-*Last modified: December 29, 2024*
+*Last modified: February 27, 2025*
 
 ## 无法连接服务器
 
@@ -16,9 +16,11 @@ nav_order: 7
 
 2. 如果报错信息是：Permission denied (publickey). 请检查以下配置是否正确: 在本地的 `.ssh` 文件夹中含有私钥和公钥对, 如, 私钥 `id_ecdsa` 和公钥 `id_ecdsa.pub`.
 
-3. 如果报错信息是：Connection reset, 可能是网络不稳定或连接被中途中断，导致 SSH 密钥交换无法成功。如果你使用了其它 VPN，尝试断开其它 VPN。
+3. 如果报错信息是：Connection reset, 可能是网络不稳定或连接被中途中断，导致 SSH 密钥交换无法成功。如果你使用了其它 VPN，尝试断开其它 VPN.
 
-4. 如果报错信息是：
+4. 当文件大小累计超过 quota 后达 1 周，或超过 limit , 可能会导致无法通过 VSCode 连接到服务器.
+
+5. 如果报错信息是：
 
 ~~~ text
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
