@@ -10,17 +10,17 @@ nav_order: 7
 
 1. 如果请你输入密码, 那么说明你的 公钥 或者 ssh配置 不正确. 此时应先排查是否为配置问题. 输入 `ssh <username>@10.88.3.90 -p 20001 -i C:/path/to/your/public/key/id_ed25519.pub` 检查能否连通, 如果能则说明可能是配置不正确, 应检查 [SSH 配置文件](new-user/how-can-i-connect).
 
-1. 如果报错信息是：Connection timed out/Connection refused/No route to host, 请查看服务器公告, 看看服务器是否在下线状态 (比如维护或其他原因).
+2. 如果报错信息是：Connection timed out/Connection refused/No route to host, 请查看服务器公告, 看看服务器是否在下线状态 (比如维护或其他原因).
 
     如果在校外, 可以先看看有没有连上学校的 VPN. 具体来说, 我们可以通过 `ping 10.88.3.1` 和 `ping 10.64.130.6` 来排查问题, 前者是校园网, 后者是大数据的网关. 如果都能 ping 通, 则跳转下一步. 否则可能是校园网或者大数据机房的问题.
 
-2. 如果报错信息是：Permission denied (publickey). 请检查以下配置是否正确: 在本地的 `.ssh` 文件夹中含有私钥和公钥对, 如, 私钥 `id_ecdsa` 和公钥 `id_ecdsa.pub`.
+3. 如果报错信息是：Permission denied (publickey). 请检查以下配置是否正确: 在本地的 `.ssh` 文件夹中含有私钥和公钥对, 如, 私钥 `id_ecdsa` 和公钥 `id_ecdsa.pub`.
 
-3. 如果报错信息是：Connection reset, 可能是网络不稳定或连接被中途中断，导致 SSH 密钥交换无法成功。如果你使用了其它 VPN，尝试断开其它 VPN.
+4. 如果报错信息是：Connection reset, 可能是网络不稳定或连接被中途中断，导致 SSH 密钥交换无法成功。如果你使用了其它 VPN，尝试断开其它 VPN.
 
-4. 当文件大小累计超过 quota 后达 1 周，或超过 limit , 可能会导致无法通过 VSCode 连接到服务器.
+5. 当文件大小累计超过 quota 后达 1 周，或超过 limit , 可能会导致无法通过 VSCode 连接到服务器.
 
-5. 如果报错信息是：
+6. 如果报错信息是：
 
 ~~~ text
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
