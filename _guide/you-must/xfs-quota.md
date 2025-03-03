@@ -5,7 +5,7 @@ parent: 使用须知
 ---
 
 # 关于服务器各用户储存空间的 Quota
-*Last modified: February 27, 2025*
+*Last modified: March 03, 2025*
 
 
 *Created: February 28, 2022*
@@ -42,7 +42,7 @@ parent: 使用须知
 
 <!-- `df` 请看下面的 `free` 命令. -->
 
-在命令行界面输入 `xfs_quota` 后, 会进入 `xfs_quota` 的交互界面中:
+在命令行 `ssh` 登录服务器可以看到已用空间, 或者在命令行界面输入 `xfs_quota` 后, 会进入 `xfs_quota` 的交互界面中:
 
 ~~~ bash
 $ xfs_quota
