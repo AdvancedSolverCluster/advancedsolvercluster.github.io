@@ -1,12 +1,12 @@
 ---
 title: 在连接上服务器后, 我能做些什么? 比如，如何上传/下载文件? 如何运行程序?
-nav_order: 3
+nav_order: 4
 parent: 快速开始
 ---
 
 
 # 在连接上服务器后, 我能做些什么? 比如，如何上传/下载文件? 如何运行程序?
-*Last modified: December 10, 2024*
+*Last modified: March 03, 2025*
 
 ## Step 1: 四处看看
 

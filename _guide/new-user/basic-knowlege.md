@@ -1,5 +1,12 @@
+---
+title: 什么是服务器集群? 集群基本使用方法? (面向新用户)
+nav_order: 1
+parent: 快速开始
+---
+
+
 # 什么是服务器集群? 集群基本使用方法? (面向新用户)
-*Last modified: February 25, 2025*
+*Last modified: March 03, 2025*
 
 对服务器集群一无所知在开始之前, 若你还没有服务器账号, 请你移步[我还没有服务器账号, 我该怎么做?](i-have-no-account.md)先申请一个账号, 提交申请后需等待一定时间, 在此期间你可以先阅读这篇指南. 
 
@@ -73,85 +80,106 @@ ssh <username>@10.88.3.90 -p 20001
 - `mv`  移动文件
 - `rm`  删除文件
 
-### Step 3 : 上传和下载文件
-你可能会需要从本地和服务器之间上传和下载文件, 下面列举一些常见的方法: 
+### Step 3 ： 提交计算任务
 
-1. 上传单个文件到服务器
-~~~ bash
-scp my_data.txt your_username@server_address:/home/your_username/
-~~~
-- `my_data.txt`： 本地文件
-- `your_username@server_address`：你的服务器账户
-- `/home/your_username/`：服务器上存放文件的目录(你可以更改目标路径)
+这一部分提供了在服务器上提交计算任务的实例, 可以快速上手，若需要更多信息，请参考[如何使用SLURM在集群上运行程序](/server-management/guide/you-must/slurm/index.md)
 
-2. 上传整个文件夹到服务器
-~~~ bash
-scp -r my_project your_username@server_address:/home/your_username/
-~~~
-- `-r`选项表示递归上传(用于目录)
-- `my_project`: 本地文件夹的名称
-3. 从服务器下载文件到本地
-~~~bash
-scp -r your_username@server_address:/home/your_username/results/ /Users/your_local_path/
-~~~
-- `/Users/your_local_path/`: 本地文件夹路径
+#### 1. 创建 Python 脚本
 
-若不设置具体路径，文件夹将下载到当前目录(`.`):
+在服务器上新建 `matrix_multiply.py` 文件, 这里是使用 `nano` 在服务器环境中创建 Python 文件, 通过下面的操作可以由简单的命令直接创建文件, 若你已经学会用 VSCode 连接服务器, 也可以直接创建, 对于新用户建议按照以下步骤操作一遍:
 
-~~~ bash
-scp your_username@server_address:/home/your_username/output.txt .
-~~~
+```bash
+nano matrix_multiply.py
+```
 
-4. 使用rsync上传文件
-~~~ bash
-rsync -av my_data.txt your_username@server_address:/home/your_username/
-~~~
-- `-a`：保持文件权限、时间戳等信息
-- `-v`：显示详细信息
+粘贴以下内容（可按需调整矩阵大小）：
 
-5. 使用rsync上传目录
-~~~ bash
-rsync -av my_project/ your_username@server_address:/home/your_username/my_project/
-~~~
+```python
+import numpy as np
+import time
 
-6. 使用rsync下载文件
-~~~ bash
-rsync -av your_username@server_address:/home/your_username/output.txt ./
-~~~
+# 调整矩阵维度
+MATRIX_SIZE = 10000
 
-7. 使用rsync下载目录
-~~~ bash
-rsync -av your_username@server_address:/home/your_username/results/ ./local_results/
-~~~
+# 生成随机矩阵
+a = np.random.rand(MATRIX_SIZE, MATRIX_SIZE)
+b = np.random.rand(MATRIX_SIZE, MATRIX_SIZE)
 
-### Step 4 ： 提交计算任务
-详情请参考[如何使用SLURM在集群上运行程序](/server-management/guide/you-must/slurm/index.md)
+# 计时开始
+start = time.time()
 
-任务提交通常需要写一个任务脚本（Job Script），例如一个简单的Slurm脚本`job.slurm`：
-~~~ bash
+# 执行矩阵乘法
+result = np.dot(a, b)
+
+# 计算耗时
+duration = time.time() - start
+print(f"Matrix {MATRIX_SIZE}x{MATRIX_SIZE} multiplication done in {duration:.2f} seconds")
+```
+
+**保存文件**：`Ctrl+O` (保存) 回车 → `Ctrl+X` (退出)
+
+#### 2. 编写 Slurm 作业脚本
+
+首先我们先确定使用的必要模块的版本:
+
+```bash
+module avail
+```
+
+更多关于服务器上软件环境的信息, 请参考 [服务器上安装了哪些大家常用的软件](../software/index)
+
+创建提交脚本 `submit_job.sh`:
+
+```bash
+nano submit_job.sh
+```
+
+粘贴以下配置, 注意要将模块的版本更改：
+
+```bash
 #!/bin/bash
-#SBATCH --job-name=my_job        # 任务名称
-#SBATCH --nodes=1                # 需要的计算节点数
-#SBATCH --ntasks=4               # 需要的CPU核心数
-#SBATCH --time=01:00:00          # 运行时间（1小时）
-#SBATCH --output=output.txt      # 输出文件
+#SBATCH --job-name=gpu_matrix      # 作业名称
+#SBATCH --nodes=1                  # 使用1个节点
+#SBATCH --ntasks-per-node=1        # 单任务单进程
+#SBATCH --cpus-per-task=8          # 每个任务8核CPU
+#SBATCH --gres=gpu:tesla_t4:1      # 申请1块T4显卡（适配bigMem0）
+#SBATCH --time=00:15:00            # 超时设置15分钟
+#SBATCH --output=%j.out        # 输出文件命名
+#SBATCH --exclude=bigMem1,bigMem2,bigMem3  # 明确排除非GPU节点
 
-python my_script.py              # 运行Python程序
-~~~
+# 加载环境模块
+module purge
+module load CUDA/11.8
+module load Python/3.10.13
 
-然后，使用sbatch命令提交任务：
-~~~ bash
-sbatch job.slurm
-~~~
+# 执行矩阵运算（启用GPU加速）
+python3 matrix_multiply.py --use-gpu  # 需在代码中添加GPU支持
+```
 
-任务提交后，你可以用squeue命令查看任务的运行状态：
-~~~ bash
-squeue -u your_username
-~~~
+**保存文件**：`Ctrl+O` 回车 → `Ctrl+X`
 
-如果你的任务还没有运行，可能是服务器正在排队等待资源。
+#### 3. 提交与监控任务
 
-### Step 5 ： 查看计算结果
-任务完成后，你可以在指定的输出文件`output.txt`中查看输出结果，也可以用`cat output.txt`或者`less output.txt`命令查看。
+提交作业:
+```bash
+sbatch submit_job.sh
+```
 
-如果任务出错，可以查看`slurm-*.out`文件（任务的日志）。
+示例输出:
+```bash
+Submitted batch job 7460
+```
+
+
+#### 4. 查看运行结果
+
+查看作业状态：
+```bash
+squeue
+```
+
+任务完成后, 可以在 `任务ID.out` 文件里查看运行结果, 例如:
+
+```bash
+Matrix 10000x10000 multiplication done in 6.59 seconds
+```

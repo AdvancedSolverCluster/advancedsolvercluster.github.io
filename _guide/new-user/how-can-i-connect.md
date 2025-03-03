@@ -1,13 +1,13 @@
 ---
 title: 我得到了我的服务器账号, 我该怎么连接服务器?
-nav_order: 2
+nav_order: 3
 parent: 快速开始
 ---
 
 
 
 # 我得到了我的服务器账号, 我该怎么连接服务器?
-*Last modified: December 29, 2024*
+*Last modified: March 03, 2025*
 
 ## 必做: 从内网连接
 
