@@ -42,7 +42,7 @@ def process(filename: str):
                 break
         if matched2 > -1:
             # insert after the matched2 line
-            lines.insert(matched2 + 1, f'*Last modified: {get_last_modified_date(filename)}*\n')
+            lines.insert(matched2 + 1, f'\n*Last modified: {get_last_modified_date(filename)}*\n')
 
     # write the file back
     with open(filename, 'w') as f:

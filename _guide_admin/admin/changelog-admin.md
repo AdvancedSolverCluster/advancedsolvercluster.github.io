@@ -3,6 +3,7 @@ title: Changelog for admin
 ---
 
 # AdvancedSolver Cluster Changelog for Admin
+
 *Last modified: October 15, 2024*
 
 ## Oct 14, 2024

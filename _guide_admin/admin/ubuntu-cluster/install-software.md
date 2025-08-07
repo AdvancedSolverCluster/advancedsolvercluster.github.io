@@ -5,6 +5,7 @@ parent: Ubuntu Cluster
 ---
 
 # 安装软件
+
 *Last modified: December 22, 2024*
 
 ## Modules

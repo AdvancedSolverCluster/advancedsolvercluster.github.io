@@ -5,6 +5,7 @@ nav_order: 8
 
 
 # AdvancedSolver Cluster Changelog
+
 *Last modified: December 22, 2024*
 
 {: .highlight }

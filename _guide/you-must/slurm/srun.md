@@ -5,6 +5,7 @@ parent: slurm
 grand_parent: 使用须知
 ---
 # `srun`
+
 *Last modified: December 03, 2024*
 
 官方文档: <https://slurm.schedmd.com/srun.html>

@@ -5,6 +5,7 @@ parent: Router
 ---
 
 # install openclash on R4S router
+
 *Last modified: February 26, 2024*
 
 - download newest release from github openclash repo:

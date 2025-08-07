@@ -6,6 +6,7 @@ parent: Web0
 
 
 # "GitLab log"
+
 *Last modified: September 30, 2024*
 
 我们安装的是Omnibus版Gitlab (installed from linux package manager)

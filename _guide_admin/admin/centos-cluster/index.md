@@ -6,6 +6,7 @@ has_toc: false
 ---
 
 # CentOS Cluster
+
 *Last modified: March 15, 2024*
 
 - [制作CentOS启动盘](make-centos-boost-stick)

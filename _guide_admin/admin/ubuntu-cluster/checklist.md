@@ -5,6 +5,7 @@ parent: Ubuntu Cluster
 ---
 
 # 重启后的检查
+
 *Last modified: October 08, 2024*
 
 这篇 markdown 主要讲讲在服务器重启后, 我们应当检查哪些服务.

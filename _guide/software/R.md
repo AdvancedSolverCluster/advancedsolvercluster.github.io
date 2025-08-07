@@ -5,6 +5,7 @@ nav_order: 5
 ---
 
 # R
+
 *Last modified: September 10, 2024*
 
 在命令行运行 `module load R`.

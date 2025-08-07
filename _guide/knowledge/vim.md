@@ -5,6 +5,7 @@ parent: 其他知识
 ---
 
 # vi/vim 教程
+
 *Last modified: September 02, 2024*
 
 *March 10, 2022, [Jingyu Liu](mailto:381258337@qq.com), [Yidong Zhang](mailto:2308353627@qq.com)*

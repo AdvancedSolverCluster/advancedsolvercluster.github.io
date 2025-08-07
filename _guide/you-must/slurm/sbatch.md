@@ -5,6 +5,7 @@ parent: slurm
 grand_parent: 使用须知
 ---
 # `sbatch`
+
 *Last modified: December 03, 2024*
 
 当你想要执行的不止一条命令, 或者执行的命令需要非常久才能完成, 此时需要使用 `sbatch` 提交你的任务.

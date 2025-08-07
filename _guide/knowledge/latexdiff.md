@@ -5,6 +5,7 @@ parent: 其他知识
 ---
 
 # 使用 latexdiff 工具标注文档修改
+
 *Last modified: August 07, 2025*
 
 `latexdiff` 是一个 Perl 脚本，用于**比较两个 LaTeX 文件的内容**，并生成一份新的文件，这份新的文件中所有修改/删除/新增处都被高亮显示，效果类似下图：

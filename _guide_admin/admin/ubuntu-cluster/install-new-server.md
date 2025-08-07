@@ -7,6 +7,7 @@ parent: Ubuntu Cluster
 Feb 24, 2024
 
 # 安装新机
+
 *Last modified: June 02, 2024*
 
 ## 第一步

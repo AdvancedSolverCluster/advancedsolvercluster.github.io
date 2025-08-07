@@ -5,6 +5,7 @@ parent: slurm
 grand_parent: 使用须知
 ---
 # 申请资源选项
+
 *Last modified: December 17, 2024*
 
 在上述案例中, 无论是 `srun`, `salloc` 还是 `sbatch` 都默认你申请一个计算节点, 启动一个进程, 不使用GPU, 并有默认的运行时长上限. 如果你想要申请更多资源 (**比如你需要使用GPU, 就必须加上GPU选项!**), 或者指定一些运行设定, 都可以添加选项.

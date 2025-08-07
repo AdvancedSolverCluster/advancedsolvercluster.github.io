@@ -9,6 +9,7 @@ has_children: true
 *Created: December 3, 2024, [Xiang Li](mailto:646873166@qq.com)*
 
 # Python
+
 *Last modified: December 10, 2024*
 
 - 使用我们安装的 Python: `module load Python/3.10.13` (使用 `module av` 来检查可用的版本号).

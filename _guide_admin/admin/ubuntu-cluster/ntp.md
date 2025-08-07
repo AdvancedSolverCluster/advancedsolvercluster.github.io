@@ -5,6 +5,7 @@ parent: Ubuntu Cluster
 ---
 
 # update timezone
+
 *Last modified: June 02, 2024*
 
 `sudo timedatectl set-timezone Asia/Shanghai`

@@ -5,6 +5,7 @@ parent: CentOS Cluster (legacy)
 ---
 
 # "如何在服务器上安装并配置 slurm"
+
 *Last modified: February 26, 2024*
 
 *April 1, 2022, [Jingyu Liu](mailto:381258337@qq.com)*

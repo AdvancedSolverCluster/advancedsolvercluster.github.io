@@ -5,6 +5,7 @@ parent: Ubuntu Cluster
 ---
 
 # 安装SLURM
+
 *Last modified: January 07, 2025*
 
 ## 第一步
