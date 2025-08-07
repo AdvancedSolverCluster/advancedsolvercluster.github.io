@@ -32,7 +32,7 @@ def process(filename: str):
 
     if matched > -1:
         # update the line
-        lines[matched] = f'*Last modified: {get_last_modified_date(filename)}*\n'
+        lines[matched] = f'\n*Last modified: {get_last_modified_date(filename)}*\n'
     else:
         # find the first line that starts with `# `
         matched2 = -1
