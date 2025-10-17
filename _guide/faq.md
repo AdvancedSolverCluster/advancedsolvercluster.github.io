@@ -5,11 +5,11 @@ nav_order: 7
 
 # FAQ
 
-*Last modified: February 27, 2025*
+*Last modified: October 17, 2025*
 
 ## 无法连接服务器
 
-1. 如果请你输入密码, 那么说明你的 公钥 或者 ssh配置 不正确. 此时应先排查是否为配置问题. 输入 `ssh <username>@10.88.3.90 -p 20001 -i C:/path/to/your/public/key/id_ed25519.pub` 检查能否连通, 如果能则说明可能是配置不正确, 应检查 [SSH 配置文件](new-user/how-can-i-connect).
+1. 如果请你输入密码, 那么说明你的 公钥 或者 ssh配置 不正确. 此时应先排查是否为配置问题. 输入 `ssh <username>@10.12.208.220 -p 20001 -i C:/path/to/your/public/key/id_ed25519.pub` 检查能否连通, 如果能则说明可能是配置不正确, 应检查 [SSH 配置文件](new-user/how-can-i-connect).
 
 2. 如果报错信息是：Connection timed out/Connection refused/No route to host, 请查看服务器公告, 看看服务器是否在下线状态 (比如维护或其他原因).
 

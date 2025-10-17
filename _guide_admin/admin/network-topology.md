@@ -6,11 +6,11 @@ has_children: false
 
 # "集群网络结构"
 
-*Last modified: February 26, 2024*
+*Last modified: October 17, 2025*
 
 基本结构
 
-外网 -- 校园网 -- 10.88.3.90(Cluster/路由器)
+外网 -- 校园网 -- 10.12.208.220(Cluster/路由器)
 
 ~~~
 路由器: 内网/外网隔离: 内网网段192.168.2.0/24
@@ -29,11 +29,11 @@ has_children: false
 
 |   Server   | Campus URL/IP |       Off-Campus URL       | Port  |
 | ---------- | ------------- | -------------------------- | ----- |
-| router     | 10.88.3.90    | cluster.advancedsolver.com | 20254 |
-| loginNode  | 10.88.3.90    | cluster.advancedsolver.com | 20001 |
-| bigMem0    | 10.88.3.90    | cluster.advancedsolver.com | 20010 |
-| bigMem1    | 10.88.3.90    | cluster.advancedsolver.com | 20011 |
-| web0       | 10.88.3.90    | cluster.advancedsolver.com | 20100 |
+| router     | 10.12.208.220    | cluster.advancedsolver.com | 20254 |
+| loginNode  | 10.12.208.220    | cluster.advancedsolver.com | 20001 |
+| bigMem0    | 10.12.208.220    | cluster.advancedsolver.com | 20010 |
+| bigMem1    | 10.12.208.220    | cluster.advancedsolver.com | 20011 |
+| web0       | 10.12.208.220    | cluster.advancedsolver.com | 20100 |
 
 路由器管理地址
 https://cluster.advancedsolver.com
