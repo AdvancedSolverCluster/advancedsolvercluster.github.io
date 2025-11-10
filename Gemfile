@@ -7,3 +7,6 @@ gem "just-the-docs", "0.5.0" # pinned to the current release
 # gem "just-the-docs"        # always download the latest release
 
 gem 'jekyll-redirect-from'
+
+gem "jekyll-sass-converter", "~> 2.2"
+gem "sassc", "~> 2.4"
