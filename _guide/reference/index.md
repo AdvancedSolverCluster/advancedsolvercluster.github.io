@@ -60,7 +60,7 @@ Test description:
 |Base Clock Speed (GHz)                                  | 2.30 | 2.90 | 2.90 | 2.00 | 2.25 | 2.90 |
 |Boost Clock Speed (GHz)                                 | 3.10 | 3.90 | 3.90 | 2.50(?) | 3.10 | 3.90 |
 |CPU Cache (MiB/CPU)                                     | 30 | 22 | 22 | 64 | 256 | 22 |
-|Lithography (Nanometer)                                 | 22 | 14 | 14 | 14(?) | 5 | 22 | 14 |
+|Lithography (Nanometer)                                 | 22 | 14 | 14 | 14(?) | 5 | 14 |
 |**CPU Speed** |`loginNode`|`bigMem0`|`bigMem1`|`bigMem2`|`bigMem3`| `bigMem4`|
 |Integer Math (Million Operations/s)                     |113,171 |206,926 |210,833 |326,869 |2,054,471 | 210,843 |
 |Floating Point Math (Million Operations/s)              |56,058 |113,990 |114,338 |146,645 |1,149,133 | 114,359 |
