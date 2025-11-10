@@ -5,7 +5,7 @@ nav_order: 6
 
 # 集群中各服务器的配置与性能
 
-*Last modified: November 08, 2025*
+*Last modified: November 10, 2025*
 
 *[Xiang Li](mailto:646873166@qq.com), [Yuejia Zhang](mailto:yuejiazhang21@m.fudan.edu.cn)*
 
@@ -55,7 +55,7 @@ Test description:
 |**CPU Info** |`loginNode`|`bigMem0`|`bigMem1`|`bigMem2`|`bigMem3`|`bigMem4`|
 |--|--:|--:|--:|--:|--:|--:|
 |CPU Brand|Intel Xeon CPU E5-2670 v3 @ 2.30GHz|Intel Xeon Gold 6226R CPU @ 2.90GHz|Intel Xeon Gold 6226R CPU @ 2.90GHz|Hygon C86 7285 32-core Processor|AMD EPYC 9754 128-Core Processor|Intel Xeon Gold 6226R CPU @ 2.90GHz|
-|Num of CPUs on Board                                     | 2  | 2  | 2  | 2 | 2 | 2 | 2 |
+|Num of CPUs on Board                                     | 2  | 2  | 2  | 2 | 2 | 2 |
 |Total Threads                                           | 48 | 64 | 64 | 128 | 512 | 64 |
 |Base Clock Speed (GHz)                                  | 2.30 | 2.90 | 2.90 | 2.00 | 2.25 | 2.90 |
 |Boost Clock Speed (GHz)                                 | 3.10 | 3.90 | 3.90 | 2.50(?) | 3.10 | 3.90 |
